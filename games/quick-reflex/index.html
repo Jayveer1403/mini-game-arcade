@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Quick Reflex - Reaction Speed Challenge. Measure your reaction speed in milliseconds across 5 exhilarating arcade modes!">
+  <meta name="theme-color" content="#080c18">
+  <title>Quick Reflex | Reaction Speed Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Header HUD -->
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">⚡</span>
+          <span class="brand-title">QUICK<span class="highlight">REFLEX</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Pill -->
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+
+        <!-- Fastest Reaction Pill -->
+        <div class="hud-stat best-pill">
+          <span class="stat-lbl">FASTEST</span>
+          <span id="best-val" class="stat-num">-- ms</span>
+        </div>
+
+        <!-- Mode / Round Pill -->
+        <div class="hud-stat mode-pill">
+          <span class="stat-lbl" id="round-stat-lbl">ROUND</span>
+          <span id="round-stat-val" class="stat-num">1 / 5</span>
+        </div>
+
+        <!-- Combo Streak Pill -->
+        <div class="hud-stat combo-pill hidden" id="combo-pill">
+          <span class="stat-lbl">STREAK</span>
+          <span id="combo-val" class="stat-num">x2</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Sound Toggle -->
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <!-- Pause Button -->
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game (P/Esc)">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Arena -->
+    <main id="reflex-main">
+      <!-- Floating Score & Notification Toast -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- Instruction / Hint Bar -->
+      <div id="instruction-bar">
+        <span id="instruction-icon">🎯</span>
+        <span id="instruction-text">Tap START to begin the reflex test</span>
+      </div>
+
+      <!-- Primary Interactive Arena -->
+      <div id="arena-container">
+        <!-- Interactive Arena Box -->
+        <div id="reaction-arena" class="arena-idle" tabindex="0" role="button" aria-label="Reaction Surface">
+          <!-- Central Dynamic Content Area -->
+          <div id="arena-content">
+            <div id="arena-icon" class="big-icon">⚡</div>
+            <h2 id="arena-title">READY TO TEST REFLEXES?</h2>
+            <p id="arena-desc">Select your mode and tap START below</p>
+            <div id="arena-metric" class="metric-display hidden">0 ms</div>
+          </div>
+
+          <!-- Dynamic Grid Container (For Color, Number, Shape, Mini-challenges) -->
+          <div id="targets-grid" class="targets-container hidden"></div>
+
+          <!-- Fast Tap Progress / Clicker Container -->
+          <div id="fast-tap-area" class="fast-tap-container hidden">
+            <div class="fast-tap-meter-track">
+              <div id="fast-tap-meter-fill"></div>
+            </div>
+            <button id="btn-tap-target" class="huge-tap-button">
+              <span>TAP!</span>
+              <div id="tap-count-badge">0</div>
+            </button>
+          </div>
+
+          <!-- Memory Sequence Container -->
+          <div id="memory-pad-area" class="memory-container hidden">
+            <div class="memory-grid">
+              <button class="mem-pad pad-0" data-index="0" aria-label="Red Pad"></button>
+              <button class="mem-pad pad-1" data-index="1" aria-label="Blue Pad"></button>
+              <button class="mem-pad pad-2" data-index="2" aria-label="Yellow Pad"></button>
+              <button class="mem-pad pad-3" data-index="3" aria-label="Green Pad"></button>
+            </div>
+            <div id="memory-status" class="memory-status-text">Watch the sequence...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- START & MODE SELECTION OVERLAY -->
+    <div id="modal-start" class="game-overlay">
+      <div class="modal-card">
+        <div class="glow-header-icon">⚡⏱️</div>
+        <h1 class="modal-title">QUICK <span class="accent-text">REFLEX</span></h1>
+        <p class="modal-sub">Measure your reaction speed in milliseconds across 5 distinct arcade challenges!</p>
+
+        <!-- 5 Game Modes Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-btn active" data-mode="classic">
+            <span class="m-icon">🚦</span>
+            <span class="m-title">Reaction Time</span>
+            <span class="m-desc">5 Rounds / Green Light</span>
+          </button>
+          <button class="mode-btn" data-mode="color">
+            <span class="m-icon">🎨</span>
+            <span class="m-title">Color Reflex</span>
+            <span class="m-desc">Tap Target Color</span>
+          </button>
+          <button class="mode-btn" data-mode="number">
+            <span class="m-icon">🔢</span>
+            <span class="m-title">Number Blitz</span>
+            <span class="m-desc">Ascending Order</span>
+          </button>
+          <button class="mode-btn" data-mode="fast-tap">
+            <span class="m-icon">👆</span>
+            <span class="m-title">Fast Tap</span>
+            <span class="m-desc">Max Taps in 10s</span>
+          </button>
+          <button class="mode-btn" data-mode="memory">
+            <span class="m-icon">🧠</span>
+            <span class="m-title">Memory Reflex</span>
+            <span class="m-desc">Repeat Sequences</span>
+          </button>
+        </div>
+
+        <!-- Difficulty Pills -->
+        <div class="difficulty-row">
+          <span class="diff-title">DIFFICULTY:</span>
+          <div class="diff-chips">
+            <button class="diff-chip" data-diff="easy">Easy (Generous)</button>
+            <button class="diff-chip active" data-diff="medium">Medium (Standard)</button>
+            <button class="diff-chip" data-diff="hard">Hard (Ultra Fast)</button>
+          </div>
+        </div>
+
+        <!-- Mode Explanation Box -->
+        <div id="mode-info" class="mode-info-box">
+          <strong>1. Reaction Time Test:</strong> Wait for the red screen to turn green. React as fast as you can! Reacting too early triggers a false-start penalty.
+        </div>
+
+        <!-- Controls Guide -->
+        <div class="controls-guide-grid">
+          <div class="ctrl-item">
+            <span>🖱️ <strong>Mouse:</strong> Click anywhere on the arena surface</span>
+          </div>
+          <div class="ctrl-item">
+            <span>⌨️ <strong>Keyboard:</strong> Spacebar or Enter to react</span>
+          </div>
+          <div class="ctrl-item">
+            <span>👆 <strong>Touch:</strong> Fast tap on mobile/tablet screen</span>
+          </div>
+          <div class="ctrl-item">
+            <span>⏱️ <strong>High Precision:</strong> Sub-millisecond performance.now()</span>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary-action">
+          <span>START CHALLENGE</span>
+          <span class="btn-arrow">➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAUSE MENU OVERLAY -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="modal-card small-card">
+        <div class="glow-header-icon">⏸️</div>
+        <h2 class="modal-title">CHALLENGE PAUSED</h2>
+        <p class="modal-sub">Catch your breath before the next signal.</p>
+
+        <div class="pause-stat-grid">
+          <div class="p-stat-box">
+            <span class="p-lbl">CURRENT SCORE</span>
+            <span id="pause-score-num" class="p-val">0</span>
+          </div>
+          <div class="p-stat-box">
+            <span class="p-lbl">FASTEST ROUND</span>
+            <span id="pause-best-num" class="p-val">-- ms</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-resume" class="btn-primary-action">RESUME ⚡</button>
+          <button id="btn-restart" class="btn-secondary-action">RESTART SESSION</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY & PERFORMANCE RESULTS OVERLAY -->
+    <div id="modal-results" class="game-overlay hidden">
+      <div class="modal-card">
+        <div class="glow-header-icon">🏆⚡</div>
+        <h2 class="modal-title" id="results-title">SESSION COMPLETE!</h2>
+        <p class="modal-sub" id="results-sub">Here is your reflex performance breakdown:</p>
+
+        <!-- Rating Badge -->
+        <div class="rating-badge-container">
+          <div class="rating-badge" id="rating-badge">LIGHTNING FAST ⚡</div>
+        </div>
+
+        <!-- High-Score Ribbon if beaten -->
+        <div id="new-record-ribbon" class="record-ribbon hidden">⭐ NEW PERSONAL RECORD! ⭐</div>
+
+        <!-- Primary Stat Cards Grid -->
+        <div class="results-stats-grid">
+          <div class="r-stat-card highlight">
+            <span class="r-lbl">TOTAL SCORE</span>
+            <div id="r-score-val" class="r-big-num">0</div>
+          </div>
+          <div class="r-stat-card highlight">
+            <span class="r-lbl">AVERAGE REACTION</span>
+            <div id="r-avg-val" class="r-big-num">-- ms</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">FASTEST REACTION</span>
+            <div id="r-fastest-val" class="r-num">-- ms</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">SLOWEST REACTION</span>
+            <div id="r-slowest-val" class="r-num">-- ms</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">ACCURACY</span>
+            <div id="r-accuracy-val" class="r-num">100%</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">BEST COMBO</span>
+            <div id="r-combo-val" class="r-num">x0</div>
+          </div>
+        </div>
+
+        <!-- Reaction History Graph Canvas -->
+        <div class="chart-wrapper">
+          <div class="chart-header">
+            <span>📈 Round-by-Round Reaction History</span>
+            <span id="chart-sub">Lower is better</span>
+          </div>
+          <canvas id="reaction-chart" width="460" height="130"></canvas>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-play-again" class="btn-primary-action">TRY AGAIN ⚡</button>
+          <button id="btn-change-mode" class="btn-secondary-action">CHOOSE ANOTHER MODE</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Meta -->
+    <footer id="game-footer">
+      <div class="footer-tip">⌨️ Spacebar/Enter or Mouse Click | 👆 Tap screen on mobile/tablet</div>
+      <div class="footer-meta">Quick Reflex • Precision performance.now() • Web Audio API</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

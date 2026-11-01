@@ -58,7 +58,7 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (7)</button>
+          <button class="pill active" data-category="all">All (8)</button>
           <button class="pill" data-category="action">Action</button>
           <button class="pill" data-category="arcade">Runner</button>
           <button class="pill" data-category="puzzle">Puzzle</button>
@@ -440,6 +440,65 @@
           </div>
           <div class="card-action-row">
             <a href="/games/number-merge/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 8: Quick Reflex -->
+      <article class="game-card" data-category="action" data-tags="quick reflex reaction speed challenge reflex test timing ms lightning">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#reflex-bg)"/>
+            
+            <!-- Stopwatch & Pulse Wave Motif -->
+            <circle cx="200" cy="115" r="75" fill="rgba(0, 242, 254, 0.05)" stroke="rgba(0, 242, 254, 0.2)" stroke-width="2"/>
+            <circle cx="200" cy="115" r="62" fill="rgba(16, 23, 44, 0.9)" stroke="url(#green-border-grad)" stroke-width="4"/>
+            
+            <!-- Stopwatch Top Nipple -->
+            <rect x="194" y="38" width="12" height="15" rx="3" fill="#00f2fe"/>
+            <rect x="188" y="34" width="24" height="6" rx="2" fill="#00f2fe"/>
+            
+            <!-- Lightning Bolt Accent -->
+            <polygon points="200,68 184,115 198,115 192,156 218,105 204,105" fill="#facc15" filter="drop-shadow(0 0 12px rgba(250, 204, 21, 0.8))"/>
+
+            <!-- Speed Readings Text -->
+            <text x="200" y="196" fill="#00f2fe" font-family="'Outfit', sans-serif" font-weight="900" font-size="22" text-anchor="middle" letter-spacing="1">184 ms</text>
+            <text x="200" y="216" fill="#94a3b8" font-family="'Outfit', sans-serif" font-weight="700" font-size="11" text-anchor="middle">LIGHTNING FAST ⚡</text>
+
+            <!-- Surrounding Color Dots -->
+            <circle cx="75" cy="80" r="14" fill="#ef4444" filter="drop-shadow(0 0 8px rgba(239, 68, 68, 0.6))"/>
+            <circle cx="95" cy="155" r="14" fill="#22c55e" filter="drop-shadow(0 0 8px rgba(34, 197, 94, 0.6))"/>
+            <circle cx="325" cy="80" r="14" fill="#a855f7" filter="drop-shadow(0 0 8px rgba(168, 85, 247, 0.6))"/>
+            <circle cx="305" cy="155" r="14" fill="#ec4899" filter="drop-shadow(0 0 8px rgba(236, 72, 153, 0.6))"/>
+
+            <defs>
+              <linearGradient id="reflex-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#10172e"/>
+                <stop offset="1" stop-color="#070a14"/>
+              </linearGradient>
+              <linearGradient id="green-border-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#22c55e"/>
+                <stop offset="1" stop-color="#00f2fe"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(250, 204, 21, 0.2); border-color: rgba(250, 204, 21, 0.5); color: #facc15;">REFLEX</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Quick Reflex</h3>
+            <span class="card-rating">⭐ 5.0</span>
+          </div>
+          <p class="card-desc">
+            Test and measure your reaction speed down to the millisecond! Features Reaction Test, Color Reflex, Number Blitz, Fast Tap, and Memory sequences.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🖱️ Mouse Click</span>
+            <span class="control-tag">⌨️ Space / Enter</span>
+            <span class="control-tag">👆 Touch Tap</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/quick-reflex/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>

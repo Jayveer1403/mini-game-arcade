@@ -36,6 +36,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - 2048-inspired numerical slide and merge puzzle on a 4×4 grid. Features 4 modes (Classic, Time Attack 90s, Endless, Challenge 512 in 60 moves), 3 difficulty tiers (Target 1024, 2048, 4096), Undo, AI Hint solver, and board Shuffle power-ups.
    - **Controls:** Arrow Keys / `WASD` on desktop, 4-direction touch swipe or on-screen Virtual D-Pad on mobile.
 
+8. **⚡ Quick Reflex (`/games/quick-reflex/`)**
+   - Millisecond-precision reaction speed challenge arcade. Features 5 game modes (Green Signal Reaction Test, Color Reflex, Number Blitz, 10s Fast Tap, and Memory Reflex sequences), false-start penalization, round-by-round Canvas chart, and dynamic performance ratings.
+   - **Controls:** Spacebar / Enter or Mouse Click on desktop, direct touch tap on mobile/tablet.
+
 ---
 
 ## 📁 Project Structure
