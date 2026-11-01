@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Neon Number Merge - Slide, merge matching numbers to 2048 and beyond! 4 modes, 3 difficulties, undo, hints, and shuffle power-ups.">
+  <meta name="theme-color" content="#090d1c">
+  <title>Number Merge | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Header & Dashboard -->
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🔢</span>
+          <span class="brand-title">NUMBER<span class="highlight">MERGE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Card -->
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+
+        <!-- High Score Card -->
+        <div class="hud-stat best-pill">
+          <span class="stat-lbl">BEST</span>
+          <span id="best-val" class="stat-num">0</span>
+        </div>
+
+        <!-- Mode / Timer Card -->
+        <div class="hud-stat mode-pill">
+          <span class="stat-lbl" id="mode-stat-lbl">MODE</span>
+          <span id="mode-stat-val" class="stat-num">Classic</span>
+        </div>
+
+        <!-- Combo Streak Pill -->
+        <div class="hud-stat combo-pill hidden" id="combo-pill">
+          <span class="stat-lbl">STREAK</span>
+          <span id="combo-val" class="stat-num">x2</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Sound Toggle -->
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <!-- Pause Button -->
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game (P/Esc)">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Area -->
+    <main id="puzzle-main">
+      <!-- Quick Floating Alert Toast -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- Action Toolbar (Undo, Hint, Shuffle) -->
+      <div id="action-toolbar">
+        <button id="btn-undo" class="tool-btn" title="Undo Move (Z)">
+          <span class="t-icon">↩️</span>
+          <span class="t-name">Undo (<span id="undo-count">3</span>)</span>
+        </button>
+        <button id="btn-hint" class="tool-btn" title="Highlight Best Move (H)">
+          <span class="t-icon">💡</span>
+          <span class="t-name">Hint (<span id="hint-count">3</span>)</span>
+        </button>
+        <button id="btn-shuffle" class="tool-btn" title="Shuffle Board (S)">
+          <span class="t-icon">🔀</span>
+          <span class="t-name">Shuffle (<span id="shuffle-count">1</span>)</span>
+        </button>
+      </div>
+
+      <!-- 4x4 Grid Board Container -->
+      <div id="board-container">
+        <!-- Background 4x4 Cells -->
+        <div class="grid-backdrop" id="grid-backdrop">
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+        </div>
+        <!-- Dynamic Tiles Layer -->
+        <div class="tiles-container" id="tiles-container"></div>
+      </div>
+
+      <!-- On-Screen Virtual D-Pad / Arrows for Mobile Accessibility -->
+      <div id="touch-dpad">
+        <button class="dpad-btn up" data-dir="up" aria-label="Swipe Up">▲</button>
+        <div class="dpad-mid">
+          <button class="dpad-btn left" data-dir="left" aria-label="Swipe Left">◀</button>
+          <div class="dpad-center">🎮</div>
+          <button class="dpad-btn right" data-dir="right" aria-label="Swipe Right">▶</button>
+        </div>
+        <button class="dpad-btn down" data-dir="down" aria-label="Swipe Down">▼</button>
+      </div>
+    </main>
+
+    <!-- START / MODE SELECTOR OVERLAY -->
+    <div id="modal-start" class="game-overlay">
+      <div class="modal-card">
+        <div class="glow-header-icon">🔢✨</div>
+        <h1 class="modal-title">NUMBER <span class="accent-text">MERGE</span></h1>
+        <p class="modal-sub">Swipe & slide matching tiles together to merge them into higher numbers!</p>
+
+        <!-- Mode Selector Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-btn active" data-mode="classic">
+            <span class="m-icon">🎯</span>
+            <span class="m-title">Classic</span>
+            <span class="m-desc">Reach 2048</span>
+          </button>
+          <button class="mode-btn" data-mode="time">
+            <span class="m-icon">⏱️</span>
+            <span class="m-title">Time Attack</span>
+            <span class="m-desc">90s Blitz</span>
+          </button>
+          <button class="mode-btn" data-mode="endless">
+            <span class="m-icon">♾️</span>
+            <span class="m-title">Endless</span>
+            <span class="m-desc">Max Value</span>
+          </button>
+          <button class="mode-btn" data-mode="challenge">
+            <span class="m-icon">⚡</span>
+            <span class="m-title">Challenge</span>
+            <span class="m-desc">512 in 60 Moves</span>
+          </button>
+        </div>
+
+        <!-- Difficulty Pills -->
+        <div class="difficulty-row">
+          <span class="diff-title">DIFFICULTY:</span>
+          <div class="diff-chips">
+            <button class="diff-chip" data-diff="easy">Easy (Target 1024)</button>
+            <button class="diff-chip active" data-diff="medium">Medium (Target 2048)</button>
+            <button class="diff-chip" data-diff="hard">Hard (Target 4096)</button>
+          </div>
+        </div>
+
+        <!-- Mode Description Info -->
+        <div id="mode-info" class="mode-info-box">
+          <strong>Classic Mode:</strong> Swipe tiles in 4 directions. Matching tiles collide and merge into double their value (2+2=4, 4+4=8... 1024+1024=2048)!
+        </div>
+
+        <!-- Controls Guide -->
+        <div class="controls-guide-grid">
+          <div class="ctrl-item">
+            <span>⌨️ <strong>Desktop:</strong> Arrow Keys or W, A, S, D</span>
+          </div>
+          <div class="ctrl-item">
+            <span>👆 <strong>Mobile:</strong> Swipe anywhere on grid or tap D-Pad</span>
+          </div>
+          <div class="ctrl-item">
+            <span>↩️ <strong>Undo:</strong> Revert unwanted moves (3 uses)</span>
+          </div>
+          <div class="ctrl-item">
+            <span>💡 <strong>Hint & 🔀 Shuffle:</strong> Discover optimal merges</span>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary-action">
+          <span>START PLAYING</span>
+          <span class="btn-arrow">➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAUSE MENU OVERLAY -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="modal-card small-card">
+        <div class="glow-header-icon">⏸️</div>
+        <h2 class="modal-title">GAME PAUSED</h2>
+        <p class="modal-sub">Take a quick breather.</p>
+
+        <div class="pause-stat-grid">
+          <div class="p-stat-box">
+            <span class="p-lbl">CURRENT SCORE</span>
+            <span id="pause-score-num" class="p-val">0</span>
+          </div>
+          <div class="p-stat-box">
+            <span class="p-lbl">BEST RECORD</span>
+            <span id="pause-best-num" class="p-val">0</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-resume" class="btn-primary-action">RESUME</button>
+          <button id="btn-restart" class="btn-secondary-action">RESTART MATCH</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- VICTORY OVERLAY -->
+    <div id="modal-victory" class="game-overlay hidden">
+      <div class="modal-card">
+        <div class="glow-header-icon">🏆✨</div>
+        <h2 class="modal-title">TARGET REACHED!</h2>
+        <p class="modal-sub" id="victory-sub">You merged the legendary tile!</p>
+
+        <div class="final-score-card">
+          <span class="p-lbl">CURRENT SCORE</span>
+          <div id="victory-score-num" class="highlight-number">0</div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-keep-going" class="btn-primary-action">KEEP PLAYING (ENDLESS) ➔</button>
+          <button id="btn-play-again-vic" class="btn-secondary-action">NEW GAME</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME OVER OVERLAY -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="modal-card">
+        <div class="glow-header-icon">💥</div>
+        <h2 class="modal-title" id="gameover-title">GAME OVER</h2>
+        <p class="modal-sub" id="gameover-reason">No valid moves remaining on the board.</p>
+
+        <div class="final-score-card">
+          <span class="p-lbl">FINAL SCORE</span>
+          <div id="gameover-score-num" class="highlight-number">0</div>
+          <div id="new-high-badge" class="badge-record hidden">⭐ NEW HIGH RECORD! ⭐</div>
+        </div>
+
+        <div class="gameover-stats-row">
+          <div class="g-box">
+            <span class="g-num" id="stat-max-tile">2048</span>
+            <span class="g-lbl">Highest Tile</span>
+          </div>
+          <div class="g-box">
+            <span class="g-num" id="stat-moves-total">0</span>
+            <span class="g-lbl">Total Moves</span>
+          </div>
+          <div class="g-box">
+            <span class="g-num" id="stat-high-score">0</span>
+            <span class="g-lbl">High Score</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-play-again" class="btn-primary-action">TRY AGAIN ⚡</button>
+          <button id="btn-change-mode" class="btn-secondary-action">CHANGE MODE</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Controls Tip -->
+    <footer id="game-footer">
+      <div class="footer-tip">⌨️ Desktop: Arrow Keys or WASD | 👆 Mobile: Swipe grid or tap D-Pad</div>
+      <div class="footer-meta">Number Merge • Pure Vanilla JS & Web Audio</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

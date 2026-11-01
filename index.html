@@ -58,7 +58,7 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (6)</button>
+          <button class="pill active" data-category="all">All (7)</button>
           <button class="pill" data-category="action">Action</button>
           <button class="pill" data-category="arcade">Runner</button>
           <button class="pill" data-category="puzzle">Puzzle</button>
@@ -367,6 +367,79 @@
           </div>
           <div class="card-action-row">
             <a href="/games/block-puzzle/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 7: Number Merge -->
+      <article class="game-card" data-category="puzzle" data-tags="number merge 2048 math sliding puzzle numbers logic swipe grid">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#merge-bg)"/>
+            
+            <!-- 4x4 Mini Board Matrix -->
+            <rect x="70" y="25" width="260" height="190" rx="16" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+            
+            <!-- Number Tiles Sample -->
+            <!-- Tile 256 (Cyan) -->
+            <rect x="88" y="42" width="52" height="52" rx="10" fill="#00f2fe" filter="drop-shadow(0 0 10px rgba(0,242,254,0.5))"/>
+            <text x="114" y="74" fill="#0b0f19" font-family="'Outfit', sans-serif" font-weight="900" font-size="18" text-anchor="middle">256</text>
+            
+            <!-- Tile 512 (Purple) -->
+            <rect x="148" y="42" width="52" height="52" rx="10" fill="#a855f7" filter="drop-shadow(0 0 10px rgba(168,85,247,0.5))"/>
+            <text x="174" y="74" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="900" font-size="18" text-anchor="middle">512</text>
+            
+            <!-- Tile 1024 (Pink) -->
+            <rect x="208" y="42" width="52" height="52" rx="10" fill="#ec4899" filter="drop-shadow(0 0 12px rgba(236,72,153,0.6))"/>
+            <text x="234" y="74" fill="#ffffff" font-family="'Outfit', sans-serif" font-weight="900" font-size="16" text-anchor="middle">1024</text>
+
+            <!-- Legendary Tile 2048 (Gold Neon Super Star) -->
+            <rect x="268" y="42" width="52" height="52" rx="10" fill="url(#gold-tile-grad)" stroke="#fff" stroke-width="2" filter="drop-shadow(0 0 18px rgba(255,215,0,0.8))"/>
+            <text x="294" y="74" fill="#3d2100" font-family="'Outfit', sans-serif" font-weight="900" font-size="15" text-anchor="middle">2048</text>
+
+            <!-- Row 2 -->
+            <rect x="88" y="102" width="52" height="52" rx="10" fill="#4ade80" filter="drop-shadow(0 0 8px rgba(74,222,128,0.4))"/>
+            <text x="114" y="134" fill="#0b0f19" font-family="'Outfit', sans-serif" font-weight="900" font-size="20" text-anchor="middle">64</text>
+
+            <rect x="148" y="102" width="52" height="52" rx="10" fill="#38bdf8"/>
+            <text x="174" y="134" fill="#0b0f19" font-family="'Outfit', sans-serif" font-weight="900" font-size="20" text-anchor="middle">128</text>
+
+            <!-- Empty slots -->
+            <rect x="208" y="102" width="52" height="52" rx="10" fill="rgba(255,255,255,0.06)"/>
+            <rect x="268" y="102" width="52" height="52" rx="10" fill="rgba(255,255,255,0.06)"/>
+
+            <!-- Merging Arrow / Sparkle -->
+            <polygon points="200,175 204,185 215,188 204,191 200,202 196,191 185,188 196,185" fill="#ffd700"/>
+            <text x="200" y="195" fill="#ffd700" font-family="'Outfit', sans-serif" font-weight="800" font-size="14" text-anchor="middle"></text>
+
+            <defs>
+              <linearGradient id="merge-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#141933"/>
+                <stop offset="1" stop-color="#080b18"/>
+              </linearGradient>
+              <linearGradient id="gold-tile-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#ffe600"/>
+                <stop offset="1" stop-color="#ff9900"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(236, 72, 153, 0.2); border-color: rgba(236, 72, 153, 0.5); color: #ec4899;">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Number Merge</h3>
+            <span class="card-rating">⭐ 5.0</span>
+          </div>
+          <p class="card-desc">
+            Slide and merge matching number tiles to reach 2048 and beyond! Features 4 game modes, undo, hint solver, and shuffle power-ups.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ Arrows / WASD</span>
+            <span class="control-tag">👆 Swipe / D-Pad</span>
+            <span class="control-tag">↩️ Undo & Hints</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/number-merge/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>

@@ -32,6 +32,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - 10×10 strategic block placement puzzle with 24+ polyomino shapes, simultaneous multi-line clears, combo multipliers, 3 undo moves, and a 3×3 zone bomb clearance tool.
    - **Controls:** Mouse drag-and-drop or tap-to-select then tap-to-place; `Z` to undo, `P` to pause.
 
+7. **🔢 Neon Number Merge (`/games/number-merge/`)**
+   - 2048-inspired numerical slide and merge puzzle on a 4×4 grid. Features 4 modes (Classic, Time Attack 90s, Endless, Challenge 512 in 60 moves), 3 difficulty tiers (Target 1024, 2048, 4096), Undo, AI Hint solver, and board Shuffle power-ups.
+   - **Controls:** Arrow Keys / `WASD` on desktop, 4-direction touch swipe or on-screen Virtual D-Pad on mobile.
+
 ---
 
 ## 📁 Project Structure
