@@ -28,6 +28,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - Arcade brick breaker featuring 10 architectural levels, 5 distinct brick types (Normal, Strong, Gold, Bomb, Steel), 7 dynamic power-ups (Wide Paddle, Laser Cannon, Multi-Ball, Fireball, Slow-Mo, Extra Life, 2x Multiplier), and 3 game modes (Classic, Endless, Time Challenge).
    - **Controls:** Mouse drag, Left/Right arrow keys, Spacebar to launch/shoot lasers, or touch drag on mobile.
 
+6. **🧩 Neon Block Puzzle (`/games/block-puzzle/`)**
+   - 10×10 strategic block placement puzzle with 24+ polyomino shapes, simultaneous multi-line clears, combo multipliers, 3 undo moves, and a 3×3 zone bomb clearance tool.
+   - **Controls:** Mouse drag-and-drop or tap-to-select then tap-to-place; `Z` to undo, `P` to pause.
+
 ---
 
 ## 📁 Project Structure

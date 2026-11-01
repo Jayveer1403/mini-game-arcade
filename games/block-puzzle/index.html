@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Neon Block Puzzle - 10x10 grid puzzle with multi-line clears, combo multipliers, special bomb blocks, undo moves, and Web Audio.">
+  <meta name="theme-color" content="#090d1a">
+  <title>Neon Block Puzzle | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Header & HUD -->
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🧩</span>
+          <span class="brand-title">BLOCK<span class="highlight">PUZZLE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Pill -->
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+
+        <!-- Mode / Target / Timer Pill -->
+        <div class="hud-stat mode-pill" id="mode-stat-container">
+          <span class="stat-lbl" id="mode-stat-lbl">MODE</span>
+          <span id="mode-stat-val" class="stat-num">Classic</span>
+        </div>
+
+        <!-- High Score Pill -->
+        <div class="hud-stat high-pill">
+          <span class="stat-lbl">BEST</span>
+          <span id="best-score-val" class="stat-num">0</span>
+        </div>
+
+        <!-- Combo Streak Pill -->
+        <div class="hud-stat combo-pill hidden" id="combo-pill">
+          <span class="stat-lbl">STREAK</span>
+          <span id="combo-val" class="stat-num">x2</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Undo Button -->
+        <button id="btn-undo" class="icon-hud-btn" aria-label="Undo Move" title="Undo Move (Z)">
+          <span>↩️</span>
+          <span class="badge-count" id="undo-count">3</span>
+        </button>
+        <!-- Bomb Power-up Button -->
+        <button id="btn-bomb-tool" class="icon-hud-btn" aria-label="Hammer/Bomb Tool" title="Clear 3x3 Area">
+          <span>💣</span>
+          <span class="badge-count" id="bomb-count">1</span>
+        </button>
+        <!-- Sound Toggle -->
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <!-- Pause Button -->
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game (P/Esc)">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Play Area -->
+    <main id="puzzle-main">
+      <!-- In-Game Combo Banner -->
+      <div id="combo-toast" class="hidden">
+        <div class="c-title" id="combo-title-text">2x COMBO!</div>
+        <div class="c-bonus" id="combo-bonus-text">+100 PTS</div>
+      </div>
+
+      <!-- Quick Message Notification -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- 10x10 Board Canvas Arena -->
+      <div id="board-arena">
+        <canvas id="board-canvas"></canvas>
+      </div>
+
+      <!-- Bottom Block Selection Tray -->
+      <div id="selection-tray">
+        <div class="tray-slot" id="slot-0" data-slot="0"></div>
+        <div class="tray-slot" id="slot-1" data-slot="1"></div>
+        <div class="tray-slot" id="slot-2" data-slot="2"></div>
+      </div>
+    </main>
+
+    <!-- START / MODE SELECTOR OVERLAY -->
+    <div id="modal-start" class="game-overlay">
+      <div class="modal-card">
+        <div class="glow-header-icon">🧩✨</div>
+        <h1 class="modal-title">NEON <span class="accent-text">BLOCKS</span></h1>
+        <p class="modal-sub">Drag & place shapes onto the 10×10 grid. Complete full rows & columns to trigger brilliant neon clears!</p>
+
+        <!-- Mode Selector Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-btn active" data-mode="classic">
+            <span class="m-icon">♾️</span>
+            <span class="m-title">Classic</span>
+            <span class="m-desc">Endless Strategy</span>
+          </button>
+          <button class="mode-btn" data-mode="time">
+            <span class="m-icon">⏱️</span>
+            <span class="m-title">Time Attack</span>
+            <span class="m-desc">2-Min Sprint</span>
+          </button>
+          <button class="mode-btn" data-mode="challenge">
+            <span class="m-icon">🎯</span>
+            <span class="m-title">Challenge</span>
+            <span class="m-desc">Clear 12 Lines</span>
+          </button>
+        </div>
+
+        <div id="mode-info" class="mode-info-box">
+          <strong>Classic Mode:</strong> Fit blocks onto the 10×10 board and clear lines continuously. Game ends when no tray shape fits anywhere on the grid!
+        </div>
+
+        <!-- Controls Guide -->
+        <div class="controls-guide-grid">
+          <div class="ctrl-item">
+            <span>🖱️ <strong>Mouse:</strong> Drag & Drop or Click block then click cell</span>
+          </div>
+          <div class="ctrl-item">
+            <span>👆 <strong>Touch:</strong> Touch & Drag or Tap block then tap board</span>
+          </div>
+          <div class="ctrl-item">
+            <span>↩️ <strong>Undo:</strong> Revert accidental placements (3 uses)</span>
+          </div>
+          <div class="ctrl-item">
+            <span>💣 <strong>Bomb Tool:</strong> Clear any crowded 3×3 zone</span>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary-action">
+          <span>START PLAYING</span>
+          <span class="btn-arrow">➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAUSE MENU OVERLAY -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="modal-card small-card">
+        <div class="glow-header-icon">⏸️</div>
+        <h2 class="modal-title">GAME PAUSED</h2>
+        <p class="modal-sub">Take your time to plan your next moves.</p>
+
+        <div class="pause-stat-grid">
+          <div class="p-stat-box">
+            <span class="p-lbl">CURRENT SCORE</span>
+            <span id="pause-score-num" class="p-val">0</span>
+          </div>
+          <div class="p-stat-box">
+            <span class="p-lbl">BEST RECORD</span>
+            <span id="pause-best-num" class="p-val">0</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-resume" class="btn-primary-action">RESUME</button>
+          <button id="btn-restart" class="btn-secondary-action">RESTART MATCH</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME OVER / VICTORY OVERLAY -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="modal-card">
+        <div class="glow-header-icon" id="gameover-emoji">💥</div>
+        <h2 class="modal-title" id="gameover-title">NO MORE MOVES!</h2>
+        <p class="modal-sub" id="gameover-reason">None of the available blocks fit on the board.</p>
+
+        <div class="final-score-card">
+          <span class="p-lbl">FINAL SCORE</span>
+          <div id="gameover-score-num" class="highlight-number">0</div>
+          <div id="new-high-badge" class="badge-record hidden">⭐ NEW HIGH RECORD! ⭐</div>
+        </div>
+
+        <div class="gameover-stats-row">
+          <div class="g-box">
+            <span class="g-num" id="stat-lines-cleared">0</span>
+            <span class="g-lbl">Lines Cleared</span>
+          </div>
+          <div class="g-box">
+            <span class="g-num" id="stat-max-streak">0x</span>
+            <span class="g-lbl">Max Combo</span>
+          </div>
+          <div class="g-box">
+            <span class="g-num" id="stat-high-score">0</span>
+            <span class="g-lbl">High Score</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-play-again" class="btn-primary-action">PLAY AGAIN ⚡</button>
+          <button id="btn-change-mode" class="btn-secondary-action">CHANGE MODE</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Controls Tip -->
+    <footer id="game-footer">
+      <div class="footer-tip">💡 Tip: Complete rows AND columns simultaneously for massive combo multipliers!</div>
+      <div class="footer-meta">Neon Block Puzzle • 10x10 Grid Engine</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

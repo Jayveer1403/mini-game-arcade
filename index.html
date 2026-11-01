@@ -58,7 +58,7 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (5)</button>
+          <button class="pill active" data-category="all">All (6)</button>
           <button class="pill" data-category="action">Action</button>
           <button class="pill" data-category="arcade">Runner</button>
           <button class="pill" data-category="puzzle">Puzzle</button>
@@ -309,6 +309,64 @@
           </div>
           <div class="card-action-row">
             <a href="/games/brick-breaker/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 6: Block Puzzle -->
+      <article class="game-card" data-category="puzzle" data-tags="block puzzle grid 10x10 logic lines combo brain tetris shape">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#block-bg)"/>
+            <!-- 10x10 Mini Grid Motif -->
+            <rect x="50" y="30" width="180" height="180" rx="12" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)"/>
+            
+            <!-- Placed Blocks in Grid -->
+            <rect x="68" y="48" width="30" height="30" rx="4" fill="#00f2fe"/>
+            <rect x="102" y="48" width="30" height="30" rx="4" fill="#00f2fe"/>
+            <rect x="136" y="48" width="30" height="30" rx="4" fill="#00f2fe"/>
+            <rect x="170" y="48" width="30" height="30" rx="4" fill="#00f2fe"/> <!-- Full Line Flash -->
+
+            <rect x="68" y="82" width="30" height="30" rx="4" fill="#ffb800"/>
+            <rect x="68" y="116" width="30" height="30" rx="4" fill="#ffb800"/>
+            <rect x="102" y="116" width="30" height="30" rx="4" fill="#ffb800"/>
+
+            <rect x="136" y="116" width="30" height="30" rx="4" fill="#ff007f"/>
+            <rect x="170" y="116" width="30" height="30" rx="4" fill="#ff007f"/>
+            <rect x="170" y="150" width="30" height="30" rx="4" fill="#ff007f"/>
+
+            <!-- Floating Shape Preview on Right -->
+            <rect x="270" y="75" width="28" height="28" rx="4" fill="#9d4edd" filter="drop-shadow(0 0 10px rgba(157,78,221,0.6))"/>
+            <rect x="302" y="75" width="28" height="28" rx="4" fill="#9d4edd" filter="drop-shadow(0 0 10px rgba(157,78,221,0.6))"/>
+            <rect x="286" y="107" width="28" height="28" rx="4" fill="#9d4edd" filter="drop-shadow(0 0 10px rgba(157,78,221,0.6))"/>
+
+            <!-- Clear Beam Glow -->
+            <line x1="50" y1="63" x2="230" y2="63" stroke="#00f2fe" stroke-width="4" stroke-opacity="0.8"/>
+
+            <defs>
+              <linearGradient id="block-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#141a2e"/>
+                <stop offset="1" stop-color="#060913"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(157, 78, 221, 0.2); border-color: rgba(157, 78, 221, 0.5); color: #9d4edd;">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Block Puzzle</h3>
+            <span class="card-rating">⭐ 5.0</span>
+          </div>
+          <p class="card-desc">
+            Fit colorful polyomino shapes onto the 10×10 board, trigger multi-line combo streaks, and use bombs & undo moves.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🖱️ Drag & Drop</span>
+            <span class="control-tag">👆 Tap to Place</span>
+            <span class="control-tag">↩️ Undo Move</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/block-puzzle/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>
