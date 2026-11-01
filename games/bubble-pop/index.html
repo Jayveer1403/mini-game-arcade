@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Bubble Pop Arcade - Fast-paced, glossy, colorful bubble popping action with power-ups, combos, and multiple game modes.">
+  <meta name="theme-color" content="#090f1d">
+  <title>Bubble Pop Arcade | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Top Navigation & Dashboard HUD -->
+    <header id="game-hud">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand-title">
+          <span class="brand-bubble">🫧</span>
+          <span class="brand-text">BUBBLE<span class="highlight">POP</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Card -->
+        <div class="hud-pill score-pill">
+          <span class="pill-label">SCORE</span>
+          <span id="score-display" class="pill-value">0</span>
+        </div>
+
+        <!-- Timer / Mode Card -->
+        <div class="hud-pill timer-pill" id="timer-container">
+          <span class="pill-label" id="timer-label">TIME</span>
+          <span id="timer-display" class="pill-value">60s</span>
+        </div>
+
+        <!-- Challenge Objective Card (Visible in Challenge Mode) -->
+        <div class="hud-pill objective-pill hidden" id="objective-container">
+          <span class="pill-label">OBJECTIVE</span>
+          <span id="objective-display" class="pill-value">0 / 25</span>
+        </div>
+
+        <!-- Combo Multiplier Pill -->
+        <div class="hud-pill combo-pill hidden" id="combo-pill">
+          <span class="pill-label">COMBO</span>
+          <span id="combo-display" class="pill-value">x2</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Active Power-Up Notification Bar -->
+    <div id="powerup-bar" class="hidden">
+      <span id="powerup-icon">⚡</span>
+      <span id="powerup-name">POWER-UP ACTIVE!</span>
+      <div id="powerup-timer-track">
+        <div id="powerup-timer-fill"></div>
+      </div>
+    </div>
+
+    <!-- Main Game Canvas Arena -->
+    <main id="stage-wrapper">
+      <canvas id="bubble-canvas"></canvas>
+
+      <!-- Combo Pop Celebration Banner -->
+      <div id="combo-banner" class="hidden">
+        <div class="combo-text" id="combo-text-val">5x POP COMBO!</div>
+        <div class="combo-sub" id="combo-sub-val">+150 BONUS</div>
+      </div>
+
+      <!-- Quick Feedback Toast -->
+      <div id="hud-toast" class="hidden"></div>
+
+      <!-- START MENU OVERLAY -->
+      <div id="overlay-start" class="game-overlay">
+        <div class="menu-card">
+          <div class="glow-orb">🫧</div>
+          <h1 class="game-title">BUBBLE <span class="pop-accent">POP</span></h1>
+          <p class="game-tagline">Pop glossy bubbles, trigger chain reactions, and unleash power-ups!</p>
+
+          <!-- Mode Selector Tabs -->
+          <div class="mode-tabs" role="tablist">
+            <button class="mode-tab active" data-mode="classic">
+              <span class="tab-icon">⏳</span>
+              <span class="tab-title">Classic</span>
+              <span class="tab-desc">60s Speed Run</span>
+            </button>
+            <button class="mode-tab" data-mode="endless">
+              <span class="tab-icon">♾️</span>
+              <span class="tab-title">Endless</span>
+              <span class="tab-desc">Chill / Survival</span>
+            </button>
+            <button class="mode-tab" data-mode="challenge">
+              <span class="tab-icon">🎯</span>
+              <span class="tab-title">Challenge</span>
+              <span class="tab-desc">Color Hunt</span>
+            </button>
+          </div>
+
+          <!-- Mode Description Box -->
+          <div id="mode-info" class="mode-info-box">
+            <strong>Classic Mode:</strong> Pop as many bubbles as you can before the 60-second timer expires. Watch for Golden & Rainbow bubbles!
+          </div>
+
+          <!-- Bubble Legend & Power-Up Guide -->
+          <div class="bubble-guide">
+            <div class="guide-item">
+              <span class="bubble-dot gold"></span>
+              <span><strong>Gold:</strong> +50 Pts</span>
+            </div>
+            <div class="guide-item">
+              <span class="bubble-dot rainbow"></span>
+              <span><strong>Rainbow:</strong> +100 Pts</span>
+            </div>
+            <div class="guide-item">
+              <span class="bubble-dot mega">💥</span>
+              <span><strong>Mega Pop:</strong> AOE Blast</span>
+            </div>
+            <div class="guide-item">
+              <span class="bubble-dot slow">⏱️</span>
+              <span><strong>Slow-Mo:</strong> Half Speed</span>
+            </div>
+          </div>
+
+          <button id="btn-start-game" class="play-action-btn">
+            <span>START POPPING</span>
+            <span class="btn-arrow">➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PAUSE OVERLAY -->
+      <div id="overlay-pause" class="game-overlay hidden">
+        <div class="menu-card small-card">
+          <div class="modal-emoji">⏸️</div>
+          <h2 class="game-title">GAME PAUSED</h2>
+          <p class="game-tagline">Catch your breath, bubble popper!</p>
+
+          <div class="pause-stat-grid">
+            <div class="pause-stat">
+              <span class="stat-lbl">CURRENT SCORE</span>
+              <span id="pause-score-val" class="stat-val">0</span>
+            </div>
+            <div class="pause-stat">
+              <span class="stat-lbl">TIME / MODE</span>
+              <span id="pause-time-val" class="stat-val">Classic</span>
+            </div>
+          </div>
+
+          <div class="btn-stack">
+            <button id="btn-resume-game" class="play-action-btn">RESUME PLAY</button>
+            <button id="btn-restart-game" class="secondary-action-btn">RESTART MODE</button>
+            <a href="/" class="secondary-action-btn" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME OVER OVERLAY -->
+      <div id="overlay-gameover" class="game-overlay hidden">
+        <div class="menu-card">
+          <div class="modal-emoji" id="gameover-emoji">🎉</div>
+          <h2 class="game-title" id="gameover-title">MATCH COMPLETE!</h2>
+          <p class="game-tagline" id="gameover-reason">Sensational popping action!</p>
+
+          <div class="final-score-card">
+            <span class="stat-lbl">FINAL SCORE</span>
+            <div id="final-score-val" class="final-score-num">0</div>
+            <div id="new-high-tag" class="badge-record hidden">⭐ NEW HIGH SCORE! ⭐</div>
+          </div>
+
+          <div class="gameover-stats-grid">
+            <div class="g-stat-item">
+              <span class="stat-val" id="stat-popped-total">0</span>
+              <span class="stat-lbl">Bubbles Popped</span>
+            </div>
+            <div class="g-stat-item">
+              <span class="stat-val" id="stat-max-streak">0x</span>
+              <span class="stat-lbl">Max Combo</span>
+            </div>
+            <div class="g-stat-item">
+              <span class="stat-val" id="stat-high-record">0</span>
+              <span class="stat-lbl">Best Score</span>
+            </div>
+          </div>
+
+          <div class="btn-stack">
+            <button id="btn-play-again" class="play-action-btn">PLAY AGAIN 🫧</button>
+            <button id="btn-change-mode" class="secondary-action-btn">CHOOSE GAME MODE</button>
+            <a href="/" class="secondary-action-btn" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer id="game-footer">
+      <div class="footer-tip">💡 Tip: Tap power-up bubbles for screen-clearing Mega Pops & Slow-Mo!</div>
+      <div class="footer-meta">Bubble Pop Arcade • Zero Latency Web Audio</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -58,10 +58,11 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (3)</button>
+          <button class="pill active" data-category="all">All (4)</button>
           <button class="pill" data-category="action">Action</button>
           <button class="pill" data-category="arcade">Runner</button>
           <button class="pill" data-category="puzzle">Puzzle</button>
+          <button class="pill" data-category="casual">Casual</button>
         </div>
       </div>
     </div>
@@ -192,6 +193,69 @@
           </div>
           <div class="card-action-row">
             <a href="/games/memory-match/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 4: Bubble Pop -->
+      <article class="game-card" data-category="casual" data-tags="bubble pop arcade casual relax powerup combo color reflex">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#bubble-bg)"/>
+            <!-- Big Cyan Bubble with glossy reflection -->
+            <circle cx="140" cy="120" r="52" fill="url(#cyan-bubble-grad)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+            <ellipse cx="122" cy="100" rx="18" ry="9" transform="rotate(-35 122 100)" fill="rgba(255,255,255,0.85)"/>
+            <circle cx="155" cy="138" r="8" fill="rgba(255,255,255,0.3)"/>
+            
+            <!-- Golden Star Bubble -->
+            <circle cx="260" cy="85" r="40" fill="url(#gold-bubble-grad)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <ellipse cx="246" cy="70" rx="14" ry="7" transform="rotate(-35 246 70)" fill="rgba(255,255,255,0.85)"/>
+            <polygon points="260,70 264,80 275,82 267,90 270,101 260,94 250,101 253,90 245,82 256,80" fill="#ffffff"/>
+
+            <!-- Small Pink Bubble -->
+            <circle cx="280" cy="170" r="32" fill="url(#pink-bubble-grad)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <ellipse cx="270" cy="158" rx="10" ry="5" transform="rotate(-35 270 158)" fill="rgba(255,255,255,0.85)"/>
+
+            <!-- Sparkle Rings -->
+            <circle cx="140" cy="120" r="68" stroke="rgba(0, 242, 254, 0.3)" stroke-width="2" stroke-dasharray="4 6"/>
+            <defs>
+              <linearGradient id="bubble-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#12182e"/>
+                <stop offset="1" stop-color="#060913"/>
+              </linearGradient>
+              <radialGradient id="cyan-bubble-grad" cx="0.35" cy="0.35" r="0.65">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#00f2fe"/>
+                <stop offset="100%" stop-color="#0052cc"/>
+              </radialGradient>
+              <radialGradient id="gold-bubble-grad" cx="0.35" cy="0.35" r="0.65">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#ffb800"/>
+                <stop offset="100%" stop-color="#b86200"/>
+              </radialGradient>
+              <radialGradient id="pink-bubble-grad" cx="0.35" cy="0.35" r="0.65">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="40%" stop-color="#ff007f"/>
+                <stop offset="100%" stop-color="#720042"/>
+              </radialGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(0, 242, 254, 0.2); border-color: rgba(0, 242, 254, 0.5); color: #00f2fe;">CASUAL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Bubble Pop</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Pop glossy floating bubbles, unleash Mega Pop chain reactions and Slow-Mo power-ups across Classic, Endless, and Challenge modes.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🖱️ Mouse Click</span>
+            <span class="control-tag">👆 Touch Tap</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/bubble-pop/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>

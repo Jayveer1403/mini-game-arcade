@@ -20,6 +20,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - Brain-training arcade card-matching game featuring 3D flip card animations, live elapsed timer, move counter, match audio synthesis, win state overlay, and persistent best-record tracking.
    - **Controls:** Mouse click, touch tap, or keyboard navigation (`Tab` + `Enter`/`Space`).
 
+4. **🫧 Bubble Pop Arcade (`/games/bubble-pop/`)**
+   - Glossy, responsive bubble popping mini-game featuring 3D spherical reflections, 4 power-up bubbles (Mega Pop AOE, Slow-Mo, Score Booster, Time Bonus), Golden/Rainbow tiers, and 3 modes (Classic, Endless, Challenge).
+   - **Controls:** Mouse click or touch tap on rising bubbles.
+
 ---
 
 ## 📁 Project Structure
