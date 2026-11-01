@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Space Dodge - Space Survival Arcade Game. Pilot your spaceship, dodge hazardous asteroids, lasers, space mines, and hostile UFOs!">
+  <meta name="theme-color" content="#060913">
+  <title>Space Dodge | Space Survival Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Header HUD -->
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🚀</span>
+          <span class="brand-title">SPACE<span class="highlight">DODGE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Pill -->
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+
+        <!-- Survival Time Pill -->
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">00:00</span>
+        </div>
+
+        <!-- Shields / Lives -->
+        <div class="hud-stat lives-pill">
+          <span class="stat-lbl">HULL</span>
+          <span id="lives-val" class="stat-num">🛡️ x1</span>
+        </div>
+
+        <!-- Combo Streak Pill -->
+        <div class="hud-stat combo-pill hidden" id="combo-pill">
+          <span class="stat-lbl">STREAK</span>
+          <span id="combo-val" class="stat-num">x2</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Sound Toggle -->
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <!-- Pause Button -->
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game (P/Esc)">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Canvas Container -->
+    <main id="space-main">
+      <!-- Active Power-ups Bar -->
+      <div id="powerups-dock" class="powerups-dock"></div>
+
+      <!-- Quick Floating Alert Toast -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- Canvas Viewport -->
+      <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+
+        <!-- On-Screen Virtual Controls for Mobile/Tablet -->
+        <div id="mobile-controls-overlay">
+          <!-- Joystick Left Zone -->
+          <div id="joystick-zone">
+            <div id="joystick-base">
+              <div id="joystick-thumb"></div>
+            </div>
+          </div>
+          <!-- Ability Button Right Zone -->
+          <div id="ability-zone">
+            <button id="btn-ability" class="ability-action-btn" aria-label="Special Ability (Pulse)">
+              <span class="ab-icon">⚡</span>
+              <span class="ab-label">PULSE</span>
+              <div id="ability-cooldown-overlay"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- START / MODE SELECTOR OVERLAY -->
+    <div id="modal-start" class="game-overlay">
+      <div class="modal-card">
+        <div class="glow-header-icon">🚀🌌</div>
+        <h1 class="modal-title">SPACE <span class="accent-text">DODGE</span></h1>
+        <p class="modal-sub">Pilot your cosmic interceptor through deep space. Dodge asteroids, laser beams, space mines, and hostile alien cruisers!</p>
+
+        <!-- 4 Game Modes Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-btn active" data-mode="classic">
+            <span class="m-icon">🎯</span>
+            <span class="m-title">Classic Survival</span>
+            <span class="m-desc">Increasing Hazards</span>
+          </button>
+          <button class="mode-btn" data-mode="endless">
+            <span class="m-icon">♾️</span>
+            <span class="m-title">Endless Space</span>
+            <span class="m-desc">Infinite High Score</span>
+          </button>
+          <button class="mode-btn" data-mode="time">
+            <span class="m-icon">⏱️</span>
+            <span class="m-title">Time Blitz</span>
+            <span class="m-desc">Survive 60s Storm</span>
+          </button>
+          <button class="mode-btn" data-mode="mission">
+            <span class="m-icon">🏆</span>
+            <span class="m-title">Missions</span>
+            <span class="m-desc">Special Objectives</span>
+          </button>
+        </div>
+
+        <!-- Difficulty Pills -->
+        <div class="difficulty-row">
+          <span class="diff-title">DIFFICULTY:</span>
+          <div class="diff-chips">
+            <button class="diff-chip" data-diff="easy">Cadet (Easy)</button>
+            <button class="diff-chip active" data-diff="medium">Pilot (Medium)</button>
+            <button class="diff-chip" data-diff="hard">Ace (Hard)</button>
+          </div>
+        </div>
+
+        <!-- Mode Explanation Box -->
+        <div id="mode-info" class="mode-info-box">
+          <strong>1. Classic Survival:</strong> Pilot your ship in all directions. Survive incoming asteroid belts, space mines, and laser sweeps. Near-misses grant massive bonus combo points!
+        </div>
+
+        <!-- Controls Guide -->
+        <div class="controls-guide-grid">
+          <div class="ctrl-item">
+            <span>⌨️ <strong>Desktop:</strong> Arrow Keys or WASD to navigate</span>
+          </div>
+          <div class="ctrl-item">
+            <span>⚡ <strong>Ability:</strong> Spacebar for Energy Pulse</span>
+          </div>
+          <div class="ctrl-item">
+            <span>👆 <strong>Mobile:</strong> Touch & Drag or Virtual Joystick</span>
+          </div>
+          <div class="ctrl-item">
+            <span>🛡️ <strong>Power-ups:</strong> Shields, Speed, Magnets, Slow-Mo</span>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary-action">
+          <span>LAUNCH INTERCEPTOR</span>
+          <span class="btn-arrow">➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAUSE MENU OVERLAY -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="modal-card small-card">
+        <div class="glow-header-icon">⏸️</div>
+        <h2 class="modal-title">MISSION PAUSED</h2>
+        <p class="modal-sub">Interceptor systems on standby.</p>
+
+        <div class="pause-stat-grid">
+          <div class="p-stat-box">
+            <span class="p-lbl">CURRENT SCORE</span>
+            <span id="pause-score-num" class="p-val">0</span>
+          </div>
+          <div class="p-stat-box">
+            <span class="p-lbl">TIME SURVIVED</span>
+            <span id="pause-time-num" class="p-val">00:00</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-resume" class="btn-primary-action">RESUME FLIGHT 🚀</button>
+          <button id="btn-restart" class="btn-secondary-action">RESTART MISSION</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS & MISSION OVER OVERLAY -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="modal-card">
+        <div class="glow-header-icon">💥🚀</div>
+        <h2 class="modal-title" id="gameover-title">HULL DESTROYED</h2>
+        <p class="modal-sub" id="gameover-sub">Critical impact sustained in deep space.</p>
+
+        <!-- Rating Badge -->
+        <div class="rating-badge-container">
+          <div class="rating-badge" id="rating-badge">ACE PILOT 🌟</div>
+        </div>
+
+        <!-- High-Score Ribbon -->
+        <div id="new-record-ribbon" class="record-ribbon hidden">⭐ NEW DISTANCE & SCORE RECORD! ⭐</div>
+
+        <!-- Stats Grid -->
+        <div class="results-stats-grid">
+          <div class="r-stat-card highlight">
+            <span class="r-lbl">FINAL SCORE</span>
+            <div id="r-score-val" class="r-big-num">0</div>
+          </div>
+          <div class="r-stat-card highlight">
+            <span class="r-lbl">SURVIVAL TIME</span>
+            <div id="r-time-val" class="r-big-num">00:00</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">DISTANCE</span>
+            <div id="r-dist-val" class="r-num">0 km</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">NEAR MISSES</span>
+            <div id="r-nearmiss-val" class="r-num">0</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">BEST COMBO</span>
+            <div id="r-combo-val" class="r-num">x0</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">POWER-UPS</span>
+            <div id="r-powerups-val" class="r-num">0</div>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-play-again" class="btn-primary-action">LAUNCH AGAIN 🚀</button>
+          <button id="btn-change-mode" class="btn-secondary-action">SELECT MISSION MODE</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Tip -->
+    <footer id="game-footer">
+      <div class="footer-tip">⌨️ Arrows/WASD to fly • Spacebar for Pulse • 👆 Touch & Drag on Mobile</div>
+      <div class="footer-meta">Space Dodge • 60 FPS HTML5 Canvas Physics • Web Audio API</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -44,6 +44,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - High-energy chromatic reaction speed matching arcade. Features 5 modes (Classic Color Match, Speed Rush 45s blitz, Stroop Color Name challenge, Reverse Color avoidance, and Color Memory tile sequences), response time graphs, and combo multipliers.
    - **Controls:** Mouse Click or Keys 1–8 on desktop, direct touch tap on mobile/tablet.
 
+10. **🚀 Space Dodge (`/games/space-dodge/`)**
+   - 60 FPS HTML5 Canvas cosmic survival arcade. Pilot your spaceship in all directions, evade asteroid swarms, laser sweeps, and space mines, trigger Energy Pulse abilities, and collect shields & speed boosts.
+   - **Controls:** Arrow Keys / `WASD` & Spacebar on desktop, touch-and-drag or Virtual Joystick on mobile/tablet.
+
 ---
 
 ## 📁 Project Structure

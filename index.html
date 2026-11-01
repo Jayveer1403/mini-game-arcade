@@ -58,7 +58,7 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (9)</button>
+          <button class="pill active" data-category="all">All (10)</button>
           <button class="pill" data-category="action">Action</button>
           <button class="pill" data-category="arcade">Runner</button>
           <button class="pill" data-category="puzzle">Puzzle</button>
@@ -561,6 +561,72 @@
           </div>
           <div class="card-action-row">
             <a href="/games/color-reaction/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 10: Space Dodge -->
+      <article class="game-card" data-category="arcade" data-tags="space dodge survival spaceship asteroids lasers pulse meteor cosmic">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#space-bg)"/>
+            
+            <!-- Distant Planet -->
+            <circle cx="330" cy="60" r="45" fill="url(#planet-grad)" opacity="0.8"/>
+            <path d="M 280 60 Q 330 40 380 60" stroke="#a855f7" stroke-width="3" fill="none" opacity="0.6"/>
+
+            <!-- Moving Star Trails -->
+            <line x1="80" y1="20" x2="80" y2="90" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <line x1="220" y1="40" x2="220" y2="130" stroke="rgba(0,242,254,0.4)" stroke-width="1.5"/>
+            <line x1="140" y1="90" x2="140" y2="170" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+
+            <!-- Asteroids incoming -->
+            <polygon points="100,50 120,40 135,60 125,80 95,75" fill="#64748b" stroke="#94a3b8" stroke-width="2"/>
+            <polygon points="260,110 275,100 290,120 280,135 255,130" fill="#475569" stroke="#64748b" stroke-width="2"/>
+
+            <!-- Space Mine hazard with red glow -->
+            <circle cx="90" cy="150" r="14" fill="#ef4444" filter="drop-shadow(0 0 8px rgba(239,68,68,0.8))"/>
+            <circle cx="90" cy="150" r="6" fill="#ffffff"/>
+
+            <!-- Player Spaceship with Thruster Glow -->
+            <!-- Shield Aura -->
+            <circle cx="200" cy="160" r="30" fill="none" stroke="#00f2fe" stroke-width="2" filter="drop-shadow(0 0 10px rgba(0,242,254,0.7))"/>
+            
+            <!-- Spaceship -->
+            <polygon points="200,135 218,175 200,165 182,175" fill="#00f2fe" filter="drop-shadow(0 0 8px rgba(0,242,254,0.8))"/>
+            <polygon points="200,140 205,155 200,152 195,155" fill="#ffffff"/>
+            
+            <!-- Thruster Flame -->
+            <polygon points="196,170 200,188 204,170" fill="#facc15" filter="drop-shadow(0 0 10px rgba(250,204,21,0.9))"/>
+
+            <defs>
+              <linearGradient id="space-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0b1026"/>
+                <stop offset="1" stop-color="#030610"/>
+              </linearGradient>
+              <linearGradient id="planet-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop stop-color="#ec4899"/>
+                <stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag runner" style="background: rgba(0, 242, 254, 0.2); border-color: rgba(0, 242, 254, 0.5); color: #00f2fe;">SURVIVAL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Space Dodge</h3>
+            <span class="card-rating">⭐ 5.0</span>
+          </div>
+          <p class="card-desc">
+            Pilot your spaceship through hazardous cosmic fields! Dodge asteroids, lasers, and mines, trigger Energy Pulses, and collect power-ups.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ Arrows / WASD</span>
+            <span class="control-tag">⚡ Spacebar Pulse</span>
+            <span class="control-tag">👆 Joystick / Touch</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/space-dodge/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>
