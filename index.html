@@ -58,9 +58,10 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (2)</button>
+          <button class="pill active" data-category="all">All (3)</button>
           <button class="pill" data-category="action">Action</button>
           <button class="pill" data-category="arcade">Runner</button>
+          <button class="pill" data-category="puzzle">Puzzle</button>
         </div>
       </div>
     </div>
@@ -151,6 +152,46 @@
           </div>
           <div class="card-action-row">
             <a href="/games/cyber-dash/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 3: Memory Match -->
+      <article class="game-card" data-category="puzzle" data-tags="memory match card puzzle brain pairs focus flip">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#memory-bg)"/>
+            <!-- Card 1 (Front - Star) -->
+            <rect x="70" y="45" width="105" height="150" rx="14" fill="#202947" stroke="#00e676" stroke-width="2"/>
+            <polygon points="122,80 128,100 148,102 132,116 138,136 122,122 106,136 112,116 96,102 116,100" fill="#ffd43b"/>
+            <!-- Card 2 (Front - Star Match) -->
+            <rect x="225" y="45" width="105" height="150" rx="14" fill="#202947" stroke="#00e676" stroke-width="2"/>
+            <polygon points="277,80 283,100 303,102 287,116 293,136 277,122 261,136 267,116 251,102 271,100" fill="#ffd43b"/>
+            <!-- Match Glow connection beam -->
+            <path d="M 175 120 Q 200 100 225 120" stroke="#00e676" stroke-width="4" stroke-dasharray="6 6"/>
+            <defs>
+              <linearGradient id="memory-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#141a2e"/>
+                <stop offset="1" stop-color="#080c18"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(0, 230, 118, 0.2); border-color: rgba(0, 230, 118, 0.5); color: #00e676;">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Memory Match</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Flip and match glowing arcade symbol pairs, track your move efficiency against the clock, and test your brain recall.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🖱️ Click / Flip</span>
+            <span class="control-tag">👆 Tap Cards</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/memory-match/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>

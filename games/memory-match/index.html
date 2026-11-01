@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Memory Match - Flip, match, and train your brain with colorful arcade symbols and combos.">
+  <meta name="theme-color" content="#0d111d">
+  <title>Memory Match | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b0d19;
+      --card-bg: #141a2e;
+      --card-back: #1e2642;
+      --card-border: rgba(255, 255, 255, 0.12);
+      --accent-cyan: #00f2fe;
+      --accent-gold: #ffb800;
+      --accent-green: #00e676;
+      --accent-pink: #ff007f;
+      --font-display: 'Fredoka One', cursive, sans-serif;
+      --font-ui: 'Outfit', sans-serif;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      font-family: var(--font-ui);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    #game-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 12px 16px 24px;
+    }
+
+    /* Header & HUD */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 14px;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover { background: rgba(255, 255, 255, 0.18); transform: translateX(-2px); }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--accent-gold);
+      letter-spacing: 0.5px;
+    }
+    .hud-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .stat-box {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      color: #8e9bb0;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: #fff;
+    }
+    .hud-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .icon-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: 0.2s;
+    }
+    .icon-btn:hover { background: rgba(255, 255, 255, 0.16); }
+
+    /* Board Grid */
+    #grid-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      width: 100%;
+      max-width: 540px;
+      aspect-ratio: 1;
+      perspective: 1000px;
+    }
+    .memory-card {
+      position: relative;
+      background: transparent;
+      border-radius: 14px;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      outline: none;
+    }
+    .memory-card:focus-visible {
+      box-shadow: 0 0 0 3px var(--accent-cyan);
+    }
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+    .memory-card.matched {
+      transform: rotateY(180deg) scale(0.96);
+      pointer-events: none;
+    }
+    .memory-card.matched .card-front {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 16px rgba(0, 230, 118, 0.4);
+    }
+    .card-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+    .card-back {
+      background: linear-gradient(135deg, #161d33 0%, #0d1222 100%);
+      color: var(--accent-cyan);
+      font-size: 1.8rem;
+    }
+    .card-back::after {
+      content: '❓';
+      opacity: 0.7;
+    }
+    .card-front {
+      background: linear-gradient(135deg, #202947 0%, #151b30 100%);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .card-icon {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+    }
+    .card-name {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Modal Overlays */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(8, 11, 20, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 16px;
+      opacity: 1;
+      transition: opacity 0.25s;
+    }
+    .overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+      display: none;
+    }
+    .modal-card {
+      background: #141a2e;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 30px 24px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 184, 0, 0.2);
+    }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+    }
+    .modal-desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    .win-stat-grid {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .win-stat-box {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 8px;
+    }
+    .win-stat-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--accent-cyan);
+    }
+    .btn-action {
+      font-family: var(--font-ui);
+      font-weight: 800;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #ffb800 0%, #ff8f00 100%);
+      color: #0b0f19;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: 0.2s;
+    }
+    .btn-action:hover {
+      filter: brightness(1.1);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid var(--card-border);
+      margin-top: 10px;
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.16); }
+
+    @media (max-width: 480px) {
+      .memory-grid { gap: 8px; }
+      .card-icon { font-size: 1.6rem; }
+      .card-name { font-size: 0.55rem; }
+      .stat-val { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div id="game-wrapper">
+    <header>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="/" class="back-btn" title="Back to Arcade Catalog">⬅️ Arcade</a>
+        <h1 class="brand-title">MEMORY<span style="color:#00f2fe;">MATCH</span></h1>
+      </div>
+      <div class="hud-actions">
+        <button id="btn-sound" class="icon-btn" aria-label="Toggle Sound" title="Sound Toggle">🔊</button>
+        <button id="btn-restart" class="icon-btn" aria-label="Restart Match" title="Restart">🔄</button>
+      </div>
+    </header>
+
+    <div class="hud-stats">
+      <div class="stat-box">
+        <span class="stat-label">TIME</span>
+        <span id="time-val" class="stat-val">00:00</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">MOVES</span>
+        <span id="moves-val" class="stat-val">0</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">PAIRS</span>
+        <span id="pairs-val" class="stat-val">0 / 8</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-label">BEST RECORD</span>
+        <span id="best-val" class="stat-val">--</span>
+      </div>
+    </div>
+
+    <div id="grid-container">
+      <main class="memory-grid" id="memory-grid" role="region" aria-label="Memory Card Board"></main>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="modal-victory" class="overlay hidden">
+      <div class="modal-card">
+        <div style="font-size: 3rem; margin-bottom: 8px;">🏆</div>
+        <h2 class="modal-title">BOARD CLEARED!</h2>
+        <p class="modal-desc">Incredible focus and memory! You matched every single pair.</p>
+
+        <div class="win-stat-grid">
+          <div class="win-stat-box">
+            <span class="stat-label">TOTAL TIME</span>
+            <span id="win-time" class="win-stat-num">00:00</span>
+          </div>
+          <div class="win-stat-box">
+            <span class="stat-label">TOTAL MOVES</span>
+            <span id="win-moves" class="win-stat-num">0</span>
+          </div>
+        </div>
+
+        <button id="btn-play-again" class="btn-action">PLAY AGAIN ⚡</button>
+        <a href="/" class="btn-action btn-secondary">ARCADE CATALOG 🏠</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. PROCEDURAL SOUND ENGINE ---
+    class MemoryAudio {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      }
+      toggleMute() {
+        this.muted = !this.muted;
+        return !this.muted;
+      }
+      playFlip() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(660, now + 0.07);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.09);
+        } catch(e){}
+      }
+      playMatch() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+          notes.forEach((f, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(f, now + idx * 0.06);
+            gain.gain.setValueAtTime(0.25, now + idx * 0.06);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.14);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + idx * 0.06);
+            osc.stop(now + idx * 0.06 + 0.16);
+          });
+        } catch(e){}
+      }
+      playMismatch() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.15);
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.17);
+        } catch(e){}
+      }
+      playVictory() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const now = this.ctx.currentTime;
+          const victoryChimes = [523.25, 659.25, 783.99, 1046.50];
+          victoryChimes.forEach((f, idx) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(f, now + idx * 0.09);
+            gain.gain.setValueAtTime(0.3, now + idx * 0.09);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.25);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now + idx * 0.09);
+            osc.stop(now + idx * 0.09 + 0.28);
+          });
+        } catch(e){}
+      }
+    }
+    const audio = new MemoryAudio();
+
+    // --- 2. GAME DATA & LOGIC ---
+    const SYMBOLS = [
+      { id: 'star', icon: '⭐', name: 'Star' },
+      { id: 'gem', icon: '💎', name: 'Gem' },
+      { id: 'lightning', icon: '⚡', name: 'Bolt' },
+      { id: 'fire', icon: '🔥', name: 'Fire' },
+      { id: 'rocket', icon: '🚀', name: 'Rocket' },
+      { id: 'crown', icon: '👑', name: 'Crown' },
+      { id: 'sword', icon: '⚔️', name: 'Blade' },
+      { id: 'heart', icon: '💖', name: 'Heart' }
+    ];
+
+    const gridEl = document.getElementById('memory-grid');
+    const timeValEl = document.getElementById('time-val');
+    const movesValEl = document.getElementById('moves-val');
+    const pairsValEl = document.getElementById('pairs-val');
+    const bestValEl = document.getElementById('best-val');
+    const modalVictory = document.getElementById('modal-victory');
+    const winTimeEl = document.getElementById('win-time');
+    const winMovesEl = document.getElementById('win-moves');
+    const btnRestart = document.getElementById('btn-restart');
+    const btnPlayAgain = document.getElementById('btn-play-again');
+    const btnSound = document.getElementById('btn-sound');
+
+    let deck = [];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let moves = 0;
+    let secondsElapsed = 0;
+    let timerInterval = null;
+    let gameActive = false;
+    let lockBoard = false;
+
+    // Load Best Score
+    let bestScore = localStorage.getItem('memorymatch_best_moves');
+    if (bestScore) bestValEl.textContent = `${bestScore} moves`;
+
+    function formatTime(s) {
+      const mins = Math.floor(s / 60).toString().padStart(2, '0');
+      const secs = (s % 60).toString().padStart(2, '0');
+      return `${mins}:${secs}`;
+    }
+
+    function initGame() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      secondsElapsed = 0;
+      moves = 0;
+      matchedPairs = 0;
+      flippedCards = [];
+      lockBoard = false;
+      gameActive = false;
+
+      timeValEl.textContent = '00:00';
+      movesValEl.textContent = '0';
+      pairsValEl.textContent = '0 / 8';
+      modalVictory.classList.add('hidden');
+
+      // Create 16 cards (8 pairs) & shuffle
+      deck = [...SYMBOLS, ...SYMBOLS]
+        .map((item, idx) => ({ ...item, uniqueId: idx }))
+        .sort(() => Math.random() - 0.5);
+
+      renderBoard();
+    }
+
+    function startTimer() {
+      if (timerInterval) return;
+      gameActive = true;
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        timeValEl.textContent = formatTime(secondsElapsed);
+      }, 1000);
+    }
+
+    function renderBoard() {
+      gridEl.innerHTML = '';
+      deck.forEach((card, index) => {
+        const cardBtn = document.createElement('button');
+        cardBtn.className = 'memory-card';
+        cardBtn.setAttribute('data-id', card.id);
+        cardBtn.setAttribute('data-index', index);
+        cardBtn.setAttribute('aria-label', `Card ${index + 1}, hidden`);
+
+        cardBtn.innerHTML = `
+          <div class="card-face card-back"></div>
+          <div class="card-face card-front">
+            <span class="card-icon">${card.icon}</span>
+            <span class="card-name">${card.name}</span>
+          </div>
+        `;
+
+        cardBtn.addEventListener('click', () => handleCardClick(cardBtn, card));
+        gridEl.appendChild(cardBtn);
+      });
+    }
+
+    function handleCardClick(cardBtn, card) {
+      audio.init();
+      if (!gameActive) startTimer();
+      if (lockBoard || cardBtn.classList.contains('flipped') || cardBtn.classList.contains('matched')) return;
+
+      audio.playFlip();
+      cardBtn.classList.add('flipped');
+      cardBtn.setAttribute('aria-label', `Card: ${card.name}`);
+      flippedCards.push({ el: cardBtn, data: card });
+
+      if (flippedCards.length === 2) {
+        moves++;
+        movesValEl.textContent = moves;
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      const [c1, c2] = flippedCards;
+      lockBoard = true;
+
+      if (c1.data.id === c2.data.id) {
+        // MATCH!
+        setTimeout(() => {
+          audio.playMatch();
+          c1.el.classList.add('matched');
+          c2.el.classList.add('matched');
+          matchedPairs++;
+          pairsValEl.textContent = `${matchedPairs} / 8`;
+          flippedCards = [];
+          lockBoard = false;
+
+          if (matchedPairs === 8) {
+            handleVictory();
+          }
+        }, 350);
+      } else {
+        // MISMATCH!
+        setTimeout(() => {
+          audio.playMismatch();
+          c1.el.classList.remove('flipped');
+          c2.el.classList.remove('flipped');
+          c1.el.setAttribute('aria-label', 'Card hidden');
+          c2.el.setAttribute('aria-label', 'Card hidden');
+          flippedCards = [];
+          lockBoard = false;
+        }, 900);
+      }
+    }
+
+    function handleVictory() {
+      clearInterval(timerInterval);
+      audio.playVictory();
+
+      // Check Best Record
+      if (!bestScore || moves < parseInt(bestScore, 10)) {
+        bestScore = moves;
+        localStorage.setItem('memorymatch_best_moves', bestScore.toString());
+        bestValEl.textContent = `${bestScore} moves`;
+      }
+
+      winTimeEl.textContent = formatTime(secondsElapsed);
+      winMovesEl.textContent = moves;
+
+      setTimeout(() => {
+        modalVictory.classList.remove('hidden');
+      }, 500);
+    }
+
+    // Button Listeners
+    btnRestart.addEventListener('click', initGame);
+    btnPlayAgain.addEventListener('click', initGame);
+    btnSound.addEventListener('click', () => {
+      audio.init();
+      const on = audio.toggleMute();
+      btnSound.textContent = on ? '🔊' : '🔇';
+    });
+
+    // Start on page load
+    window.addEventListener('DOMContentLoaded', initGame);
+  </script>
+</body>
+</html>

@@ -16,6 +16,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - High-reflex neon runner dodging high-voltage plasma barriers, steering across lanes, and collecting glowing energy orbs.
    - **Controls:** Arrow Keys / `A` & `D` on desktop, or tap left/right halves of screen on touchscreens.
 
+3. **🧠 Memory Match (`/games/memory-match/`)**
+   - Brain-training arcade card-matching game featuring 3D flip card animations, live elapsed timer, move counter, match audio synthesis, win state overlay, and persistent best-record tracking.
+   - **Controls:** Mouse click, touch tap, or keyboard navigation (`Tab` + `Enter`/`Space`).
+
 ---
 
 ## 📁 Project Structure
