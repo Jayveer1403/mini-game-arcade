@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Mini Game Arcade - Learn about our mission, our development team, original game designs, and tech stack.">
+  <title>About Us | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/portal.css">
+  <style>
+    .page-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .page-title {
+      font-family: 'Fredoka One', cursive, sans-serif;
+      font-size: 2.6rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .page-title .accent {
+      color: #00f2fe;
+      text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+    }
+    .page-sub {
+      color: #94a3b8;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .content-card {
+      background: rgba(16, 23, 44, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 30px;
+      line-height: 1.7;
+      color: #cbd5e1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .content-card h2 {
+      font-family: 'Fredoka One', cursive, sans-serif;
+      color: #00f2fe;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+    .content-card h3 {
+      color: #facc15;
+      font-size: 1.2rem;
+      margin: 20px 0 10px;
+    }
+    .content-card p {
+      margin-bottom: 16px;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .team-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .team-avatar {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .team-name {
+      font-weight: 800;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+    .team-role {
+      color: #ec4899;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header id="site-header">
+    <div class="header-container">
+      <a href="/" class="brand-logo" style="text-decoration:none;">
+        <span class="logo-icon">🕹️</span>
+        <span class="logo-text">MINI GAME <span class="highlight">ARCADE</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/">Catalog</a>
+        <a href="/about.html" class="active">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">ABOUT <span class="accent">OUR ARCADE</span></h1>
+      <p class="page-sub">Independent, high-performance browser gaming built with modern web standards.</p>
+    </div>
+
+    <div class="content-card">
+      <h2>🚀 Who We Are & Our Mission</h2>
+      <p>
+        <strong>Mini Game Arcade</strong> is an independent web gaming platform founded in 2026. Our vision is to bring back the golden age of instant, accessible arcade entertainment—free from massive 50GB downloads, invasive login walls, pay-to-win microtransactions, and aggressive ad trackers.
+      </p>
+      <p>
+        We believe that the modern open web (HTML5, Canvas, Web Audio API, and CSS3) is capable of delivering desktop-caliber 60 FPS gameplay natively inside any browser on phones, tablets, laptops, and workstations.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h2>🎮 100% Original Content & Native Engineering</h2>
+      <p>
+        Unlike aggregator websites that embed third-party iframes filled with slow malware or stolen Flash conversions, <strong>every single game in our catalog is engineered in-house</strong>. 
+      </p>
+      <h3>Our Technical Standards:</h3>
+      <ul>
+        <li><strong>Zero Bloatware:</strong> No bloated engines or external runtime dependencies. Games boot in milliseconds.</li>
+        <li><strong>Procedural Web Audio:</strong> All music and sound effects (swipes, chimes, explosions) are synthesized directly in code via the browser's <code>AudioContext</code>.</li>
+        <li><strong>Vector & Canvas Graphics:</strong> Original vector SVG artwork and GPU-accelerated 2D Canvas rendering that sharpens crisply at 4K resolution.</li>
+        <li><strong>Universal Accessibility:</strong> Touch gestures, virtual joysticks, keyboard keys (WASD/Arrows), and screen-reader compliant metadata.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2>👥 Editorial & Engineering Team</h2>
+      <div class="team-grid">
+        <div class="team-box">
+          <div class="team-avatar">👨‍💻</div>
+          <div class="team-name">Jayveer Kushwaha</div>
+          <div class="team-role">Lead Front-End Architect & Creator</div>
+          <p style="font-size: 0.85rem; color: #94a3b8;">Oversees gameplay physics, Canvas rendering engines, performance optimization, and production deployments.</p>
+        </div>
+        <div class="team-box">
+          <div class="team-avatar">🎨</div>
+          <div class="team-name">Shivang Design Labs</div>
+          <div class="team-role">UI/UX & Sound Designer</div>
+          <p style="font-size: 0.85rem; color: #94a3b8;">Crafts responsive dark-neon interfaces, procedural Web Audio frequencies, and visual feedback effects.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="logo-icon">🕹️</span>
+        <span class="logo-text">MINI GAME ARCADE</span>
+      </div>
+      <div class="footer-links">
+        <a href="/">Catalog</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+      </div>
+      <div class="footer-copy">
+        © 2026 Mini Game Arcade. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
