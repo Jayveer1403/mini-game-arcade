@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mini Game Arcade - Fast, responsive, browser-based games. No downloads, zero ads, 100% free.">
+  <meta name="theme-color" content="#0d111d">
+  <title>Mini Game Arcade | Instant Browser Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header id="site-header">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <span class="logo-icon">🕹️</span>
+        <span class="logo-text">MINI GAME <span class="highlight">ARCADE</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="#games-catalog" class="nav-link active">Games</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#privacy" class="nav-link">Privacy</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">⚡ INSTANT ARCADE ACTION</div>
+      <h1 class="hero-title">Pure Fun. <span class="gradient-text">Zero Wait.</span></h1>
+      <p class="hero-desc">
+        Welcome to <strong>Mini Game Arcade</strong> — a curated collection of lightweight, responsive HTML5 arcade games designed for instant play on mobile, tablet, and desktop. No installations, no paywalls, and no intrusive popups.
+      </p>
+      <div class="hero-cta">
+        <a href="#games-catalog" class="cta-btn primary">Browse Games ➔</a>
+        <a href="#about" class="cta-btn secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Arcade Catalog -->
+  <main id="games-catalog">
+    <div class="catalog-header">
+      <div>
+        <h2 class="section-title">Verified Playable Games</h2>
+        <p class="section-subtitle">Every game in our catalog is 100% tested, functional, and ready to play.</p>
+      </div>
+
+      <!-- Live Category & Search Filter -->
+      <div class="catalog-filters">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
+        </div>
+        <div class="category-pills" id="category-pills">
+          <button class="pill active" data-category="all">All (2)</button>
+          <button class="pill" data-category="action">Action</button>
+          <button class="pill" data-category="arcade">Runner</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Games Grid -->
+    <div class="games-grid" id="games-grid">
+      <!-- Game 1: Fruit Blade -->
+      <article class="game-card" data-category="action" data-tags="fruit slicing blade action sword swipe">
+        <div class="card-thumb-wrapper">
+          <!-- Original Canvas / Vector SVG Illustration -->
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#fruit-bg)"/>
+            <circle cx="160" cy="130" r="50" fill="#2b8a3e"/>
+            <circle cx="160" cy="130" r="44" fill="#ff2a5f"/>
+            <circle cx="150" cy="120" r="4" fill="#1a1a1a"/>
+            <circle cx="170" cy="135" r="4" fill="#1a1a1a"/>
+            <circle cx="155" cy="145" r="4" fill="#1a1a1a"/>
+            <!-- Blade Cut Slice line -->
+            <path d="M 60 210 L 340 30" stroke="#00f2fe" stroke-width="6" stroke-linecap="round"/>
+            <path d="M 60 210 L 340 30" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="270" cy="80" r="34" fill="#ff922b"/>
+            <circle cx="270" cy="80" r="28" fill="#ffa94d"/>
+            <!-- Sparkles -->
+            <polygon points="190,70 195,85 210,90 195,95 190,110 185,95 170,90 185,85" fill="#ffd43b"/>
+            <defs>
+              <linearGradient id="fruit-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#19233c"/>
+                <stop offset="1" stop-color="#0b0f19"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action">ACTION</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Fruit Blade</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Slice juicy fruits flying through the air, build high-speed combos, and dodge explosive bombs before the 60-second timer runs out.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🖱️ Mouse Drag</span>
+            <span class="control-tag">👆 Touch Swipe</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/fruit-blade/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 2: Cyber Dash -->
+      <article class="game-card" data-category="arcade" data-tags="cyber runner dodge reflex lane speed">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#cyber-bg)"/>
+            <!-- Cyber perspective lines -->
+            <line x1="80" y1="240" x2="160" y2="0" stroke="rgba(0, 242, 254, 0.3)" stroke-width="2"/>
+            <line x1="200" y1="240" x2="200" y2="0" stroke="rgba(0, 242, 254, 0.4)" stroke-width="2"/>
+            <line x1="320" y1="240" x2="240" y2="0" stroke="rgba(0, 242, 254, 0.3)" stroke-width="2"/>
+            <!-- Plasma barrier -->
+            <rect x="150" y="70" width="100" height="14" rx="4" fill="#ff007f"/>
+            <!-- Energy Orb -->
+            <circle cx="280" cy="110" r="16" fill="#ffe600"/>
+            <circle cx="280" cy="110" r="7" fill="#ffffff"/>
+            <!-- Player ship -->
+            <polygon points="200,165 218,205 200,198 182,205" fill="#00f2fe"/>
+            <defs>
+              <linearGradient id="cyber-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0b0e1b"/>
+                <stop offset="1" stop-color="#05070e"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag runner">RUNNER</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Cyber Dash</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Steer through a neon cybernetic grid, dodge high-voltage plasma barriers, and collect glowing energy cores to set a new distance record.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ Arrow Keys / A-D</span>
+            <span class="control-tag">👆 Tap Left/Right</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/cyber-dash/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Empty state message for filters -->
+    <div id="no-games" class="empty-state hidden">
+      <div style="font-size: 2.5rem; margin-bottom: 8px;">🎮</div>
+      <h3>No Games Found</h3>
+      <p>Try searching for a different keyword or resetting your filter.</p>
+    </div>
+  </main>
+
+  <!-- Informational & Policy Sections -->
+  <section id="about" class="info-section">
+    <div class="section-container">
+      <h2 class="section-title">About Mini Game Arcade</h2>
+      <p class="section-text">
+        Mini Game Arcade is built on the philosophy that web games should be fast, elegant, and instantly accessible. Every game in our catalog is engineered using modern HTML5 Canvas, SVG graphics, and procedural Web Audio. We don’t ask for user accounts, we don’t run intrusive ad banners that block your screen, and we never track your personal data.
+      </p>
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">🚀</div>
+          <h4>Zero Install & Fast Load</h4>
+          <p>Built as ultra-lightweight static web pages that boot in milliseconds on any internet connection.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">📱</div>
+          <h4>Cross-Platform Responsive</h4>
+          <p>Seamlessly adapts to phones, tablets, laptops, and ultra-wide desktop monitors.</p>
+        </div>
+        <div class="feature-box">
+          <div class="feature-icon">🎵</div>
+          <h4>Web Audio Synthesis</h4>
+          <p>Zero external sound downloads. Every whoosh, pop, and melody is synthesized natively in your browser.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="info-section alt-bg">
+    <div class="section-container">
+      <h2 class="section-title">Contact & Community</h2>
+      <p class="section-text">
+        Have feedback, suggestions for a new game, or want to contribute an HTML5 mini-game to our open arcade? We’d love to hear from you.
+      </p>
+      <div class="contact-card">
+        <div class="contact-item">
+          <strong>Open Source & Deployment:</strong> Hosted globally on Vercel CDN.
+        </div>
+        <div class="contact-item">
+          <strong>Feedback & Bug Reports:</strong> Open an issue or discussion on the project repository.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Policy Section -->
+  <section id="privacy" class="info-section">
+    <div class="section-container">
+      <h2 class="section-title">Privacy Policy</h2>
+      <p class="section-text">
+        Last updated: November 2026.
+      </p>
+      <div class="policy-body">
+        <p><strong>1. Data Collection:</strong> Mini Game Arcade does not collect, sell, or transmit any personally identifiable information (PII). We do not require registration, passwords, or emails.</p>
+        <p><strong>2. Local Storage:</strong> Games use standard browser <code>localStorage</code> exclusively to save your local high scores and sound mute preferences on your own device. This data never leaves your computer or phone.</p>
+        <p><strong>3. Third-Party Trackers:</strong> We do not load invasive marketing cookies, trackers, or behavioral analytics scripts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Terms of Service Section -->
+  <section id="terms" class="info-section alt-bg">
+    <div class="section-container">
+      <h2 class="section-title">Terms of Service</h2>
+      <div class="policy-body">
+        <p>By accessing Mini Game Arcade, you are free to play and share our games for personal entertainment. All original game codes, custom synthesized audio, and vector assets are provided as-is without warranties. You may not rebrand, mirror, or repackage these titles with deceptive paywalls or intrusive malware.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <span class="logo-icon">🕹️</span>
+        <span class="logo-text">MINI GAME ARCADE</span>
+      </div>
+      <div class="footer-links">
+        <a href="#games-catalog">All Games</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms</a>
+      </div>
+      <div class="footer-copy">
+        © 2026 Mini Game Arcade. Handcrafted with HTML5, CSS3 & JavaScript.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Catalog Filtering & Search Script -->
+  <script>
+    const searchInput = document.getElementById('game-search');
+    const categoryPills = document.querySelectorAll('#category-pills .pill');
+    const gameCards = document.querySelectorAll('.game-card');
+    const noGamesMsg = document.getElementById('no-games');
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function filterGames() {
+      let visibleCount = 0;
+      gameCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+
+        const matchesCat = (currentCategory === 'all' || category === currentCategory);
+        const matchesQuery = (!searchQuery || title.includes(searchQuery) || desc.includes(searchQuery) || tags.includes(searchQuery));
+
+        if (matchesCat && matchesQuery) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (visibleCount === 0) {
+        noGamesMsg.classList.remove('hidden');
+      } else {
+        noGamesMsg.classList.add('hidden');
+      }
+    }
+
+    categoryPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        categoryPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentCategory = pill.getAttribute('data-category');
+        filterGames();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      filterGames();
+    });
+  </script>
+</body>
+</html>

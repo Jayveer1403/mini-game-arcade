@@ -1,0 +1,36 @@
+# Dependency & Package Managers
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vercel Deployment & Build Artifacts
+.vercel/
+.vercel_build_output/
+
+# Environment Variables & Secrets
+.env
+.env*.local
+.env.development
+.env.test
+.env.production
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary, Scratch & Test Artifacts
+*.tmp
+*.temp
+test_*.js
+*.log

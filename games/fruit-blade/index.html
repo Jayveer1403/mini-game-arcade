@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Fruit Blade - High-speed arcade fruit slicing action in HTML5 Canvas.">
+  <meta name="theme-color" content="#121826">
+  <title>Fruit Blade | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Arcade Return Button integration */
+    .arcade-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 7px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-right: 12px;
+    }
+    .arcade-nav-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateX(-2px);
+    }
+    @media (max-width: 600px) {
+      .arcade-nav-btn span.nav-text {
+        display: none;
+      }
+      .arcade-nav-btn {
+        padding: 7px 10px;
+        margin-right: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-wrapper">
+    <!-- Top Navigation / HUD Bar -->
+    <header id="game-header">
+      <div style="display: flex; align-items: center;">
+        <a href="/" class="arcade-nav-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="nav-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">⚔️</span>
+          <span class="brand-title">FRUIT<span class="highlight">BLADE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-stats">
+        <div class="stat-pill score-pill">
+          <span class="stat-label">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+        <div class="stat-pill timer-pill">
+          <span class="stat-label">TIME</span>
+          <span id="timer-val" class="stat-num">60s</span>
+        </div>
+        <div class="stat-pill lives-pill" id="lives-container">
+          <span class="stat-label">LIVES</span>
+          <div id="lives-icons" class="lives-row">
+            <span class="heart active">❤️</span>
+            <span class="heart active">❤️</span>
+            <span class="heart active">❤️</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-actions">
+        <button id="btn-sound" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">
+          <span class="btn-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-btn" aria-label="Pause Game" title="Pause Game">
+          <span class="btn-icon">⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Canvas Container -->
+    <main id="game-stage">
+      <canvas id="game-canvas"></canvas>
+
+      <!-- Combo Indicator Floating Banner -->
+      <div id="combo-banner" class="hidden">
+        <div class="combo-title" id="combo-text">3x COMBO!</div>
+        <div class="combo-subtitle" id="combo-bonus">+30 PTS</div>
+      </div>
+
+      <!-- In-Game Notice / Alert Banner -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- Instructions Modal / First-Time Overlay -->
+      <div id="modal-instructions" class="overlay active">
+        <div class="modal-card">
+          <div class="modal-badge">ARCADE EDITION</div>
+          <h1 class="modal-title">FRUIT <span class="accent-text">BLADE</span></h1>
+          <p class="modal-subtitle">Fast-paced slicing action right in your browser!</p>
+
+          <div class="guide-grid">
+            <div class="guide-item">
+              <div class="guide-icon">🍎🍉🍊</div>
+              <div class="guide-text">
+                <strong>Slice Juicy Fruits</strong>
+                <span>Swipe or drag mouse across moving fruit to slice them and earn points.</span>
+              </div>
+            </div>
+
+            <div class="guide-item highlight-item">
+              <div class="guide-icon">⚡✨</div>
+              <div class="guide-text">
+                <strong>Chain Combos</strong>
+                <span>Slice 3 or more fruits in a single swipe for massive combo bonuses!</span>
+              </div>
+            </div>
+
+            <div class="guide-item danger-item">
+              <div class="guide-icon">💣⚠️</div>
+              <div class="guide-text">
+                <strong>Avoid Bombs!</strong>
+                <span>Slicing a bomb will trigger an instant explosion and cost you lives or game over!</span>
+              </div>
+            </div>
+
+            <div class="guide-item">
+              <div class="guide-icon">⏳⏱️</div>
+              <div class="guide-text">
+                <strong>Race The Clock</strong>
+                <span>Score as high as possible before your 60-second timer runs out.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls-hint">
+            <span>🖱️ Click & Drag on Desktop</span>
+            <span class="sep">•</span>
+            <span>👆 Swipe on Touchscreen</span>
+          </div>
+
+          <button id="btn-start" class="btn-action primary-action">
+            <span class="btn-text">START SLICING</span>
+            <span class="btn-arrow">➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Pause Menu Overlay -->
+      <div id="modal-pause" class="overlay hidden">
+        <div class="modal-card small-card">
+          <div class="modal-icon-header">⏸️</div>
+          <h2 class="modal-title">GAME PAUSED</h2>
+          <p class="modal-subtitle">Take a breather, ninja.</p>
+
+          <div class="modal-stats-summary">
+            <div class="summary-box">
+              <div class="sub-label">CURRENT SCORE</div>
+              <div id="pause-score" class="sub-val">0</div>
+            </div>
+            <div class="summary-box">
+              <div class="sub-label">TIME LEFT</div>
+              <div id="pause-time" class="sub-val">60s</div>
+            </div>
+          </div>
+
+          <div class="modal-btn-stack">
+            <button id="btn-resume" class="btn-action primary-action">
+              RESUME PLAY
+            </button>
+            <button id="btn-restart-paused" class="btn-action secondary-action">
+              RESTART MATCH
+            </button>
+            <a href="/" class="btn-action" style="background: rgba(255,255,255,0.06); color:#fff; text-decoration:none; margin-top:4px;">
+              BACK TO ARCADE
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Over Modal Overlay -->
+      <div id="modal-gameover" class="overlay hidden">
+        <div class="modal-card">
+          <div id="gameover-trophy" class="modal-icon-header">🏆</div>
+          <h2 id="gameover-title" class="modal-title">TIME'S UP!</h2>
+          <p id="gameover-reason" class="modal-subtitle">Great slicing skills!</p>
+
+          <div class="final-score-container">
+            <div class="final-score-label">FINAL SCORE</div>
+            <div id="final-score-val" class="final-score-number">0</div>
+            <div id="new-high-badge" class="badge-new-record hidden">⭐ NEW HIGH SCORE! ⭐</div>
+          </div>
+
+          <div class="stats-row-details">
+            <div class="stat-detail-item">
+              <span class="stat-detail-num" id="stat-sliced-count">0</span>
+              <span class="stat-detail-label">Fruits Sliced</span>
+            </div>
+            <div class="stat-detail-item">
+              <span class="stat-detail-num" id="stat-max-combo">0x</span>
+              <span class="stat-detail-label">Max Combo</span>
+            </div>
+            <div class="stat-detail-item">
+              <span class="stat-detail-num" id="stat-best-score">0</span>
+              <span class="stat-detail-label">Best Record</span>
+            </div>
+          </div>
+
+          <div class="modal-btn-stack">
+            <button id="btn-play-again" class="btn-action primary-action">
+              PLAY AGAIN ⚡
+            </button>
+            <a href="/" class="btn-action secondary-action" style="text-decoration:none;">
+              ARCADE HOME 🏠
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer with Tips and Quick Status -->
+    <footer id="game-footer">
+      <div class="footer-tip">💡 Tip: Slice multiple fruits with one swift motion for combo bonuses!</div>
+      <div class="footer-copy"><a href="/" style="color:inherit; text-decoration:none;">Mini Game Arcade</a></div>
+    </footer>
+  </div>
+
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

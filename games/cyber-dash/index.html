@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Cyber Dash - Dodge neon barriers, collect energy orbs, and test your lightning reflexes in this cyber arcade runner.">
+  <meta name="theme-color" content="#0d0f18">
+  <title>Cyber Dash | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0b0d19;
+      --card-bg: rgba(18, 22, 38, 0.95);
+      --border-color: rgba(255, 255, 255, 0.12);
+      --cyan: #00f2fe;
+      --neon-pink: #ff007f;
+      --neon-yellow: #ffe600;
+      --font-display: 'Fredoka One', cursive, sans-serif;
+      --font-ui: 'Outfit', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
+    body, html { width: 100%; height: 100%; overflow: hidden; background: var(--bg-color); font-family: var(--font-ui); color: #fff; touch-action: none; }
+    #game-container { display: flex; flex-direction: column; width: 100vw; height: 100vh; height: 100dvh; position: relative; }
+    
+    header {
+      height: 60px;
+      background: rgba(14, 18, 32, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 20;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.18); }
+    .brand-title { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: 1px; color: var(--cyan); }
+    .hud-stats { display: flex; gap: 10px; }
+    .stat-pill { background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); border-radius: 10px; padding: 4px 12px; text-align: center; }
+    .stat-label { font-size: 0.6rem; font-weight: 800; color: #8e9bb0; display: block; }
+    .stat-num { font-family: var(--font-display); font-size: 1.15rem; color: #fff; }
+    .hud-actions { display: flex; gap: 8px; }
+    .icon-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border-color); color: #fff; border-radius: 8px; width: 38px; height: 38px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    
+    main { flex: 1; position: relative; width: 100%; overflow: hidden; }
+    canvas { width: 100%; height: 100%; display: block; }
+
+    /* Overlays */
+    .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 10, 20, 0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 30; padding: 16px; }
+    .overlay.hidden { display: none; }
+    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 28px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 16px 40px rgba(0,0,0,0.7); }
+    .title { font-family: var(--font-display); font-size: 2rem; color: var(--cyan); margin-bottom: 6px; }
+    .desc { color: #8e9bb0; font-size: 0.95rem; margin-bottom: 20px; line-height: 1.4; }
+    .controls-box { background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; margin-bottom: 20px; text-align: left; font-size: 0.85rem; color: #cbd5e1; }
+    .controls-box div { margin: 4px 0; }
+    .btn { font-family: var(--font-ui); font-weight: 800; font-size: 1.05rem; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #04101e; border: none; border-radius: 12px; padding: 14px; width: 100%; cursor: pointer; transition: 0.2s; text-decoration: none; display: block; }
+    .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .secondary-btn { background: rgba(255,255,255,0.08); color: #fff; margin-top: 10px; border: 1px solid var(--border-color); }
+    .stat-res { font-size: 2.8rem; font-family: var(--font-display); color: var(--neon-yellow); margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <header>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="/" class="back-btn" title="Back to Arcade Catalog">⬅️ Arcade</a>
+        <span class="brand-title">CYBER<span style="color:#ff007f;">DASH</span></span>
+      </div>
+      <div class="hud-stats">
+        <div class="stat-pill">
+          <span class="stat-label">DISTANCE</span>
+          <span id="score-val" class="stat-num">0m</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">ORBS</span>
+          <span id="orb-val" class="stat-num">0</span>
+        </div>
+      </div>
+      <div class="hud-actions">
+        <button id="btn-sound" class="icon-btn" title="Sound Toggle">🔊</button>
+        <button id="btn-pause" class="icon-btn" title="Pause">⏸️</button>
+      </div>
+    </header>
+
+    <main>
+      <canvas id="cyber-canvas"></canvas>
+
+      <!-- Start Overlay -->
+      <div id="modal-start" class="overlay">
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 6px;">⚡</div>
+          <h1 class="title">CYBER DASH</h1>
+          <p class="desc">Dodge neon plasma barriers, steer across lanes, and collect energy orbs to survive the grid.</p>
+          <div class="controls-box">
+            <div>⌨️ <strong>Arrow Keys / A & D</strong>: Move Left & Right</div>
+            <div>👆 <strong>Touch / Mouse</strong>: Tap or Drag left/right halves of screen</div>
+            <div>⏸️ <strong>P / Esc</strong>: Pause game</div>
+          </div>
+          <button id="btn-play-game" class="btn">LAUNCH RUNNER ➔</button>
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div id="modal-pause" class="overlay hidden">
+        <div class="card">
+          <div style="font-size: 2.5rem; margin-bottom: 6px;">⏸️</div>
+          <h2 class="title" style="color: #fff;">PAUSED</h2>
+          <p class="desc">Take a quick breath.</p>
+          <button id="btn-resume" class="btn">RESUME</button>
+          <button id="btn-restart" class="btn secondary-btn">RESTART</button>
+          <a href="/" class="btn secondary-btn">BACK TO ARCADE</a>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="modal-gameover" class="overlay hidden">
+        <div class="card">
+          <div style="font-size: 2.5rem; margin-bottom: 6px;">💥</div>
+          <h2 class="title" style="color: #ff007f;">SYSTEM CRASH!</h2>
+          <p class="desc">You collided with a plasma barrier.</p>
+          <div class="stat-res" id="final-dist">0m</div>
+          <p style="color: #8e9bb0; font-size: 0.9rem; margin-bottom: 16px;">Best Distance: <span id="best-dist" style="color:#fff; font-weight:700;">0m</span></p>
+          <button id="btn-play-again" class="btn">RUN AGAIN ⚡</button>
+          <a href="/" class="btn secondary-btn">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // --- SYNTHESIZER ---
+    class CyberAudio {
+      constructor() {
+        this.ctx = null;
+        this.muted = false;
+      }
+      init() {
+        if (!this.ctx) {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) this.ctx = new AudioCtx();
+        }
+        if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+      }
+      playMove() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const now = this.ctx.currentTime;
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(350, now);
+          osc.frequency.exponentialRampToValueAtTime(700, now + 0.06);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.07);
+        } catch(e){}
+      }
+      playOrb() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const now = this.ctx.currentTime;
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, now);
+          osc.frequency.exponentialRampToValueAtTime(1760, now + 0.09);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.1);
+        } catch(e){}
+      }
+      playCrash() {
+        if (this.muted || !this.ctx) return;
+        try {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          const now = this.ctx.currentTime;
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(200, now);
+          osc.frequency.exponentialRampToValueAtTime(40, now + 0.4);
+          gain.gain.setValueAtTime(0.4, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.45);
+        } catch(e){}
+      }
+      toggleMute() {
+        this.muted = !this.muted;
+        return !this.muted;
+      }
+    }
+    const audio = new CyberAudio();
+
+    // --- GAME ENGINE ---
+    const canvas = document.getElementById('cyber-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    const scoreVal = document.getElementById('score-val');
+    const orbVal = document.getElementById('orb-val');
+    const modalStart = document.getElementById('modal-start');
+    const modalPause = document.getElementById('modal-pause');
+    const modalGameOver = document.getElementById('modal-gameover');
+    const finalDist = document.getElementById('final-dist');
+    const bestDist = document.getElementById('best-dist');
+
+    let state = 'START';
+    let distance = 0;
+    let orbs = 0;
+    let highDistance = parseInt(localStorage.getItem('cyberdash_high') || '0', 10);
+    let speed = 7;
+    let obstacles = [];
+    let orbItems = [];
+    let particles = [];
+    let lanes = 3;
+    let playerLane = 1; // 0, 1, 2
+    let playerX = 0;
+    let targetX = 0;
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.resetTransform();
+      ctx.scale(dpr, dpr);
+      targetX = getLaneX(playerLane);
+      playerX = targetX;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function getLaneX(lane) {
+      const laneWidth = Math.min(width * 0.28, 140);
+      const centerX = width / 2;
+      return centerX + (lane - 1) * laneWidth;
+    }
+
+    function startGame() {
+      audio.init();
+      state = 'PLAYING';
+      distance = 0;
+      orbs = 0;
+      speed = 7;
+      playerLane = 1;
+      playerX = getLaneX(playerLane);
+      targetX = playerX;
+      obstacles = [];
+      orbItems = [];
+      particles = [];
+      scoreVal.textContent = '0m';
+      orbVal.textContent = '0';
+      modalStart.classList.add('hidden');
+      modalPause.classList.add('hidden');
+      modalGameOver.classList.add('hidden');
+    }
+
+    function gameOver() {
+      state = 'GAMEOVER';
+      audio.playCrash();
+      if (distance > highDistance) {
+        highDistance = distance;
+        localStorage.setItem('cyberdash_high', highDistance.toString());
+      }
+      finalDist.textContent = `${distance}m`;
+      bestDist.textContent = `${highDistance}m`;
+      modalGameOver.classList.remove('hidden');
+    }
+
+    // Input
+    window.addEventListener('keydown', (e) => {
+      if (state !== 'PLAYING') return;
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+        if (playerLane > 0) {
+          playerLane--;
+          targetX = getLaneX(playerLane);
+          audio.playMove();
+        }
+      } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        if (playerLane < lanes - 1) {
+          playerLane++;
+          targetX = getLaneX(playerLane);
+          audio.playMove();
+        }
+      } else if (e.key === 'p' || e.key === 'P' || e.key === 'Escape') {
+        togglePause();
+      }
+    });
+
+    canvas.addEventListener('pointerdown', (e) => {
+      if (state !== 'PLAYING') return;
+      audio.init();
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      if (x < width / 2) {
+        if (playerLane > 0) { playerLane--; audio.playMove(); }
+      } else {
+        if (playerLane < lanes - 1) { playerLane++; audio.playMove(); }
+      }
+      targetX = getLaneX(playerLane);
+    });
+
+    function togglePause() {
+      if (state === 'PLAYING') {
+        state = 'PAUSED';
+        modalPause.classList.remove('hidden');
+      } else if (state === 'PAUSED') {
+        state = 'PLAYING';
+        modalPause.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('btn-play-game').addEventListener('click', startGame);
+    document.getElementById('btn-resume').addEventListener('click', togglePause);
+    document.getElementById('btn-restart').addEventListener('click', startGame);
+    document.getElementById('btn-play-again').addEventListener('click', startGame);
+    document.getElementById('btn-pause').addEventListener('click', togglePause);
+    document.getElementById('btn-sound').addEventListener('click', () => {
+      audio.init();
+      const on = audio.toggleMute();
+      document.getElementById('btn-sound').textContent = on ? '🔊' : '🔇';
+    });
+
+    let spawnCounter = 0;
+    let gridOffset = 0;
+
+    function loop() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Perspective Cyber Grid Lines
+      gridOffset = (gridOffset + speed) % 40;
+      ctx.strokeStyle = 'rgba(0, 242, 254, 0.12)';
+      ctx.lineWidth = 1;
+      for (let y = gridOffset; y < height; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Lane dividers
+      for (let i = 0; i <= lanes; i++) {
+        const laneWidth = Math.min(width * 0.28, 140);
+        const lx = (width / 2) + (i - 1.5) * laneWidth;
+        ctx.strokeStyle = 'rgba(255, 0, 127, 0.2)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(lx, 0);
+        ctx.lineTo(lx, height);
+        ctx.stroke();
+      }
+
+      if (state === 'PLAYING') {
+        distance += Math.round(speed * 0.15);
+        scoreVal.textContent = `${distance}m`;
+        speed = Math.min(18, 7 + Math.floor(distance / 250) * 0.8);
+
+        // Smooth player transition
+        playerX += (targetX - playerX) * 0.22;
+
+        // Spawning obstacles & orbs
+        spawnCounter++;
+        if (spawnCounter > Math.max(28, 65 - Math.floor(speed * 1.5))) {
+          spawnCounter = 0;
+          const blockedLane = Math.floor(Math.random() * lanes);
+          obstacles.push({
+            lane: blockedLane,
+            y: -60,
+            width: Math.min(width * 0.24, 110),
+            height: 24,
+            color: '#ff007f'
+          });
+
+          // Chance for orb in a free lane
+          if (Math.random() < 0.6) {
+            let freeLane = (blockedLane + 1) % lanes;
+            if (Math.random() < 0.5) freeLane = (blockedLane + 2) % lanes;
+            orbItems.push({
+              lane: freeLane,
+              y: -80,
+              radius: 12
+            });
+          }
+        }
+
+        // Update Obstacles
+        for (let i = obstacles.length - 1; i >= 0; i--) {
+          const obs = obstacles[i];
+          obs.y += speed;
+          const obsX = getLaneX(obs.lane);
+
+          // Collision Check with player
+          const pY = height - 100;
+          if (Math.abs(obs.y - pY) < 32 && Math.abs(obsX - playerX) < 40) {
+            gameOver();
+            break;
+          }
+
+          if (obs.y > height + 60) obstacles.splice(i, 1);
+        }
+
+        // Update Orbs
+        for (let i = orbItems.length - 1; i >= 0; i--) {
+          const orb = orbItems[i];
+          orb.y += speed;
+          const orbX = getLaneX(orb.lane);
+          const pY = height - 100;
+
+          // Collection check
+          if (Math.abs(orb.y - pY) < 30 && Math.abs(orbX - playerX) < 36) {
+            orbs++;
+            orbVal.textContent = orbs;
+            audio.playOrb();
+            // Spawn spark particles
+            for (let p = 0; p < 10; p++) {
+              particles.push({
+                x: orbX, y: orb.y,
+                vx: (Math.random() - 0.5) * 6,
+                vy: (Math.random() - 0.5) * 6,
+                life: 1.0, color: '#ffe600'
+              });
+            }
+            orbItems.splice(i, 1);
+            continue;
+          }
+
+          if (orb.y > height + 40) orbItems.splice(i, 1);
+        }
+      }
+
+      // Draw Obstacles
+      obstacles.forEach(obs => {
+        const ox = getLaneX(obs.lane);
+        ctx.save();
+        ctx.fillStyle = obs.color;
+        ctx.shadowColor = '#ff007f';
+        ctx.shadowBlur = 14;
+        ctx.fillRect(ox - obs.width / 2, obs.y, obs.width, obs.height);
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(ox - obs.width / 2 + 4, obs.y + 4, obs.width - 8, 4);
+        ctx.restore();
+      });
+
+      // Draw Orbs
+      orbItems.forEach(orb => {
+        const ox = getLaneX(orb.lane);
+        ctx.save();
+        ctx.shadowColor = '#ffe600';
+        ctx.shadowBlur = 16;
+        ctx.fillStyle = '#ffe600';
+        ctx.beginPath();
+        ctx.arc(ox, orb.y, orb.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(ox, orb.y, orb.radius * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // Update & Draw Particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const pt = particles[i];
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        pt.life -= 0.04;
+        if (pt.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.save();
+        ctx.globalAlpha = pt.life;
+        ctx.fillStyle = pt.color;
+        ctx.fillRect(pt.x, pt.y, 4, 4);
+        ctx.restore();
+      }
+
+      // Draw Player Cyber Ship
+      const playerY = height - 100;
+      ctx.save();
+      ctx.translate(playerX, playerY);
+      ctx.shadowColor = '#00f2fe';
+      ctx.shadowBlur = 16;
+
+      // Ship Thruster trail
+      ctx.fillStyle = '#ff007f';
+      ctx.beginPath();
+      ctx.moveTo(-10, 20);
+      ctx.lineTo(10, 20);
+      ctx.lineTo(0, 32 + Math.random() * 8);
+      ctx.closePath();
+      ctx.fill();
+
+      // Ship Hull
+      ctx.fillStyle = '#00f2fe';
+      ctx.beginPath();
+      ctx.moveTo(0, -22);
+      ctx.lineTo(20, 18);
+      ctx.lineTo(0, 12);
+      ctx.lineTo(-20, 18);
+      ctx.closePath();
+      ctx.fill();
+
+      // Cockpit
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 4, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>
