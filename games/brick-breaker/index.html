@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Neon Brick Breaker - Modern arcade brick breaker with 10 challenging levels, 7 power-ups, multiple brick tiers, and Web Audio.">
+  <meta name="theme-color" content="#0a0e1c">
+  <title>Brick Breaker Arcade | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Top HUD Navigation -->
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🧱</span>
+          <span class="brand-title">NEON<span class="highlight">BREAKER</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Pill -->
+        <div class="hud-stat-pill score-pill">
+          <span class="stat-label">SCORE</span>
+          <span id="score-display" class="stat-value">0</span>
+        </div>
+
+        <!-- Level / Mode Pill -->
+        <div class="hud-stat-pill level-pill">
+          <span class="stat-label" id="level-label">LEVEL</span>
+          <span id="level-display" class="stat-value">1/10</span>
+        </div>
+
+        <!-- Lives Pill -->
+        <div class="hud-stat-pill lives-pill">
+          <span class="stat-label">LIVES</span>
+          <div id="lives-row" class="lives-icons">
+            <span class="heart-icon active">❤️</span>
+            <span class="heart-icon active">❤️</span>
+            <span class="heart-icon active">❤️</span>
+          </div>
+        </div>
+
+        <!-- Multiplier Pill (When Active) -->
+        <div class="hud-stat-pill multi-pill hidden" id="multi-pill">
+          <span class="stat-label">BOOST</span>
+          <span class="stat-value">2X</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Active Power-Up Notification Row -->
+    <div id="powerup-status-bar" class="hidden">
+      <div class="status-content">
+        <span id="status-icon">⚡</span>
+        <span id="status-text">LASER PADDLE ACTIVE!</span>
+        <div class="status-timer-bar">
+          <div id="status-timer-fill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Game Canvas Stage -->
+    <main id="canvas-arena">
+      <canvas id="brick-canvas"></canvas>
+
+      <!-- Launch Ball Tap Prompt on Mobile -->
+      <div id="launch-prompt" class="hidden">
+        <span>👆 TAP SCREEN OR PRESS SPACE TO LAUNCH BALL</span>
+      </div>
+
+      <!-- Quick Message Banner Toast -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- START & MODE SELECTION OVERLAY -->
+      <div id="modal-start" class="game-overlay">
+        <div class="modal-card">
+          <div class="card-icon-header">🧱⚡</div>
+          <h1 class="modal-title">NEON <span class="accent-text">BREAKER</span></h1>
+          <p class="modal-sub">Deflect the energy sphere, demolish vibrant bricks, and collect mega power-ups!</p>
+
+          <!-- Game Mode Selector Tabs -->
+          <div class="mode-tabs">
+            <button class="mode-tab-btn active" data-mode="classic">
+              <span class="m-icon">🏆</span>
+              <span class="m-title">Classic</span>
+              <span class="m-desc">10 Levels</span>
+            </button>
+            <button class="mode-tab-btn" data-mode="endless">
+              <span class="m-icon">♾️</span>
+              <span class="m-title">Endless</span>
+              <span class="m-desc">Rising Bricks</span>
+            </button>
+            <button class="mode-tab-btn" data-mode="time">
+              <span class="m-icon">⏱️</span>
+              <span class="m-title">Time Attack</span>
+              <span class="m-desc">90s Blitz</span>
+            </button>
+          </div>
+
+          <!-- Mode Description Info -->
+          <div id="mode-details" class="mode-details-box">
+            <strong>Classic Mode:</strong> Conquer 10 progressively designed architectural brick levels featuring unbreakable steel and explosive core bricks!
+          </div>
+
+          <!-- Level Selector (For Classic Mode) -->
+          <div id="level-selector-container" class="level-select-row">
+            <span class="level-select-title">SELECT START LEVEL:</span>
+            <div class="level-chip-grid" id="level-chips">
+              <!-- Dynamically populated 1 to 10 chips -->
+            </div>
+          </div>
+
+          <!-- Power-Up & Brick Legend -->
+          <div class="legend-grid">
+            <div class="legend-item">
+              <span class="brick-preview golden"></span>
+              <span><strong>Gold:</strong> Bonus Pts</span>
+            </div>
+            <div class="legend-item">
+              <span class="brick-preview explosive"></span>
+              <span><strong>Bomb:</strong> AOE Blast</span>
+            </div>
+            <div class="legend-item">
+              <span class="power-preview">🔴</span>
+              <span><strong>Laser:</strong> Shoot Bricks</span>
+            </div>
+            <div class="legend-item">
+              <span class="power-preview">🔥</span>
+              <span><strong>Fireball:</strong> Cleaves Through</span>
+            </div>
+          </div>
+
+          <button id="btn-start-play" class="btn-primary-action">
+            <span>LAUNCH GAME</span>
+            <span class="btn-arrow">➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PAUSE OVERLAY -->
+      <div id="modal-pause" class="game-overlay hidden">
+        <div class="modal-card small-card">
+          <div class="modal-icon-header">⏸️</div>
+          <h2 class="modal-title">GAME PAUSED</h2>
+          <p class="modal-sub">Take a quick breather.</p>
+
+          <div class="pause-stat-grid">
+            <div class="pause-stat-box">
+              <span class="sub-label">SCORE</span>
+              <span id="pause-score-num" class="sub-val">0</span>
+            </div>
+            <div class="pause-stat-box">
+              <span class="sub-label">CURRENT LEVEL</span>
+              <span id="pause-level-num" class="sub-val">Level 1</span>
+            </div>
+          </div>
+
+          <div class="btn-stack">
+            <button id="btn-resume" class="btn-primary-action">RESUME</button>
+            <button id="btn-restart" class="btn-secondary-action">RESTART LEVEL</button>
+            <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEVEL CLEARED OVERLAY -->
+      <div id="modal-level-clear" class="game-overlay hidden">
+        <div class="modal-card">
+          <div class="modal-icon-header">⭐</div>
+          <h2 class="modal-title">LEVEL COMPLETE!</h2>
+          <p class="modal-sub" id="clear-message">Flawless brick demolition!</p>
+          <div class="stat-highlight-box">
+            <span class="sub-label">TOTAL SCORE</span>
+            <div id="clear-score-val" class="highlight-number">0</div>
+          </div>
+          <div class="btn-stack">
+            <button id="btn-next-level" class="btn-primary-action">NEXT LEVEL ➔</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME OVER / VICTORY OVERLAY -->
+      <div id="modal-gameover" class="game-overlay hidden">
+        <div class="modal-card">
+          <div class="modal-icon-header" id="gameover-trophy">🏆</div>
+          <h2 class="modal-title" id="gameover-title">ALL LEVELS CLEARED!</h2>
+          <p class="modal-sub" id="gameover-reason">You are the ultimate Neon Breaker master!</p>
+
+          <div class="stat-highlight-box">
+            <span class="sub-label">FINAL SCORE</span>
+            <div id="gameover-score-val" class="highlight-number">0</div>
+            <div id="new-record-badge" class="badge-record hidden">⭐ NEW HIGH RECORD! ⭐</div>
+          </div>
+
+          <div class="gameover-stat-row">
+            <div class="g-box">
+              <span class="g-num" id="stat-bricks-broken">0</span>
+              <span class="g-lbl">Bricks Smashed</span>
+            </div>
+            <div class="g-box">
+              <span class="g-num" id="stat-highest-level">1</span>
+              <span class="g-lbl">Max Level</span>
+            </div>
+            <div class="g-box">
+              <span class="g-num" id="stat-best-record">0</span>
+              <span class="g-lbl">Best Score</span>
+            </div>
+          </div>
+
+          <div class="btn-stack">
+            <button id="btn-play-again" class="btn-primary-action">PLAY AGAIN ⚡</button>
+            <button id="btn-menu" class="btn-secondary-action">MAIN MENU</button>
+            <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Controls Tip -->
+    <footer id="game-footer">
+      <div class="footer-tip">⌨️ Desktop: Arrow Keys or Mouse | Space to Launch/Shoot | 👆 Mobile: Drag Paddle, Tap to Launch</div>
+      <div class="footer-meta">Neon Breaker • 100% Canvas & Web Audio</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

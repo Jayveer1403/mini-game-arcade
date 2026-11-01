@@ -24,6 +24,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - Glossy, responsive bubble popping mini-game featuring 3D spherical reflections, 4 power-up bubbles (Mega Pop AOE, Slow-Mo, Score Booster, Time Bonus), Golden/Rainbow tiers, and 3 modes (Classic, Endless, Challenge).
    - **Controls:** Mouse click or touch tap on rising bubbles.
 
+5. **🧱 Neon Brick Breaker (`/games/brick-breaker/`)**
+   - Arcade brick breaker featuring 10 architectural levels, 5 distinct brick types (Normal, Strong, Gold, Bomb, Steel), 7 dynamic power-ups (Wide Paddle, Laser Cannon, Multi-Ball, Fireball, Slow-Mo, Extra Life, 2x Multiplier), and 3 game modes (Classic, Endless, Time Challenge).
+   - **Controls:** Mouse drag, Left/Right arrow keys, Spacebar to launch/shoot lasers, or touch drag on mobile.
+
 ---
 
 ## 📁 Project Structure
