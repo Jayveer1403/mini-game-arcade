@@ -40,6 +40,10 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
    - Millisecond-precision reaction speed challenge arcade. Features 5 game modes (Green Signal Reaction Test, Color Reflex, Number Blitz, 10s Fast Tap, and Memory Reflex sequences), false-start penalization, round-by-round Canvas chart, and dynamic performance ratings.
    - **Controls:** Spacebar / Enter or Mouse Click on desktop, direct touch tap on mobile/tablet.
 
+9. **🎨 Color Reaction (`/games/color-reaction/`)**
+   - High-energy chromatic reaction speed matching arcade. Features 5 modes (Classic Color Match, Speed Rush 45s blitz, Stroop Color Name challenge, Reverse Color avoidance, and Color Memory tile sequences), response time graphs, and combo multipliers.
+   - **Controls:** Mouse Click or Keys 1–8 on desktop, direct touch tap on mobile/tablet.
+
 ---
 
 ## 📁 Project Structure

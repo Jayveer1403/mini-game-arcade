@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="Color Reaction - Fast Color Matching Challenge. Test your vision, speed, and accuracy across 5 vibrant arcade color modes!">
+  <meta name="theme-color" content="#090d1f">
+  <title>Color Reaction | Fast Color Matching Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <!-- Header HUD -->
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🎨</span>
+          <span class="brand-title">COLOR<span class="highlight">REACTION</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <!-- Score Pill -->
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+
+        <!-- Timer Pill -->
+        <div class="hud-stat timer-pill">
+          <span class="stat-lbl" id="timer-stat-lbl">TIME</span>
+          <span id="timer-stat-val" class="stat-num">10.0s</span>
+        </div>
+
+        <!-- Level / Round Pill -->
+        <div class="hud-stat level-pill">
+          <span class="stat-lbl" id="level-stat-lbl">ROUND</span>
+          <span id="level-stat-val" class="stat-num">1 / 10</span>
+        </div>
+
+        <!-- Combo Streak Pill -->
+        <div class="hud-stat combo-pill hidden" id="combo-pill">
+          <span class="stat-lbl">COMBO</span>
+          <span id="combo-val" class="stat-num">x2</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Sound Toggle -->
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound" title="Sound Toggle">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <!-- Pause Button -->
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game" title="Pause Game (P/Esc)">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Area -->
+    <main id="color-main">
+      <!-- Quick Floating Alert Toast -->
+      <div id="game-toast" class="hidden"></div>
+
+      <!-- Instruction / Objective Banner -->
+      <div id="instruction-bar">
+        <span id="instruction-icon">🎯</span>
+        <span id="instruction-text">Tap the matching color tile below!</span>
+      </div>
+
+      <!-- Target Presentation Stage -->
+      <div id="target-stage">
+        <div class="target-card-wrapper">
+          <div id="target-swatch" class="target-swatch" aria-label="Target Color">
+            <span id="target-label" class="target-label">MATCH ME</span>
+          </div>
+        </div>
+        <div class="round-progress-track">
+          <div id="round-timer-fill"></div>
+        </div>
+      </div>
+
+      <!-- Options Grid Arena -->
+      <div id="options-arena">
+        <div id="color-options-grid" class="options-grid cols-2"></div>
+      </div>
+    </main>
+
+    <!-- START / MODE SELECTOR OVERLAY -->
+    <div id="modal-start" class="game-overlay">
+      <div class="modal-card">
+        <div class="glow-header-icon">🎨✨</div>
+        <h1 class="modal-title">COLOR <span class="accent-text">REACTION</span></h1>
+        <p class="modal-sub">Fast-paced chromatic reflex challenge! Identify, match, and react to colors under time pressure.</p>
+
+        <!-- 5 Game Modes Tabs -->
+        <div class="mode-tabs">
+          <button class="mode-btn active" data-mode="classic">
+            <span class="m-icon">🎯</span>
+            <span class="m-title">Classic Match</span>
+            <span class="m-desc">Match Target Color</span>
+          </button>
+          <button class="mode-btn" data-mode="speed">
+            <span class="m-icon">⚡</span>
+            <span class="m-title">Speed Rush</span>
+            <span class="m-desc">Max Matches in 45s</span>
+          </button>
+          <button class="mode-btn" data-mode="name">
+            <span class="m-icon">🏷️</span>
+            <span class="m-title">Color Name</span>
+            <span class="m-desc">Match Written Name</span>
+          </button>
+          <button class="mode-btn" data-mode="reverse">
+            <span class="m-icon">🔄</span>
+            <span class="m-title">Reverse Color</span>
+            <span class="m-desc">Pick Different Color</span>
+          </button>
+          <button class="mode-btn" data-mode="memory">
+            <span class="m-icon">🧠</span>
+            <span class="m-title">Color Memory</span>
+            <span class="m-desc">Repeat Tile Sequence</span>
+          </button>
+        </div>
+
+        <!-- Difficulty Pills -->
+        <div class="difficulty-row">
+          <span class="diff-title">DIFFICULTY:</span>
+          <div class="diff-chips">
+            <button class="diff-chip" data-diff="easy">Easy (4 Colors)</button>
+            <button class="diff-chip active" data-diff="medium">Medium (6 Colors)</button>
+            <button class="diff-chip" data-diff="hard">Hard (8 Colors)</button>
+          </div>
+        </div>
+
+        <!-- Mode Explanation Box -->
+        <div id="mode-info" class="mode-info-box">
+          <strong>1. Classic Color Match:</strong> Observe the top target color card and immediately tap the identical matching color from the available options before the round timer expires!
+        </div>
+
+        <!-- Controls Guide -->
+        <div class="controls-guide-grid">
+          <div class="ctrl-item">
+            <span>🖱️ <strong>Mouse:</strong> Click matching color cards</span>
+          </div>
+          <div class="ctrl-item">
+            <span>⌨️ <strong>Keys 1–8:</strong> Quick number key selection</span>
+          </div>
+          <div class="ctrl-item">
+            <span>👆 <strong>Mobile:</strong> Large touch-friendly color pads</span>
+          </div>
+          <div class="ctrl-item">
+            <span>⏱️ <strong>High Precision:</strong> Response time measured in ms</span>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary-action">
+          <span>START CHALLENGE</span>
+          <span class="btn-arrow">➔</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- PAUSE MENU OVERLAY -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="modal-card small-card">
+        <div class="glow-header-icon">⏸️</div>
+        <h2 class="modal-title">GAME PAUSED</h2>
+        <p class="modal-sub">Take a quick breather.</p>
+
+        <div class="pause-stat-grid">
+          <div class="p-stat-box">
+            <span class="p-lbl">CURRENT SCORE</span>
+            <span id="pause-score-num" class="p-val">0</span>
+          </div>
+          <div class="p-stat-box">
+            <span class="p-lbl">BEST RECORD</span>
+            <span id="pause-best-num" class="p-val">0</span>
+          </div>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-resume" class="btn-primary-action">RESUME ⚡</button>
+          <button id="btn-restart" class="btn-secondary-action">RESTART SESSION</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS & PERFORMANCE SUMMARY OVERLAY -->
+    <div id="modal-results" class="game-overlay hidden">
+      <div class="modal-card">
+        <div class="glow-header-icon">🏆✨</div>
+        <h2 class="modal-title" id="results-title">SESSION COMPLETE!</h2>
+        <p class="modal-sub" id="results-sub">Here is your chromatic reflex evaluation:</p>
+
+        <!-- Rating Badge -->
+        <div class="rating-badge-container">
+          <div class="rating-badge" id="rating-badge">COLOR MASTER 🎨</div>
+        </div>
+
+        <!-- High-Score Ribbon -->
+        <div id="new-record-ribbon" class="record-ribbon hidden">⭐ NEW PERSONAL BEST! ⭐</div>
+
+        <!-- Stats Grid -->
+        <div class="results-stats-grid">
+          <div class="r-stat-card highlight">
+            <span class="r-lbl">TOTAL SCORE</span>
+            <div id="r-score-val" class="r-big-num">0</div>
+          </div>
+          <div class="r-stat-card highlight">
+            <span class="r-lbl">AVG RESPONSE</span>
+            <div id="r-avg-val" class="r-big-num">-- ms</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">FASTEST PICK</span>
+            <div id="r-fastest-val" class="r-num">-- ms</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">ACCURACY</span>
+            <div id="r-accuracy-val" class="r-num">100%</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">CORRECT / WRONG</span>
+            <div id="r-counts-val" class="r-num">0 / 0</div>
+          </div>
+          <div class="r-stat-card">
+            <span class="r-lbl">BEST COMBO</span>
+            <div id="r-combo-val" class="r-num">x0</div>
+          </div>
+        </div>
+
+        <!-- Canvas Progression Chart -->
+        <div class="chart-wrapper">
+          <div class="chart-header">
+            <span>📈 Score Progression & Response Times</span>
+            <span>Milliseconds per Pick</span>
+          </div>
+          <canvas id="color-chart" width="460" height="110"></canvas>
+        </div>
+
+        <div class="btn-stack">
+          <button id="btn-play-again" class="btn-primary-action">TRY AGAIN ⚡</button>
+          <button id="btn-change-mode" class="btn-secondary-action">CHANGE MODE</button>
+          <a href="/" class="btn-secondary-action" style="text-decoration:none;">ARCADE CATALOG 🏠</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Tip -->
+    <footer id="game-footer">
+      <div class="footer-tip">🖱️ Click or Tap matching color | ⌨️ Keys 1-8 for rapid selection</div>
+      <div class="footer-meta">Color Reaction • High-Precision Chromatic Reflex • Web Audio</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
