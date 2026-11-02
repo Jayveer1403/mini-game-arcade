@@ -8,11 +8,15 @@
   const comboVal = document.getElementById('combo-val');
   const comboBanner = document.getElementById('combo-banner');
   const soundBtn = document.getElementById('sound-btn');
+  const pauseBtn = document.getElementById('pause-btn');
 
   const startOverlay = document.getElementById('start-overlay');
+  const pauseOverlay = document.getElementById('pause-overlay');
   const gameOverOverlay = document.getElementById('game-over-overlay');
   const startBtn = document.getElementById('start-btn');
   const restartBtn = document.getElementById('restart-btn');
+  const resumeBtn = document.getElementById('resume-btn');
+  const pauseRestartBtn = document.getElementById('pause-restart-btn');
 
   const finalScore = document.getElementById('final-score');
   const finalBest = document.getElementById('final-best');
@@ -131,7 +135,31 @@
     spawnMovingBlock();
     state = 'PLAYING';
     startOverlay.classList.add('hidden');
+    pauseOverlay.classList.add('hidden');
     gameOverOverlay.classList.add('hidden');
+    pauseBtn.textContent = '⏸️';
+  }
+
+  function pauseGame() {
+    if (state !== 'PLAYING') return;
+    state = 'PAUSED';
+    pauseOverlay.classList.remove('hidden');
+    pauseBtn.textContent = '▶️';
+  }
+
+  function resumeGame() {
+    if (state !== 'PAUSED') return;
+    state = 'PLAYING';
+    pauseOverlay.classList.add('hidden');
+    pauseBtn.textContent = '⏸️';
+  }
+
+  function togglePause() {
+    if (state === 'PLAYING') {
+      pauseGame();
+    } else if (state === 'PAUSED') {
+      resumeGame();
+    }
   }
 
   function spawnMovingBlock() {
@@ -407,6 +435,12 @@
   });
 
   window.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape') {
+      e.preventDefault();
+      togglePause();
+      return;
+    }
+
     if (e.code === 'Space') {
       e.preventDefault();
       if (state === 'PLAYING') {
@@ -414,11 +448,27 @@
       } else if (state === 'START') {
         initAudio();
         resetGame();
+      } else if (state === 'PAUSED') {
+        resumeGame();
       } else if (state === 'GAMEOVER' && !gameOverOverlay.classList.contains('hidden')) {
         initAudio();
         resetGame();
       }
     }
+  });
+
+  pauseBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    togglePause();
+  });
+
+  resumeBtn.addEventListener('click', () => {
+    resumeGame();
+  });
+
+  pauseRestartBtn.addEventListener('click', () => {
+    initAudio();
+    resetGame();
   });
 
   startBtn.addEventListener('click', () => {

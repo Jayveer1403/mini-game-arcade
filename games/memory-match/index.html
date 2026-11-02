@@ -314,6 +314,7 @@
         <h1 class="brand-title">MEMORY<span style="color:#00f2fe;">MATCH</span></h1>
       </div>
       <div class="hud-actions">
+        <button id="btn-pause" class="icon-btn" aria-label="Pause Game" title="Pause">⏸️</button>
         <button id="btn-sound" class="icon-btn" aria-label="Toggle Sound" title="Sound Toggle">🔊</button>
         <button id="btn-restart" class="icon-btn" aria-label="Restart Match" title="Restart">🔄</button>
       </div>
@@ -340,6 +341,18 @@
 
     <div id="grid-container">
       <main class="memory-grid" id="memory-grid" role="region" aria-label="Memory Card Board"></main>
+    </div>
+
+    <!-- Pause Modal -->
+    <div id="modal-pause" class="overlay hidden">
+      <div class="modal-card">
+        <div style="font-size: 3rem; margin-bottom: 8px;">⏸️</div>
+        <h2 class="modal-title">GAME PAUSED</h2>
+        <p class="modal-desc">Match timer is currently paused.</p>
+        <button id="btn-resume" class="btn-action">RESUME MATCH ⚡</button>
+        <button id="btn-pause-restart" class="btn-action btn-secondary">RESTART MATCH 🔄</button>
+        <a href="/" class="btn-action btn-secondary">ARCADE CATALOG 🏠</a>
+      </div>
     </div>
 
     <!-- Victory Modal -->
@@ -482,6 +495,10 @@
     const btnRestart = document.getElementById('btn-restart');
     const btnPlayAgain = document.getElementById('btn-play-again');
     const btnSound = document.getElementById('btn-sound');
+    const btnPause = document.getElementById('btn-pause');
+    const modalPause = document.getElementById('modal-pause');
+    const btnResume = document.getElementById('btn-resume');
+    const btnPauseRestart = document.getElementById('btn-pause-restart');
 
     let deck = [];
     let flippedCards = [];
@@ -491,6 +508,7 @@
     let timerInterval = null;
     let gameActive = false;
     let lockBoard = false;
+    let isPaused = false;
 
     // Load Best Score
     let bestScore = localStorage.getItem('memorymatch_best_moves');
@@ -516,6 +534,9 @@
       movesValEl.textContent = '0';
       pairsValEl.textContent = '0 / 8';
       modalVictory.classList.add('hidden');
+      modalPause.classList.add('hidden');
+      isPaused = false;
+      btnPause.textContent = '⏸️';
 
       // Create 16 cards (8 pairs) & shuffle
       deck = [...SYMBOLS, ...SYMBOLS]
@@ -557,6 +578,7 @@
     }
 
     function handleCardClick(cardBtn, card) {
+      if (isPaused) return;
       audio.init();
       if (!gameActive) startTimer();
       if (lockBoard || cardBtn.classList.contains('flipped') || cardBtn.classList.contains('matched')) return;
@@ -625,13 +647,50 @@
       }, 500);
     }
 
+    function pauseGame() {
+      if (!gameActive || isPaused) return;
+      isPaused = true;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      modalPause.classList.remove('hidden');
+      btnPause.textContent = '▶️';
+    }
+
+    function resumeGame() {
+      if (!isPaused) return;
+      isPaused = false;
+      modalPause.classList.add('hidden');
+      btnPause.textContent = '⏸️';
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        timeValEl.textContent = formatTime(secondsElapsed);
+      }, 1000);
+    }
+
+    function togglePause() {
+      if (isPaused) {
+        resumeGame();
+      } else {
+        pauseGame();
+      }
+    }
+
     // Button Listeners
     btnRestart.addEventListener('click', initGame);
     btnPlayAgain.addEventListener('click', initGame);
+    btnPause.addEventListener('click', togglePause);
+    btnResume.addEventListener('click', resumeGame);
+    btnPauseRestart.addEventListener('click', initGame);
     btnSound.addEventListener('click', () => {
       audio.init();
       const on = audio.toggleMute();
       btnSound.textContent = on ? '🔊' : '🔇';
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        togglePause();
+      }
     });
 
     // Start on page load

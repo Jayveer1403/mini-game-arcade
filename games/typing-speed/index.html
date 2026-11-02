@@ -17,7 +17,10 @@
         <div class="hud-item"><span class="hud-label">ACC:</span> <span id="acc-val" class="hud-value">100%</span></div>
         <div class="hud-item"><span class="hud-label">BEST:</span> <span id="best-val" class="hud-value">0</span></div>
       </div>
-      <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound">🔊</button>
+      <div style="display: flex; gap: 6px;">
+        <button id="pause-btn" class="icon-btn" aria-label="Pause Game" title="Pause Game">⏸️</button>
+        <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">🔊</button>
+      </div>
     </header>
 
     <main class="arcade-stage">
@@ -55,6 +58,20 @@
         </div>
       </div>
 
+      <!-- Pause Overlay -->
+      <div id="pause-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+          <div class="modal-icon">⏸️</div>
+          <h2>GAME PAUSED</h2>
+          <p class="subtitle">Timer is frozen</p>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;">
+            <button id="resume-btn" class="primary-btn">RESUME TYPING</button>
+            <button id="pause-restart-btn" class="secondary-btn">RESTART</button>
+            <a href="/" class="exit-link">EXIT TO ARCADE</a>
+          </div>
+        </div>
+      </div>
+
       <!-- Game Over Overlay -->
       <div id="game-over-overlay" class="modal-overlay hidden">
         <div class="modal-content">
@@ -75,6 +92,7 @@
             </div>
           </div>
           <button id="restart-btn" class="primary-btn">PLAY AGAIN</button>
+          <a href="/" class="exit-link" style="margin-top: 12px; display: block;">EXIT TO ARCADE</a>
         </div>
       </div>
     </main>

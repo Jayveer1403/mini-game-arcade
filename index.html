@@ -19,13 +19,14 @@
         <span class="logo-icon">🕹️</span>
         <span class="logo-text">MINI GAME <span class="highlight">ARCADE</span></span>
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" id="nav-links">
         <a href="#games-catalog" class="nav-link active">Games</a>
         <a href="/about" class="nav-link">About</a>
         <a href="/contact" class="nav-link">Contact</a>
         <a href="/privacy" class="nav-link">Privacy Policy</a>
         <a href="/terms" class="nav-link">Terms</a>
       </nav>
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu">☰</button>
     </div>
   </header>
 
@@ -1582,12 +1583,42 @@
     </div>
   </footer>
 
+  <!-- Floating Scroll To Top Arrow Button -->
+  <button id="scroll-to-top" aria-label="Scroll back to top" title="Back to top">↑</button>
+
   <!-- Catalog Filtering & Search Script -->
   <script>
     const searchInput = document.getElementById('game-search');
     const categoryPills = document.querySelectorAll('#category-pills .pill');
     const gameCards = document.querySelectorAll('.game-card');
     const noGamesMsg = document.getElementById('no-games');
+
+    // Mobile nav toggle
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (mobileNavToggle && navLinks) {
+      mobileNavToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      // Close mobile nav when clicking a link
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => navLinks.classList.remove('open'));
+      });
+    }
+
+    // Scroll to top button logic
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     let currentCategory = 'all';
     let searchQuery = '';

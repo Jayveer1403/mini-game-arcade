@@ -12,6 +12,7 @@
   const accVal = document.getElementById('acc-val');
   const bestVal = document.getElementById('best-val');
   const soundBtn = document.getElementById('sound-btn');
+  const pauseBtn = document.getElementById('pause-btn');
 
   const targetWordEl = document.getElementById('target-word');
   const typeInput = document.getElementById('type-input');
@@ -22,9 +23,12 @@
   const errorsCountEl = document.getElementById('errors-count');
 
   const startOverlay = document.getElementById('start-overlay');
+  const pauseOverlay = document.getElementById('pause-overlay');
   const gameOverOverlay = document.getElementById('game-over-overlay');
   const startBtn = document.getElementById('start-btn');
   const restartBtn = document.getElementById('restart-btn');
+  const resumeBtn = document.getElementById('resume-btn');
+  const pauseRestartBtn = document.getElementById('pause-restart-btn');
 
   const rankIcon = document.getElementById('rank-icon');
   const rankTitle = document.getElementById('rank-title');
@@ -158,7 +162,9 @@
     accVal.textContent = '100%';
 
     startOverlay.classList.add('hidden');
+    pauseOverlay.classList.add('hidden');
     gameOverOverlay.classList.add('hidden');
+    pauseBtn.textContent = '⏸️';
 
     typeInput.disabled = false;
     typeInput.value = '';
@@ -167,6 +173,10 @@
     setNextWord();
     updateMetrics();
 
+    startTimer();
+  }
+
+  function startTimer() {
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
       timeLeft--;
@@ -177,6 +187,33 @@
         endGame();
       }
     }, 1000);
+  }
+
+  function pauseGame() {
+    if (!isPlaying) return;
+    isPlaying = false;
+    clearInterval(timerInterval);
+    typeInput.disabled = true;
+    pauseOverlay.classList.remove('hidden');
+    pauseBtn.textContent = '▶️';
+  }
+
+  function resumeGame() {
+    if (isPlaying) return;
+    isPlaying = true;
+    pauseOverlay.classList.add('hidden');
+    pauseBtn.textContent = '⏸️';
+    typeInput.disabled = false;
+    typeInput.focus();
+    startTimer();
+  }
+
+  function togglePause() {
+    if (isPlaying) {
+      pauseGame();
+    } else if (!pauseOverlay.classList.contains('hidden')) {
+      resumeGame();
+    }
   }
 
   function endGame() {
@@ -269,6 +306,16 @@
       }
       setNextWord();
       updateMetrics();
+    }
+  });
+
+  pauseBtn.addEventListener('click', togglePause);
+  resumeBtn.addEventListener('click', resumeGame);
+  pauseRestartBtn.addEventListener('click', startGame);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      togglePause();
     }
   });
 

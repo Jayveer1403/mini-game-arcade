@@ -16,7 +16,10 @@
         <div class="hud-item"><span class="hud-label">BEST:</span> <span id="best-val" class="hud-value">0</span></div>
         <div class="hud-item combo-box"><span class="hud-label">COMBO:</span> <span id="combo-val" class="hud-value">0x</span></div>
       </div>
-      <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound">🔊</button>
+      <div style="display: flex; gap: 6px;">
+        <button id="pause-btn" class="icon-btn" aria-label="Pause Game" title="Pause Game">⏸️</button>
+        <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Toggle Sound">🔊</button>
+      </div>
     </header>
 
     <div class="canvas-wrapper" id="canvas-wrapper">
@@ -35,6 +38,20 @@
             <p>Score <strong>PERFECT</strong> alignments to build combos and earn bonus score!</p>
           </div>
           <button id="start-btn" class="primary-btn">START STACKING</button>
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div id="pause-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+          <div class="modal-icon">⏸️</div>
+          <h2>GAME PAUSED</h2>
+          <p class="subtitle">Take a breather</p>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+            <button id="resume-btn" class="primary-btn">RESUME</button>
+            <button id="pause-restart-btn" class="secondary-btn">RESTART</button>
+            <a href="/" class="exit-link">EXIT TO ARCADE</a>
+          </div>
         </div>
       </div>
 
@@ -58,6 +75,7 @@
             </div>
           </div>
           <button id="restart-btn" class="primary-btn">STACK AGAIN</button>
+          <a href="/" class="exit-link" style="margin-top: 12px; display: block;">EXIT TO ARCADE</a>
         </div>
       </div>
     </div>

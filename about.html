@@ -97,13 +97,14 @@
         <span class="logo-icon">🕹️</span>
         <span class="logo-text">MINI GAME <span class="highlight">ARCADE</span></span>
       </a>
-      <nav class="nav-links">
+      <nav class="nav-links" id="nav-links">
         <a href="/">Catalog</a>
         <a href="/about" class="active">About</a>
         <a href="/contact">Contact</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms</a>
       </nav>
+      <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation Menu">☰</button>
     </div>
   </header>
 
@@ -174,5 +175,36 @@
       </div>
     </div>
   </footer>
+
+  <!-- Floating Scroll To Top Arrow Button -->
+  <button id="scroll-to-top" aria-label="Scroll back to top" title="Back to top">↑</button>
+
+  <script>
+    // Mobile nav toggle
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    if (mobileNavToggle && navLinks) {
+      mobileNavToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => navLinks.classList.remove('open'));
+      });
+    }
+
+    // Scroll to top button logic
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
