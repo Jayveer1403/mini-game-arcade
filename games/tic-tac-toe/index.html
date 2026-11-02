@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Tic Tac Toe - Cyber Neon 3x3 Strategy. Challenge unbeatable Minimax AI or battle a friend in local 2-player mode!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Tic Tac Toe | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">❌</span>
+          <span class="brand-title">TIC-TAC<span class="highlight">TOE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat wins-pill">
+          <span class="stat-lbl">WINS</span>
+          <span id="wins-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat draws-pill">
+          <span class="stat-lbl">DRAWS</span>
+          <span id="draws-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat losses-pill">
+          <span class="stat-lbl">LOSSES</span>
+          <span id="losses-val" class="stat-num">0</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="mode-pill-row">
+        <button class="mode-btn active" data-mode="ai-hard">Master AI (Minimax)</button>
+        <button class="mode-btn" data-mode="ai-easy">Casual AI</button>
+        <button class="mode-btn" data-mode="2p">2 Players</button>
+      </div>
+
+      <div class="turn-indicator" id="turn-indicator">PLAYER X's TURN</div>
+
+      <div class="board-wrapper">
+        <div class="ttt-board" id="ttt-board">
+          <!-- 9 Cells -->
+          <div class="ttt-cell" data-index="0"></div>
+          <div class="ttt-cell" data-index="1"></div>
+          <div class="ttt-cell" data-index="2"></div>
+          <div class="ttt-cell" data-index="3"></div>
+          <div class="ttt-cell" data-index="4"></div>
+          <div class="ttt-cell" data-index="5"></div>
+          <div class="ttt-cell" data-index="6"></div>
+          <div class="ttt-cell" data-index="7"></div>
+          <div class="ttt-cell" data-index="8"></div>
+          <div class="win-strike-line hidden" id="strike-line"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">❌⭕</div>
+        <h1 class="overlay-title">TIC TAC TOE</h1>
+        <p class="overlay-subtitle">Cyber neon 3x3 tactical battleground!</p>
+
+        <div class="instructions-box">
+          <h3>Rules:</h3>
+          <ul>
+            <li><span>❌</span> Player 1 is <strong>X</strong> (Neon Cyan).</li>
+            <li><span>⭕</span> Player 2 / AI is <strong>O</strong> (Neon Pink).</li>
+            <li><span>⚔️</span> Line up 3 marks horizontally, vertically, or diagonally to win.</li>
+            <li><span>🤖</span> Master AI utilizes full algorithmic Minimax foresight!</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">ENTER GRID ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">GAME PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Round Result Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">PLAYER X WINS!</h2>
+        <p class="gameover-reason" id="gameover-reason">Three in a row completed!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">TOTAL WINS</span>
+            <span id="final-wins" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">DRAWS</span>
+            <span id="final-draws" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">LOSSES</span>
+            <span id="final-losses" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">WIN RATIO</span>
+            <span id="final-ratio" class="box-num">100%</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY NEXT ROUND ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

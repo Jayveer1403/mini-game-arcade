@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Knife Hit - Arcade target throwing challenge. Throw knives into rotating targets, avoid collisions, and slice bonus apples!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Knife Hit | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🗡️</span>
+          <span class="brand-title">KNIFE<span class="highlight">HIT</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat stage-pill">
+          <span class="stat-lbl">STAGE</span>
+          <span id="stage-val" class="stat-num">1</span>
+        </div>
+        <div class="hud-stat apple-pill">
+          <span class="stat-lbl">APPLES</span>
+          <span id="apple-val" class="stat-num">🍎 0</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+        <div id="knife-inventory" class="knife-inventory"></div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🗡️</div>
+        <h1 class="overlay-title">KNIFE HIT</h1>
+        <p class="overlay-subtitle">Master target throwing with razor precision!</p>
+
+        <div class="instructions-box">
+          <h3>How to Play:</h3>
+          <ul>
+            <li><span>🎯</span> Tap or press <strong>Space</strong> to throw your knife upward.</li>
+            <li><span>🚫</span> Do NOT hit already embedded knives or spikes!</li>
+            <li><span>🍎</span> Slice rotating apples for massive bonus points.</li>
+            <li><span>⭐</span> Clear every knife in your quiver to shatter the target and advance!</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>Best Score: <strong id="start-best-score">0</strong></span>
+          <span>Highest Stage: <strong id="start-best-stage">1</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">THROW TO START ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">GAME PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">💥</div>
+        <h2 class="overlay-title">KNIFE DEFLECTED!</h2>
+        <p id="gameover-reason" class="gameover-reason">You struck an existing blade!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">FINAL SCORE</span>
+            <span id="final-score" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">STAGE REACHED</span>
+            <span id="final-stage" class="box-num">1</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">APPLES SLICED</span>
+            <span id="final-apples" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST RECORD</span>
+            <span id="final-best" class="box-num">0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

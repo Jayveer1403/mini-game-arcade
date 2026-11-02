@@ -59,10 +59,11 @@
           <input type="text" id="game-search" placeholder="Search games by name or tag..." aria-label="Search games">
         </div>
         <div class="category-pills" id="category-pills">
-          <button class="pill active" data-category="all">All (10)</button>
+          <button class="pill active" data-category="all">All (28)</button>
           <button class="pill" data-category="action">Action</button>
-          <button class="pill" data-category="arcade">Runner</button>
-          <button class="pill" data-category="puzzle">Puzzle</button>
+          <button class="pill" data-category="arcade">Arcade & Runner</button>
+          <button class="pill" data-category="puzzle">Puzzle & Logic</button>
+          <button class="pill" data-category="reflex">Reflex & Speed</button>
           <button class="pill" data-category="casual">Casual</button>
         </div>
       </div>
@@ -446,7 +447,7 @@
       </article>
 
       <!-- Game 8: Quick Reflex -->
-      <article class="game-card" data-category="action" data-tags="quick reflex reaction speed challenge reflex test timing ms lightning">
+      <article class="game-card" data-category="reflex" data-tags="quick reflex reaction speed challenge reflex test timing ms lightning">
         <div class="card-thumb-wrapper">
           <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="400" height="240" fill="url(#reflex-bg)"/>
@@ -505,7 +506,7 @@
       </article>
 
       <!-- Game 9: Color Reaction -->
-      <article class="game-card" data-category="action" data-tags="color reaction match chromatic speed Stroop reverse reflex cards">
+      <article class="game-card" data-category="reflex" data-tags="color reaction match chromatic speed Stroop reverse reflex cards">
         <div class="card-thumb-wrapper">
           <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="400" height="240" fill="url(#color-bg)"/>
@@ -628,6 +629,787 @@
           </div>
           <div class="card-action-row">
             <a href="/games/space-dodge/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 11: Knife Hit -->
+      <article class="game-card" data-category="action" data-tags="knife hit target throw blade slice apples log arcade">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#knife-bg)"/>
+            <circle cx="200" cy="80" r="50" fill="#78350f" stroke="#b45309" stroke-width="4"/>
+            <circle cx="200" cy="80" r="32" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none"/>
+            <circle cx="200" cy="80" r="10" fill="#0f172a"/>
+            <!-- Sticking Knives -->
+            <rect x="197" y="10" width="6" height="22" rx="2" fill="#00f2fe"/>
+            <rect x="235" y="65" width="22" height="6" rx="2" fill="#00f2fe"/>
+            <!-- Apple on target -->
+            <circle cx="160" cy="95" r="9" fill="#ef4444"/>
+            <!-- Throwing Knife flying up -->
+            <polygon points="200,165 205,190 195,190" fill="#ffffff"/>
+            <rect x="198" y="190" width="4" height="15" fill="#00f2fe"/>
+            <defs>
+              <linearGradient id="knife-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#181329"/>
+                <stop offset="1" stop-color="#080712"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action">ACTION</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Knife Hit</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Throw knives into spinning wooden targets, avoid embedded blades, slice juicy bonus apples, and defeat boss targets!
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">👆 Tap / Space</span>
+            <span class="control-tag">🎯 Precision</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/knife-hit/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 12: Ball Jump -->
+      <article class="game-card" data-category="arcade" data-tags="ball jump doodle bounce platforms springs gems altitude">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#balljump-bg)"/>
+            <!-- Platforms -->
+            <rect x="80" y="180" width="70" height="12" rx="6" fill="#22c55e"/>
+            <rect x="250" y="130" width="70" height="12" rx="6" fill="#06b6d4"/>
+            <rect x="140" y="70" width="70" height="12" rx="6" fill="#22c55e"/>
+            <!-- Spring on platform -->
+            <rect x="170" y="58" width="12" height="12" fill="#e2e8f0"/>
+            <!-- Bouncing Ball -->
+            <circle cx="175" cy="40" r="16" fill="#38bdf8" filter="drop-shadow(0 0 10px rgba(56,189,248,0.8))"/>
+            <circle cx="172" cy="37" r="4" fill="#ffffff"/>
+            <!-- Floating Gem -->
+            <polygon points="285,100 292,108 285,116 278,108" fill="#c084fc"/>
+            <defs>
+              <linearGradient id="balljump-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0f172a"/>
+                <stop offset="1" stop-color="#020617"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag runner">ARCADE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Ball Jump</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Bounce ever higher up endless moving platforms, trigger super springs, collect violet gems, and avoid perilous plummets.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ Arrows / A-D</span>
+            <span class="control-tag">👆 Touch Drag</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/ball-jump/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 13: Snake Retro -->
+      <article class="game-card" data-category="arcade" data-tags="snake retro arcade classic neon grow apples">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#snakeretro-bg)"/>
+            <!-- Grid gridlines -->
+            <line x1="0" y1="120" x2="400" y2="120" stroke="rgba(16,185,129,0.1)" stroke-width="1"/>
+            <!-- Snake body -->
+            <rect x="140" y="100" width="20" height="20" rx="4" fill="#10b981"/>
+            <rect x="165" y="100" width="20" height="20" rx="4" fill="#10b981"/>
+            <rect x="190" y="100" width="20" height="20" rx="4" fill="#10b981"/>
+            <rect x="190" y="125" width="20" height="20" rx="4" fill="#10b981"/>
+            <rect x="215" y="125" width="20" height="20" rx="4" fill="#34d399" filter="drop-shadow(0 0 10px rgba(16,185,129,0.8))"/>
+            <!-- Food apple -->
+            <circle cx="280" cy="135" r="10" fill="#ef4444" filter="drop-shadow(0 0 8px rgba(239,68,68,0.8))"/>
+            <defs>
+              <linearGradient id="snakeretro-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#062e20"/>
+                <stop offset="1" stop-color="#020d09"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag runner">RETRO</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Snake Retro</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            The timeless arcade serpent rebuilt with vibrant neon aesthetics. Devour glowing apples, chase golden bonuses, and grow to record lengths.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ Arrows / WASD</span>
+            <span class="control-tag">👆 D-Pad & Swipes</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/snake-retro/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 14: Pong Classic -->
+      <article class="game-card" data-category="arcade" data-tags="pong classic tennis paddle table neon 2 player ai">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#pong-bg)"/>
+            <!-- Center Net line -->
+            <line x1="200" y1="20" x2="200" y2="220" stroke="rgba(255,255,255,0.2)" stroke-dasharray="8 8" stroke-width="3"/>
+            <!-- Left Paddle (Blue) -->
+            <rect x="40" y="80" width="12" height="60" rx="6" fill="#38bdf8" filter="drop-shadow(0 0 10px rgba(56,189,248,0.8))"/>
+            <!-- Right Paddle (Pink) -->
+            <rect x="348" y="110" width="12" height="60" rx="6" fill="#f43f5e" filter="drop-shadow(0 0 10px rgba(244,63,94,0.8))"/>
+            <!-- Ball -->
+            <circle cx="240" cy="115" r="9" fill="#ffffff" filter="drop-shadow(0 0 12px rgba(56,189,248,0.9))"/>
+            <defs>
+              <linearGradient id="pong-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0b172d"/>
+                <stop offset="1" stop-color="#030712"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag runner">CLASSIC</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Pong Classic</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Cyber table tennis with curve-ball spin physics! Rally against adaptive AI with escalating ball speed or battle 2-player local.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ W/S & Up/Down</span>
+            <span class="control-tag">👥 1P / 2P Mode</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/pong-classic/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 15: Flappy Copter -->
+      <article class="game-card" data-category="arcade" data-tags="flappy copter flight gates thrust medals cyber">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#flappy-bg)"/>
+            <!-- Laser Gates -->
+            <rect x="250" y="0" width="45" height="70" fill="url(#gate-grad)"/>
+            <rect x="246" y="58" width="53" height="12" rx="3" fill="#c084fc"/>
+            <rect x="250" y="160" width="45" height="80" fill="url(#gate-grad)"/>
+            <rect x="246" y="160" width="53" height="12" rx="3" fill="#c084fc"/>
+            <!-- Copter -->
+            <rect x="110" y="105" width="30" height="18" rx="8" fill="#a855f7" filter="drop-shadow(0 0 10px rgba(168,85,247,0.8))"/>
+            <circle cx="128" cy="112" r="4" fill="#38bdf8"/>
+            <line x1="110" y1="100" x2="140" y2="100" stroke="#e2e8f0" stroke-width="3"/>
+            <defs>
+              <linearGradient id="flappy-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1e1338"/>
+                <stop offset="1" stop-color="#080512"/>
+              </linearGradient>
+              <linearGradient id="gate-grad" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag runner">ARCADE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Flappy Copter</h3>
+            <span class="card-rating">⭐ 4.7</span>
+          </div>
+          <p class="card-desc">
+            Thrust your cyber copter with precision through energized laser gates, earn Bronze to Platinum medals, and set flight streaks.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">👆 Tap / Space</span>
+            <span class="control-tag">🏅 Medals</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/flappy-copter/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 16: Space Shooter -->
+      <article class="game-card" data-category="action" data-tags="space shooter galaga invaders lasers alien boss combat">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#shooter-bg)"/>
+            <!-- Alien Squad -->
+            <polygon points="120,40 135,60 105,60" fill="#f97316"/>
+            <polygon points="200,30 220,55 180,55" fill="#e11d48" filter="drop-shadow(0 0 8px rgba(225,29,72,0.8))"/>
+            <polygon points="280,40 295,60 265,60" fill="#f97316"/>
+            <!-- Lasers -->
+            <line x1="195" y1="110" x2="195" y2="135" stroke="#06b6d4" stroke-width="3"/>
+            <line x1="205" y1="110" x2="205" y2="135" stroke="#06b6d4" stroke-width="3"/>
+            <!-- Player Ship -->
+            <polygon points="200,165 218,195 200,188 182,195" fill="#06b6d4" filter="drop-shadow(0 0 10px rgba(6,182,212,0.8))"/>
+            <defs>
+              <linearGradient id="shooter-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0a192f"/>
+                <stop offset="1" stop-color="#020713"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action">ACTION</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Space Shooter</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Galactic top-down shooter! Blast alien drone formations, pick up Triple Lasers and Shields, and conquer colossal Dreadnought bosses.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">⌨️ WASD / Arrows</span>
+            <span class="control-tag">🔫 Auto-Fire</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/space-shooter/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 17: Whack-a-Mole -->
+      <article class="game-card" data-category="reflex" data-tags="whack a mole reflex bonk hammer golden combo blitz">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#whack-bg)"/>
+            <!-- Holes -->
+            <ellipse cx="120" cy="120" rx="40" ry="20" fill="#0f071d"/>
+            <ellipse cx="280" cy="120" rx="40" ry="20" fill="#0f071d"/>
+            <ellipse cx="200" cy="180" rx="45" ry="22" fill="#0f071d"/>
+            <!-- Mole Popping out -->
+            <circle cx="200" cy="140" r="28" fill="#a855f7" filter="drop-shadow(0 0 10px rgba(168,85,247,0.7))"/>
+            <circle cx="192" cy="135" r="4" fill="#ffffff"/>
+            <circle cx="208" cy="135" r="4" fill="#ffffff"/>
+            <ellipse cx="200" cy="145" rx="8" ry="6" fill="#facc15"/>
+            <!-- Hammer outline -->
+            <rect x="220" y="70" width="40" height="20" rx="4" fill="#f59e0b" transform="rotate(-25 220 70)"/>
+            <rect x="235" y="85" width="8" height="40" rx="2" fill="#94a3b8" transform="rotate(-25 235 85)"/>
+            <defs>
+              <linearGradient id="whack-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2a0d45"/>
+                <stop offset="1" stop-color="#0c0414"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(192, 132, 252, 0.2); border-color: rgba(192, 132, 252, 0.5); color: #c084fc;">REFLEX</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Whack-a-Mole</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Fast-paced arcade reflex hammer test! Bonk popping critters, nab rare Golden Moles, and avoid explosive decoy bomb bots.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">👆 Tap / Click</span>
+            <span class="control-tag">⏱️ 45s Blitz</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/whack-a-mole/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 18: Aim Trainer -->
+      <article class="game-card" data-category="reflex" data-tags="aim trainer click accuracy reflex ms precision bullseye">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#aim-bg)"/>
+            <!-- Targets -->
+            <circle cx="130" cy="100" r="28" fill="#ec4899" filter="drop-shadow(0 0 10px rgba(236,72,153,0.8))"/>
+            <circle cx="130" cy="100" r="18" fill="#ffffff"/>
+            <circle cx="130" cy="100" r="8" fill="#ef4444"/>
+
+            <circle cx="270" cy="130" r="32" fill="#ec4899" filter="drop-shadow(0 0 10px rgba(236,72,153,0.8))"/>
+            <circle cx="270" cy="130" r="21" fill="#ffffff"/>
+            <circle cx="270" cy="130" r="10" fill="#ef4444"/>
+
+            <circle cx="200" cy="60" r="22" fill="#ec4899"/>
+            <circle cx="200" cy="60" r="14" fill="#ffffff"/>
+            <circle cx="200" cy="60" r="6" fill="#ef4444"/>
+            <defs>
+              <linearGradient id="aim-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#240c38"/>
+                <stop offset="1" stop-color="#08030e"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(236, 72, 153, 0.2); border-color: rgba(236, 72, 153, 0.5); color: #ec4899;">REFLEX</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Aim Trainer</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Benchmark clicking precision and reflex latency in milliseconds! Hit concentric bullseyes with pinpoint accuracy in 30 seconds.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🖱️ Precision Click</span>
+            <span class="control-tag">⚡ Latency MS</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/aim-trainer/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 19: Sequence Memory -->
+      <article class="game-card" data-category="puzzle" data-tags="sequence memory simon says tones patterns brain audio">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#seq-bg)"/>
+            <!-- 4 Simon Pads -->
+            <path d="M 195 50 A 60 60 0 0 0 135 110 L 195 110 Z" fill="#10b981" filter="drop-shadow(0 0 10px rgba(16,185,129,0.7))"/>
+            <path d="M 205 50 A 60 60 0 0 1 265 110 L 205 110 Z" fill="#ef4444"/>
+            <path d="M 135 120 A 60 60 0 0 0 195 180 L 195 120 Z" fill="#f59e0b"/>
+            <path d="M 265 120 A 60 60 0 0 1 205 180 L 205 120 Z" fill="#3b82f6"/>
+            <!-- Center Hub -->
+            <circle cx="200" cy="115" r="20" fill="#0f172a" stroke="#1f2937" stroke-width="4"/>
+            <defs>
+              <linearGradient id="seq-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#111827"/>
+                <stop offset="1" stop-color="#030712"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Sequence Memory</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Echo musical synthesized tones and illuminated neon pads! Expand your brain’s short-term pattern memory across infinite rounds.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🧠 Pattern Recall</span>
+            <span class="control-tag">🎵 Synthesizer</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/sequence-memory/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 20: Tap Challenge -->
+      <article class="game-card" data-category="reflex" data-tags="tap challenge cps click speed blitz burst jitter">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#tap-bg)"/>
+            <circle cx="200" cy="120" r="65" fill="#1e1045" stroke="#facc15" stroke-width="4" filter="drop-shadow(0 0 15px rgba(250,204,21,0.5))"/>
+            <circle cx="200" cy="120" r="45" fill="none" stroke="rgba(250,204,21,0.3)" stroke-width="2"/>
+            <!-- Lightning Bolt -->
+            <polygon points="205,80 185,120 202,120 195,155 220,115 203,115" fill="#facc15" filter="drop-shadow(0 0 10px rgba(250,204,21,0.9))"/>
+            <defs>
+              <linearGradient id="tap-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#180e30"/>
+                <stop offset="1" stop-color="#05030a"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag action" style="background: rgba(250, 204, 21, 0.2); border-color: rgba(250, 204, 21, 0.5); color: #facc15;">SPEED CPS</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Tap Challenge</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Test clicking and tapping velocity in Clicks Per Second (CPS). Sprint across 5s, 10s, and 30s modes to earn Cheetah & Godlike ranks.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">👆 Rapid Click</span>
+            <span class="control-tag">⚡ CPS Meter</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/tap-challenge/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 21: Tic Tac Toe -->
+      <article class="game-card" data-category="puzzle" data-tags="tic tac toe xo minimax ai 2 player strategy neon">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#ttt-bg)"/>
+            <!-- Grid Lines -->
+            <line x1="160" y1="50" x2="160" y2="190" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+            <line x1="240" y1="50" x2="240" y2="190" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+            <line x1="100" y1="95" x2="300" y2="95" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+            <line x1="100" y1="145" x2="300" y2="145" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+            <!-- X Marks -->
+            <path d="M 120 65 L 140 85 M 140 65 L 120 85" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" filter="drop-shadow(0 0 8px rgba(56,189,248,0.8))"/>
+            <path d="M 260 155 L 280 175 M 280 155 L 260 175" stroke="#38bdf8" stroke-width="6" stroke-linecap="round" filter="drop-shadow(0 0 8px rgba(56,189,248,0.8))"/>
+            <!-- O Mark -->
+            <circle cx="200" cy="120" r="14" stroke="#f43f5e" stroke-width="5" fill="none" filter="drop-shadow(0 0 8px rgba(244,63,94,0.8))"/>
+            <defs>
+              <linearGradient id="ttt-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0a182d"/>
+                <stop offset="1" stop-color="#020610"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Tic Tac Toe</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Neon 3x3 tactical battleground. Test your wits against an unbeatable Minimax algorithm AI or play head-to-head with a friend.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🤖 Minimax AI</span>
+            <span class="control-tag">👥 2-Player</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/tic-tac-toe/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 22: Connect Four -->
+      <article class="game-card" data-category="puzzle" data-tags="connect four discs drop 4 in a row strategy 2 player">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#c4-bg)"/>
+            <!-- Blue Connect Board -->
+            <rect x="110" y="50" width="180" height="140" rx="12" fill="#1e3a8a" stroke="#2563eb" stroke-width="3"/>
+            <!-- Circles -->
+            <circle cx="140" cy="80" r="12" fill="#0b1329"/>
+            <circle cx="170" cy="80" r="12" fill="#ef4444" filter="drop-shadow(0 0 6px rgba(239,68,68,0.8))"/>
+            <circle cx="200" cy="80" r="12" fill="#eab308" filter="drop-shadow(0 0 6px rgba(234,179,8,0.8))"/>
+            <circle cx="230" cy="80" r="12" fill="#0b1329"/>
+            <circle cx="260" cy="80" r="12" fill="#0b1329"/>
+
+            <circle cx="140" cy="115" r="12" fill="#ef4444"/>
+            <circle cx="170" cy="115" r="12" fill="#ef4444"/>
+            <circle cx="200" cy="115" r="12" fill="#ef4444"/>
+            <circle cx="230" cy="115" r="12" fill="#ef4444" filter="drop-shadow(0 0 8px rgba(239,68,68,0.9))"/>
+            <circle cx="260" cy="115" r="12" fill="#eab308"/>
+            <defs>
+              <linearGradient id="c4-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#09142b"/>
+                <stop offset="1" stop-color="#020712"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Connect Four</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Vertical disc dropping strategy on a 7x6 grid. Connect 4 discs horizontally, vertically, or diagonally against smart AI or a friend.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🔴 4-in-a-Row</span>
+            <span class="control-tag">🤖 Smart AI</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/connect-four/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 23: Minesweeper -->
+      <article class="game-card" data-category="puzzle" data-tags="minesweeper mines flags logic grid safe sweep">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#mines-bg)"/>
+            <!-- Cells -->
+            <rect x="130" y="60" width="32" height="32" rx="4" fill="#0f172a" stroke="#334155"/>
+            <text x="146" y="83" font-family="sans-serif" font-weight="900" font-size="18" fill="#38bdf8" text-anchor="middle">1</text>
+            <rect x="166" y="60" width="32" height="32" rx="4" fill="#0f172a" stroke="#334155"/>
+            <text x="182" y="83" font-family="sans-serif" font-weight="900" font-size="18" fill="#22c55e" text-anchor="middle">2</text>
+            <rect x="202" y="60" width="32" height="32" rx="4" fill="#1f2937" stroke="#374151"/>
+            <text x="218" y="83" font-size="16" text-anchor="middle">🚩</text>
+            <rect x="238" y="60" width="32" height="32" rx="4" fill="#1f2937" stroke="#374151"/>
+
+            <rect x="130" y="96" width="32" height="32" rx="4" fill="#0f172a" stroke="#334155"/>
+            <rect x="166" y="96" width="32" height="32" rx="4" fill="#0f172a" stroke="#334155"/>
+            <rect x="202" y="96" width="32" height="32" rx="4" fill="#1f2937" stroke="#374151"/>
+            <rect x="238" y="96" width="32" height="32" rx="4" fill="#ef4444"/>
+            <text x="254" y="119" font-size="16" text-anchor="middle">💣</text>
+            <defs>
+              <linearGradient id="mines-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1f2937"/>
+                <stop offset="1" stop-color="#030712"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">LOGIC</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Minesweeper</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Demine cyber terrain without detonating explosives. Features 100% first-click safety, cascading empty spaces, and mobile touch flag toggle.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🛡️ First-Click Safe</span>
+            <span class="control-tag">🚩 Flag Mode</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/minesweeper/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 24: Sliding Puzzle -->
+      <article class="game-card" data-category="puzzle" data-tags="sliding puzzle 15 puzzle 8 puzzle numbers tiles logic">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#sliding-bg)"/>
+            <!-- 3x3 Tile Board -->
+            <rect x="135" y="45" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="155" y="72" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">1</text>
+            <rect x="180" y="45" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="200" y="72" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">2</text>
+            <rect x="225" y="45" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="245" y="72" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">3</text>
+
+            <rect x="135" y="90" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="155" y="117" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">4</text>
+            <rect x="180" y="90" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="200" y="117" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">5</text>
+            <rect x="225" y="90" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="245" y="117" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">6</text>
+
+            <rect x="135" y="135" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="155" y="162" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">7</text>
+            <rect x="180" y="135" width="40" height="40" rx="6" fill="#4338ca"/>
+            <text x="200" y="162" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">8</text>
+            <rect x="225" y="135" width="40" height="40" rx="6" fill="none" stroke="rgba(255,255,255,0.2)" stroke-dasharray="4 4"/>
+            <defs>
+              <linearGradient id="sliding-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#19153d"/>
+                <stop offset="1" stop-color="#060514"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">PUZZLE</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Sliding Puzzle</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Classic 15-Puzzle & 8-Puzzle tile slider. Reorder numbered tiles sequentially in minimal moves. 100% solvable guaranteed shuffle!
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🔢 3x3 / 4x4</span>
+            <span class="control-tag">🛡️ Solvable</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/sliding-puzzle/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 25: Math Challenge -->
+      <article class="game-card" data-category="puzzle" data-tags="math challenge arithmetic speed blitz combo addition multiplication">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#math-bg)"/>
+            <rect x="90" y="50" width="220" height="70" rx="14" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+            <text x="200" y="95" font-family="sans-serif" font-weight="900" font-size="26" fill="#ffffff" text-anchor="middle">12 × 8 = ?</text>
+            <rect x="90" y="135" width="105" height="45" rx="8" fill="#10b981"/>
+            <text x="142" y="165" font-family="sans-serif" font-weight="900" font-size="20" fill="#04120c" text-anchor="middle">96</text>
+            <rect x="205" y="135" width="105" height="45" rx="8" fill="rgba(255,255,255,0.06)"/>
+            <text x="257" y="165" font-family="sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">84</text>
+            <defs>
+              <linearGradient id="math-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#042a1b"/>
+                <stop offset="1" stop-color="#020d09"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle" style="background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); color: #10b981;">BRAIN</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Math Challenge</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Speed mental arithmetic blitz in 45 seconds! Solve rapid calculation equations, chain combo multipliers, and sharpen cognitive speed.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🧮 Fast Arithmetic</span>
+            <span class="control-tag">🔥 x5 Streak</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/math-challenge/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 26: Color Fill -->
+      <article class="game-card" data-category="puzzle" data-tags="color fill flood chromatic puzzle grid territory">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#cfill-bg)"/>
+            <!-- Color Grid Mosaic -->
+            <rect x="120" y="50" width="30" height="30" rx="3" fill="#ec4899"/>
+            <rect x="155" y="50" width="30" height="30" rx="3" fill="#ec4899"/>
+            <rect x="190" y="50" width="30" height="30" rx="3" fill="#3b82f6"/>
+            <rect x="225" y="50" width="30" height="30" rx="3" fill="#10b981"/>
+            <rect x="250" y="50" width="30" height="30" rx="3" fill="#f59e0b"/>
+
+            <rect x="120" y="85" width="30" height="30" rx="3" fill="#ec4899"/>
+            <rect x="155" y="85" width="30" height="30" rx="3" fill="#ec4899"/>
+            <rect x="190" y="85" width="30" height="30" rx="3" fill="#a855f7"/>
+            <rect x="225" y="85" width="30" height="30" rx="3" fill="#ef4444"/>
+            <rect x="250" y="85" width="30" height="30" rx="3" fill="#3b82f6"/>
+
+            <rect x="120" y="120" width="30" height="30" rx="3" fill="#10b981"/>
+            <rect x="155" y="120" width="30" height="30" rx="3" fill="#f59e0b"/>
+            <rect x="190" y="120" width="30" height="30" rx="3" fill="#3b82f6"/>
+            <rect x="225" y="120" width="30" height="30" rx="3" fill="#a855f7"/>
+            <rect x="250" y="120" width="30" height="30" rx="3" fill="#ef4444"/>
+            <defs>
+              <linearGradient id="cfill-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#210f33"/>
+                <stop offset="1" stop-color="#06030c"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag casual">CASUAL</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Color Fill</h3>
+            <span class="card-rating">⭐ 4.9</span>
+          </div>
+          <p class="card-desc">
+            Chromatic flood fill puzzle! Absorb neighboring colored blocks from top-left to unify the entire 144-tile board in 22 moves.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🎨 6 Colors</span>
+            <span class="control-tag">🌊 Flood Fill</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/color-fill/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 27: Sudoku Master -->
+      <article class="game-card" data-category="puzzle" data-tags="sudoku master 9x9 logic numbers deduction easy hard">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#sudoku-bg)"/>
+            <!-- 9x9 miniature board -->
+            <rect x="120" y="40" width="160" height="160" rx="8" fill="#0f172a" stroke="#334155" stroke-width="3"/>
+            <!-- 3x3 divider lines -->
+            <line x1="173" y1="40" x2="173" y2="200" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="226" y1="40" x2="226" y2="200" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="120" y1="93" x2="280" y2="93" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="120" y1="146" x2="280" y2="146" stroke="#38bdf8" stroke-width="2"/>
+            <!-- Numbers -->
+            <text x="146" y="75" font-family="sans-serif" font-weight="900" font-size="18" fill="#ffffff" text-anchor="middle">5</text>
+            <text x="200" y="125" font-family="sans-serif" font-weight="900" font-size="18" fill="#38bdf8" text-anchor="middle">9</text>
+            <text x="253" y="180" font-family="sans-serif" font-weight="900" font-size="18" fill="#ffffff" text-anchor="middle">3</text>
+            <defs>
+              <linearGradient id="sudoku-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#14213d"/>
+                <stop offset="1" stop-color="#050a14"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">LOGIC</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Sudoku Master</h3>
+            <span class="card-rating">⭐ 5.0</span>
+          </div>
+          <p class="card-desc">
+            Classic 9x9 Japanese numerical logic deduction. Features conflict error detection, matching digit highlighting, and 3 difficulty tiers.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">🔢 Easy/Med/Hard</span>
+            <span class="control-tag">🧠 Deduction</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/sudoku-master/" class="play-btn">PLAY NOW ➔</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Game 28: Word Search -->
+      <article class="game-card" data-category="puzzle" data-tags="word search cyber arcade letters hunt vocabulary find">
+        <div class="card-thumb-wrapper">
+          <svg class="card-thumb-svg" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="url(#word-bg)"/>
+            <rect x="100" y="45" width="200" height="150" rx="10" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+            <!-- Letters -->
+            <text x="125" y="75" font-family="monospace" font-size="16" fill="#10b981">P</text>
+            <text x="155" y="75" font-family="monospace" font-size="16" fill="#10b981">I</text>
+            <text x="185" y="75" font-family="monospace" font-size="16" fill="#10b981">X</text>
+            <text x="215" y="75" font-family="monospace" font-size="16" fill="#10b981">E</text>
+            <text x="245" y="75" font-family="monospace" font-size="16" fill="#10b981">L</text>
+            <!-- Highlight Box -->
+            <rect x="115" y="58" width="145" height="24" rx="4" fill="none" stroke="#10b981" stroke-width="2" filter="drop-shadow(0 0 6px rgba(16,185,129,0.8))"/>
+            <!-- Other Letters -->
+            <text x="125" y="105" font-family="monospace" font-size="16" fill="#64748b">C</text>
+            <text x="155" y="105" font-family="monospace" font-size="16" fill="#64748b">Y</text>
+            <text x="185" y="105" font-family="monospace" font-size="16" fill="#64748b">B</text>
+            <text x="215" y="105" font-family="monospace" font-size="16" fill="#64748b">E</text>
+            <text x="245" y="105" font-family="monospace" font-size="16" fill="#64748b">R</text>
+            <defs>
+              <linearGradient id="word-bg" x1="0" y1="0" x2="400" y2="240" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#062e20"/>
+                <stop offset="1" stop-color="#020d09"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="badge-tag puzzle">WORD</span>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <h3 class="card-title">Word Search</h3>
+            <span class="card-rating">⭐ 4.8</span>
+          </div>
+          <p class="card-desc">
+            Themed Arcade & Cyber word hunt! Drag across the letter matrix horizontally, vertically, or diagonally to complete your target word bank.
+          </p>
+          <div class="controls-pill-row">
+            <span class="control-tag">👆 Drag Letters</span>
+            <span class="control-tag">🔍 Word Bank</span>
+          </div>
+          <div class="card-action-row">
+            <a href="/games/word-search/" class="play-btn">PLAY NOW ➔</a>
           </div>
         </div>
       </article>

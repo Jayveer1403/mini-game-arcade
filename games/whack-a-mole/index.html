@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Whack-a-Mole - High-speed arcade reflex challenge. Bonk mischievous moles, capture golden bonuses, and avoid explosive decoy bots!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Whack-a-Mole | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🔨</span>
+          <span class="brand-title">WHACK<span class="highlight">A-MOLE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">45s</span>
+        </div>
+        <div class="hud-stat combo-pill">
+          <span class="stat-lbl">COMBO</span>
+          <span id="combo-val" class="stat-num">x1</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="holes-grid" id="holes-grid">
+        <!-- 9 Holes generated dynamically -->
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🔨</div>
+        <h1 class="overlay-title">WHACK-A-MOLE</h1>
+        <p class="overlay-subtitle">Speed reflex blitz! Whack as many moles as possible in 45s!</p>
+
+        <div class="instructions-box">
+          <h3>Target Guide:</h3>
+          <ul>
+            <li><span>🐹</span> <strong>Normal Mole:</strong> +10 points.</li>
+            <li><span>⭐</span> <strong>Golden Mole:</strong> +30 points.</li>
+            <li><span>💣</span> <strong>Decoy Bomb:</strong> -20 points! DO NOT HIT!</li>
+            <li><span>🔥</span> Maintain streaks without misses for high-score combos.</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>All-Time Best: <strong id="start-best-score">0</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">START BLITZ ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">GAME PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏱️</div>
+        <h2 class="overlay-title">TIME'S UP!</h2>
+        <p class="gameover-reason">Sensational reflex performance!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">FINAL SCORE</span>
+            <span id="final-score" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">MOLES WHACKED</span>
+            <span id="final-moles" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">MAX COMBO</span>
+            <span id="final-combo" class="box-num">x1</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST SCORE</span>
+            <span id="final-best" class="box-num">0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

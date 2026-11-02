@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Color Fill - Chromatic Flood Fill Puzzle. Flood the grid into a single uniform color in minimal tactical steps!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Color Fill | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🎨</span>
+          <span class="brand-title">COLOR<span class="highlight">FILL</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat moves-pill">
+          <span class="stat-lbl">MOVES</span>
+          <span id="moves-val" class="stat-num">0 / 22</span>
+        </div>
+        <div class="hud-stat filled-pill">
+          <span class="stat-lbl">FLOODED</span>
+          <span id="filled-val" class="stat-num">1%</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="color-palette-bar" id="palette-bar">
+        <button class="palette-btn" data-color="0" style="background:#ef4444;"></button>
+        <button class="palette-btn" data-color="1" style="background:#3b82f6;"></button>
+        <button class="palette-btn" data-color="2" style="background:#10b981;"></button>
+        <button class="palette-btn" data-color="3" style="background:#f59e0b;"></button>
+        <button class="palette-btn" data-color="4" style="background:#a855f7;"></button>
+        <button class="palette-btn" data-color="5" style="background:#ec4899;"></button>
+      </div>
+
+      <div class="flood-board-wrapper">
+        <div class="flood-grid" id="flood-grid"></div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🎨</div>
+        <h1 class="overlay-title">COLOR FILL</h1>
+        <p class="overlay-subtitle">Unify the entire chromatic grid in 22 moves!</p>
+
+        <div class="instructions-box">
+          <h3>How to Play:</h3>
+          <ul>
+            <li><span>🎨</span> Select colors from the palette to flood-fill from top-left.</li>
+            <li><span>🌊</span> Adjacent tiles matching the selected color get absorbed into your territory.</li>
+            <li><span>🎯</span> Goal: Convert all 144 tiles into 1 uniform color.</li>
+            <li><span>⚠️</span> Complete the flood before your 22 allowed moves run out!</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">COMMENCE FLOOD ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">PUZZLE PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">BOARD FLOODED!</h2>
+        <p class="gameover-reason" id="gameover-reason">Full grid unified in monochrome perfection!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">MOVES USED</span>
+            <span id="final-moves" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">COVERAGE</span>
+            <span id="final-pct" class="box-num">100%</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">ALLOWED MOVES</span>
+            <span class="box-num">22</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">RECORD LEAST</span>
+            <span id="final-best" class="box-num">--</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

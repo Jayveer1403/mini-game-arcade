@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Pong Classic - Cyber neon table tennis. Play vs adaptive AI or 2-player local battle with curve ball physics!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Pong Classic | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🏓</span>
+          <span class="brand-title">PONG<span class="highlight">CLASSIC</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat player-pill">
+          <span class="stat-lbl">YOU</span>
+          <span id="player-score" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat rally-pill">
+          <span class="stat-lbl">RALLY</span>
+          <span id="rally-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat cpu-pill">
+          <span class="stat-lbl" id="opponent-lbl">CPU</span>
+          <span id="cpu-score" class="stat-num">0</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🏓</div>
+        <h1 class="overlay-title">PONG CLASSIC</h1>
+        <p class="overlay-subtitle">Cyber-neon paddle rally action! First to 7 points wins!</p>
+
+        <div class="mode-selection-row">
+          <label>Game Mode:</label>
+          <div class="mode-pills">
+            <button class="mode-btn active" data-mode="1p-med">VS AI (Med)</button>
+            <button class="mode-btn" data-mode="1p-hard">VS AI (Pro)</button>
+            <button class="mode-btn" data-mode="2p">2 Players</button>
+          </div>
+        </div>
+
+        <div class="instructions-box">
+          <h3>Controls:</h3>
+          <ul>
+            <li><span>Player 1 (Left):</span> <strong>W/S</strong> or drag left side of screen.</li>
+            <li><span>Player 2 (Right):</span> <strong>Up/Down</strong> or drag right side of screen.</li>
+            <li><span>Curve Ball:</span> Hit near paddle edges to launch angled spin shots!</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>Best AI Win Streak: <strong id="start-best-streak">0</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">SERVE BALL ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">GAME PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">MATCH WON!</h2>
+        <p id="gameover-reason" class="gameover-reason">Outstanding rally mastery!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">PLAYER SCORE</span>
+            <span id="final-player-score" class="box-num">7</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">OPPONENT SCORE</span>
+            <span id="final-cpu-score" class="box-num">4</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">LONGEST RALLY</span>
+            <span id="final-rally" class="box-num">12</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">WIN STREAK</span>
+            <span id="final-streak" class="box-num">1</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY REMATCH ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

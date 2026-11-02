@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Tap Challenge - Ultimate CPS Click Speed Test. Test your finger sprinting speed, benchmark clicks per second, and shatter high-score records!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Tap Challenge | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">⚡</span>
+          <span class="brand-title">TAP<span class="highlight">CHALLENGE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat cps-pill">
+          <span class="stat-lbl">CPS</span>
+          <span id="cps-val" class="stat-num">0.0</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">5.0s</span>
+        </div>
+        <div class="hud-stat clicks-pill">
+          <span class="stat-lbl">CLICKS</span>
+          <span id="clicks-val" class="stat-num">0</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="time-mode-selector">
+        <button class="mode-btn active" data-time="5">5s Sprint</button>
+        <button class="mode-btn" data-time="10">10s Standard</button>
+        <button class="mode-btn" data-time="30">30s Endurance</button>
+      </div>
+
+      <div class="tap-zone" id="tap-zone">
+        <div class="tap-ripple-container" id="ripple-container"></div>
+        <div class="tap-content">
+          <span class="tap-icon">⚡</span>
+          <span class="tap-prompt" id="tap-prompt">TAP RAPIDLY!</span>
+          <span class="tap-sub">Click or tap to unleash lightning</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">⚡</div>
+        <h1 class="overlay-title">TAP CHALLENGE</h1>
+        <p class="overlay-subtitle">CPS Reflex & Finger Speed Benchmark!</p>
+
+        <div class="instructions-box">
+          <h3>Speed Protocol:</h3>
+          <ul>
+            <li><span>👆</span> Tap or click inside the giant ring as fast as humanly possible.</li>
+            <li><span>⏱️</span> Timer commences on your very first tap!</li>
+            <li><span>⚡</span> Real-time CPS calculation measures your peak clicking rhythm.</li>
+            <li><span>🏆</span> Attain Cheetah, Lightning, or Godlike status tiers.</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>Peak Record CPS: <strong id="start-best-cps">0.0</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">INITIALIZE BENCHMARK ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">TEST PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⚡</div>
+        <h2 class="overlay-title">BENCHMARK FINISHED!</h2>
+        <p class="gameover-reason" id="gameover-rank">Rank: Cheetah Speed!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">AVERAGE CPS</span>
+            <span id="final-cps" class="box-num">0.0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">TOTAL CLICKS</span>
+            <span id="final-clicks" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">PEAK BURST</span>
+            <span id="final-peak" class="box-num">0.0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">RECORD CPS</span>
+            <span id="final-best" class="box-num">0.0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">TEST AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

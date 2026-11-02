@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Sliding Puzzle - Classic 15-Puzzle & 8-Puzzle Tile Slider. Slide numbered tiles into numerical order in minimal moves and time!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Sliding Puzzle | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🧩</span>
+          <span class="brand-title">SLIDING<span class="highlight">PUZZLE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat moves-pill">
+          <span class="stat-lbl">MOVES</span>
+          <span id="moves-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">00:00</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="grid-mode-row">
+        <button class="mode-btn active" data-size="3">3x3 (8-Puzzle)</button>
+        <button class="mode-btn" data-size="4">4x4 (15-Puzzle)</button>
+      </div>
+
+      <div class="puzzle-board-wrapper">
+        <div class="puzzle-grid" id="puzzle-grid"></div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🧩</div>
+        <h1 class="overlay-title">SLIDING PUZZLE</h1>
+        <p class="overlay-subtitle">Rearrange numbered tiles into sequential order!</p>
+
+        <div class="instructions-box">
+          <h3>Instructions:</h3>
+          <ul>
+            <li><span>👆</span> Tap any tile neighboring the empty space to slide it.</li>
+            <li><span>🔢</span> Arrange numbers consecutively: 1, 2, 3 ... with empty space at bottom-right.</li>
+            <li><span>🛡️</span> 100% Solvable Guarantee — generated via reverse legal slides.</li>
+            <li><span>⏱️</span> Minimize total moves and completion time!</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">SHUFFLE & SOLVE ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">PUZZLE PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">PUZZLE SOLVED!</h2>
+        <p class="gameover-reason" id="gameover-reason">All tiles perfectly organized!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">TOTAL MOVES</span>
+            <span id="final-moves" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">TIME ELAPSED</span>
+            <span id="final-time" class="box-num">00:00</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">GRID SIZE</span>
+            <span id="final-grid" class="box-num">3x3</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">LEAST MOVES</span>
+            <span id="final-best-moves" class="box-num">--</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">SOLVE ANOTHER ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

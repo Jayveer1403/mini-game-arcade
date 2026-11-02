@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Sudoku Master - Classic 9x9 Japanese Logic Number Puzzle. Complete the 9x9 grid with numbers 1 to 9, spot conflicts, and sharpen your deductive intellect!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Sudoku Master | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🔢</span>
+          <span class="brand-title">SUDOKU<span class="highlight">MASTER</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat mistakes-pill">
+          <span class="stat-lbl">MISTAKES</span>
+          <span id="mistakes-val" class="stat-num">0 / 3</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">00:00</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="diff-bar">
+        <button class="mode-btn active" data-diff="easy">Easy</button>
+        <button class="mode-btn" data-diff="med">Medium</button>
+        <button class="mode-btn" data-diff="hard">Hard</button>
+      </div>
+
+      <div class="sudoku-board-wrapper">
+        <div class="sudoku-grid" id="sudoku-grid">
+          <!-- 81 Cells -->
+        </div>
+      </div>
+
+      <!-- Number Pad (1-9 + Erase) -->
+      <div class="numpad-row" id="numpad-row">
+        <button class="num-btn" data-num="1">1</button>
+        <button class="num-btn" data-num="2">2</button>
+        <button class="num-btn" data-num="3">3</button>
+        <button class="num-btn" data-num="4">4</button>
+        <button class="num-btn" data-num="5">5</button>
+        <button class="num-btn" data-num="6">6</button>
+        <button class="num-btn" data-num="7">7</button>
+        <button class="num-btn" data-num="8">8</button>
+        <button class="num-btn" data-num="9">9</button>
+        <button class="num-btn erase" data-num="0">⌫</button>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🔢</div>
+        <h1 class="overlay-title">SUDOKU MASTER</h1>
+        <p class="overlay-subtitle">The purest test of mathematical deduction!</p>
+
+        <div class="instructions-box">
+          <h3>Sudoku Rules:</h3>
+          <ul>
+            <li><span>1️⃣</span> Fill the 9x9 grid so every row contains digits 1 to 9.</li>
+            <li><span>2️⃣</span> Every column must contain digits 1 to 9 without repeats.</li>
+            <li><span>3️⃣</span> Every 3x3 quadrant box must contain digits 1 to 9.</li>
+            <li><span>⚠️</span> Maximum 3 mistakes allowed before failure!</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">COMMENCE PUZZLE ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">PUZZLE PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">SUDOKU SOLVED!</h2>
+        <p class="gameover-reason" id="gameover-reason">All 81 cells validated in perfect harmony!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">TIME TAKEN</span>
+            <span id="final-time" class="box-num">00:00</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">DIFFICULTY</span>
+            <span id="final-diff" class="box-num">Easy</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">MISTAKES</span>
+            <span id="final-mistakes" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">RECORD TIME</span>
+            <span id="final-best" class="box-num">--</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">SOLVE ANOTHER ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Minesweeper - Classic Cyber Logic Puzzle. Clear the minefield without detonating hidden explosives, use strategic flags, and beat your fastest time!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Minesweeper | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">💣</span>
+          <span class="brand-title">MINE<span class="highlight">SWEEPER</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat mines-pill">
+          <span class="stat-lbl">MINES</span>
+          <span id="mines-val" class="stat-num">10</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">000</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="control-bar">
+        <div class="diff-pills">
+          <button class="mode-btn active" data-diff="easy">9x9 (10 💣)</button>
+          <button class="mode-btn" data-diff="med">12x12 (20 💣)</button>
+        </div>
+
+        <button id="btn-flag-toggle" class="flag-toggle-btn" aria-label="Toggle Flag Mode">
+          <span id="flag-mode-icon">⛏️ Reveal</span>
+        </button>
+      </div>
+
+      <div class="mine-board-wrapper">
+        <div class="mine-grid" id="mine-grid"></div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">💣</div>
+        <h1 class="overlay-title">MINESWEEPER</h1>
+        <p class="overlay-subtitle">Tactical minefield clearance protocol!</p>
+
+        <div class="instructions-box">
+          <h3>Demining Protocol:</h3>
+          <ul>
+            <li><span>⛏️</span> Tap to uncover tiles. Number clues reveal adjacent hidden mines.</li>
+            <li><span>🚩</span> Switch to <strong>Flag Mode</strong> or right-click to mark danger zones.</li>
+            <li><span>🛡️</span> 100% First-Click Safe — you will never hit a mine on move 1!</li>
+            <li><span>🏆</span> Clear all safe squares without detonating a single charge.</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">COMMENCE SWEEP ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">SWEEP PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">MINEFIELD SECURED!</h2>
+        <p class="gameover-reason" id="gameover-reason">All explosive charges neutralized!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">TIME TAKEN</span>
+            <span id="final-time" class="box-num">0s</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">DIFFICULTY</span>
+            <span id="final-diff" class="box-num">9x9</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">SAFE TILES</span>
+            <span id="final-tiles" class="box-num">71</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST TIME</span>
+            <span id="final-best" class="box-num">--</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

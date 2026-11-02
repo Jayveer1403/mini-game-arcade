@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Math Challenge - Speed Mental Arithmetic Blitz. Solve rapid arithmetic puzzles, build high-speed streak multipliers, and conquer mathematical calculations!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Math Challenge | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🧮</span>
+          <span class="brand-title">MATH<span class="highlight">CHALLENGE</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">45s</span>
+        </div>
+        <div class="hud-stat streak-pill">
+          <span class="stat-lbl">STREAK</span>
+          <span id="combo-val" class="stat-num">x1</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="math-card">
+        <div class="question-box">
+          <span class="equation-text" id="equation-text">12 + 15 = ?</span>
+        </div>
+
+        <div class="options-grid" id="options-grid">
+          <button class="option-btn" data-val="27">27</button>
+          <button class="option-btn" data-val="25">25</button>
+          <button class="option-btn" data-val="30">30</button>
+          <button class="option-btn" data-val="28">28</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🧮</div>
+        <h1 class="overlay-title">MATH CHALLENGE</h1>
+        <p class="overlay-subtitle">Speed mental arithmetic blitz in 45 seconds!</p>
+
+        <div class="instructions-box">
+          <h3>Arithmetic Rules:</h3>
+          <ul>
+            <li><span>⚡</span> Select the correct calculation solution as quickly as possible.</li>
+            <li><span>🔥</span> Consecutive correct choices build combo multipliers up to x5!</li>
+            <li><span>⚠️</span> Wrong selections deduct 3 seconds from your remaining time.</li>
+            <li><span>🧠</span> Difficulty scales smoothly with larger equations and multiplication.</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>Best Score: <strong id="start-best-score">0</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">START ARITHMETIC ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">BLITZ PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏱️</div>
+        <h2 class="overlay-title">TIME'S UP!</h2>
+        <p class="gameover-reason">Remarkable mental arithmetic calculation!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">FINAL SCORE</span>
+            <span id="final-score" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">CORRECT ANSWERS</span>
+            <span id="final-correct" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">MAX STREAK</span>
+            <span id="final-streak" class="box-num">x1</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST RECORD</span>
+            <span id="final-best" class="box-num">0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

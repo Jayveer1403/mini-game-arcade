@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Space Shooter - Top-down galactic invader combat. Blast alien squadrons, dodge plasma fire, collect power-ups, and vanquish dreadnought bosses!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Space Shooter | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">👾</span>
+          <span class="brand-title">SPACE<span class="highlight">SHOOTER</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat wave-pill">
+          <span class="stat-lbl">WAVE</span>
+          <span id="wave-val" class="stat-num">1</span>
+        </div>
+        <div class="hud-stat lives-pill">
+          <span class="stat-lbl">LIVES</span>
+          <span id="lives-val" class="stat-num">❤️ x3</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">👾</div>
+        <h1 class="overlay-title">SPACE SHOOTER</h1>
+        <p class="overlay-subtitle">Repel the alien armada across deep space!</p>
+
+        <div class="instructions-box">
+          <h3>Combat Briefing:</h3>
+          <ul>
+            <li><span>🚀</span> <strong>WASD / Arrow Keys</strong> or drag with mouse/touch to pilot.</li>
+            <li><span>🔫</span> Lasers auto-fire continuously!</li>
+            <li><span>🔱</span> Pick up <strong>Triple Lasers</strong> & <strong>Shields</strong>.</li>
+            <li><span>👾</span> Defeat enemy cruisers and massive Boss flagships!</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>Galactic High Score: <strong id="start-best-score">0</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">LAUNCH FIGHTER ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">MISSION PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">💥</div>
+        <h2 class="overlay-title">FIGHTER DESTROYED!</h2>
+        <p id="gameover-reason" class="gameover-reason">All hull reserves depleted!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">FINAL SCORE</span>
+            <span id="final-score" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">WAVES CLEARED</span>
+            <span id="final-wave" class="box-num">1</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">ALIENS BLASTED</span>
+            <span id="final-kills" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST RECORD</span>
+            <span id="final-best" class="box-num">0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">SCRAMBLE AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

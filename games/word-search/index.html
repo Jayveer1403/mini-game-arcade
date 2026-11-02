@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Word Search - Themed Cyber & Arcade Word Hunt. Trace hidden words across the letter grid, clear your word bank, and set record times!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Word Search | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🔍</span>
+          <span class="brand-title">WORD<span class="highlight">SEARCH</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat words-pill">
+          <span class="stat-lbl">FOUND</span>
+          <span id="words-val" class="stat-num">0 / 6</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">00:00</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="word-bank" id="word-bank">
+        <!-- Target Words -->
+      </div>
+
+      <div class="word-grid-wrapper">
+        <div class="word-grid" id="word-grid">
+          <!-- 10x10 letters -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🔍</div>
+        <h1 class="overlay-title">WORD SEARCH</h1>
+        <p class="overlay-subtitle">Arcade & Cyberpunk Vocabulary Hunt!</p>
+
+        <div class="instructions-box">
+          <h3>Search Protocol:</h3>
+          <ul>
+            <li><span>👆</span> Drag or tap start and end letters to highlight hidden words.</li>
+            <li><span>↗️</span> Words can run horizontally, vertically, or diagonally.</li>
+            <li><span>📋</span> Find and cross off every secret word in the bank.</li>
+            <li><span>⏱️</span> Race against the clock to set your quickest solve record!</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">BEGIN HUNT ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">HUNT PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">ALL WORDS DISCOVERED!</h2>
+        <p class="gameover-reason" id="gameover-reason">Word bank 100% uncovered!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">TIME TAKEN</span>
+            <span id="final-time" class="box-num">00:00</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">WORDS FOUND</span>
+            <span id="final-words" class="box-num">6 / 6</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">ACCURACY</span>
+            <span class="box-num">100%</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST RECORD</span>
+            <span id="final-best" class="box-num">--</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY ANOTHER ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

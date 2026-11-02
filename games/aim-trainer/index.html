@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Aim Trainer - High-precision target clicking test. Measure reaction latency in milliseconds, track accuracy, and shatter precision targets!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Aim Trainer | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🎯</span>
+          <span class="brand-title">AIM<span class="highlight">TRAINER</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat score-pill">
+          <span class="stat-lbl">SCORE</span>
+          <span id="score-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat time-pill">
+          <span class="stat-lbl">TIME</span>
+          <span id="time-val" class="stat-num">30s</span>
+        </div>
+        <div class="hud-stat acc-pill">
+          <span class="stat-lbl">ACCURACY</span>
+          <span id="acc-val" class="stat-num">100%</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div id="canvas-container">
+        <canvas id="game-canvas"></canvas>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🎯</div>
+        <h1 class="overlay-title">AIM TRAINER</h1>
+        <p class="overlay-subtitle">Benchmark your cursor and tap accuracy in 30 seconds!</p>
+
+        <div class="instructions-box">
+          <h3>Precision Protocol:</h3>
+          <ul>
+            <li><span>🎯</span> Click or tap glowing targets as swiftly as possible.</li>
+            <li><span>🔴</span> Hit dead center bullseyes for bonus points!</li>
+            <li><span>🚫</span> Miss clicks will penalize your final accuracy rating.</li>
+            <li><span>⚡</span> Measure your average reaction latency in milliseconds.</li>
+          </ul>
+        </div>
+
+        <div class="best-score-row">
+          <span>Best Score: <strong id="start-best-score">0</strong></span>
+        </div>
+
+        <button id="btn-start" class="primary-btn">START PROTOCOL ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">SESSION PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">🎯</div>
+        <h2 class="overlay-title">PROTOCOL COMPLETE!</h2>
+        <p class="gameover-reason">Reflex performance metrics calculated:</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">FINAL SCORE</span>
+            <span id="final-score" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">ACCURACY</span>
+            <span id="final-acc" class="box-num">100%</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">AVG LATENCY</span>
+            <span id="final-latency" class="box-num">320ms</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">BEST SCORE</span>
+            <span id="final-best" class="box-num">0</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">RETRY BENCHMARK ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

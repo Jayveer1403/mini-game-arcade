@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Connect Four - Tactical 7x6 disc drop strategy. Drop glowing discs, align four in a row, and outsmart the AI or battle 2-player local!">
+  <meta name="theme-color" content="#0d111d">
+  <title>Connect Four | Mini Game Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-app">
+    <header id="game-header">
+      <div class="hud-left">
+        <a href="/" class="nav-back-btn" title="Back to Arcade Catalog">
+          <span>⬅️</span>
+          <span class="btn-text">Arcade</span>
+        </a>
+        <div class="brand">
+          <span class="brand-icon">🔴</span>
+          <span class="brand-title">CONNECT<span class="highlight">FOUR</span></span>
+        </div>
+      </div>
+
+      <div class="hud-center">
+        <div class="hud-stat wins-pill">
+          <span class="stat-lbl">WINS</span>
+          <span id="wins-val" class="stat-num">0</span>
+        </div>
+        <div class="hud-stat losses-pill">
+          <span class="stat-lbl">LOSSES</span>
+          <span id="losses-val" class="stat-num">0</span>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <button id="btn-sound" class="icon-hud-btn" aria-label="Toggle Sound">
+          <span id="sound-icon">🔊</span>
+        </button>
+        <button id="btn-pause" class="icon-hud-btn" aria-label="Pause Game">
+          <span>⏸️</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="game-main">
+      <div class="mode-pill-row">
+        <button class="mode-btn active" data-mode="ai">VS Smart AI</button>
+        <button class="mode-btn" data-mode="2p">2 Players</button>
+      </div>
+
+      <div class="turn-indicator" id="turn-indicator">RED PLAYER's TURN</div>
+
+      <div class="c4-container">
+        <!-- 7 Column drop buttons -->
+        <div class="c4-drop-row" id="drop-row">
+          <button class="drop-btn" data-col="0">▼</button>
+          <button class="drop-btn" data-col="1">▼</button>
+          <button class="drop-btn" data-col="2">▼</button>
+          <button class="drop-btn" data-col="3">▼</button>
+          <button class="drop-btn" data-col="4">▼</button>
+          <button class="drop-btn" data-col="5">▼</button>
+          <button class="drop-btn" data-col="6">▼</button>
+        </div>
+
+        <div class="c4-grid" id="c4-grid">
+          <!-- 42 slots (7 cols x 6 rows) -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="modal-start" class="game-overlay">
+      <div class="overlay-card">
+        <div class="overlay-icon">🔴🟡</div>
+        <h1 class="overlay-title">CONNECT FOUR</h1>
+        <p class="overlay-subtitle">Vertical disc strategy! Connect 4 in any line to claim victory!</p>
+
+        <div class="instructions-box">
+          <h3>Rules:</h3>
+          <ul>
+            <li><span>🔴</span> Player 1 controls <strong>Red Discs</strong>.</li>
+            <li><span>🟡</span> Player 2 / AI controls <strong>Yellow Discs</strong>.</li>
+            <li><span>⬇️</span> Tap any column header to drop a disc into that slot.</li>
+            <li><span>⭐</span> First to align 4 consecutive discs wins!</li>
+          </ul>
+        </div>
+
+        <button id="btn-start" class="primary-btn">ENTER ARENA ➔</button>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="modal-pause" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon">⏸️</div>
+        <h2 class="overlay-title">GAME PAUSED</h2>
+        <div class="pause-actions">
+          <button id="btn-resume" class="primary-btn">RESUME</button>
+          <button id="btn-pause-restart" class="secondary-btn">RESTART</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="modal-gameover" class="game-overlay hidden">
+      <div class="overlay-card">
+        <div class="overlay-icon" id="gameover-icon">🏆</div>
+        <h2 class="overlay-title" id="gameover-title">RED WINS!</h2>
+        <p class="gameover-reason" id="gameover-reason">Four discs connected!</p>
+
+        <div class="stats-summary-grid">
+          <div class="stat-box">
+            <span class="box-lbl">TOTAL WINS</span>
+            <span id="final-wins" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">LOSSES</span>
+            <span id="final-losses" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">TOTAL ROUNDS</span>
+            <span id="final-total" class="box-num">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="box-lbl">WIN RATE</span>
+            <span id="final-rate" class="box-num">100%</span>
+          </div>
+        </div>
+
+        <div class="gameover-actions">
+          <button id="btn-restart" class="primary-btn">PLAY AGAIN ➔</button>
+          <a href="/" class="secondary-btn link-btn">ARCADE HUB</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
