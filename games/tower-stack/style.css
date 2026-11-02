@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  background: #0d111d;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  max-height: 820px;
+  background: #141a29;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(13, 17, 29, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.back-link {
+  color: #00f2fe;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-3px);
+}
+
+.hud {
+  display: flex;
+  gap: 14px;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hud-label {
+  font-size: 0.65rem;
+  color: #8c9ba5;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.hud-value {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.combo-box .hud-value {
+  color: #ffd700;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.canvas-wrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.combo-banner {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #111;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.4rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  z-index: 5;
+}
+
+.combo-banner.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 17, 29, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+  padding: 20px;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: #1c2438;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 30px 24px;
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-icon {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.modal-content h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: #00f2fe;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  color: #a4b3c6;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.instructions-box {
+  background: rgba(13, 17, 29, 0.6);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: left;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.instructions-box p + p {
+  margin-top: 8px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: rgba(13, 17, 29, 0.6);
+  padding: 12px 6px;
+  border-radius: 10px;
+}
+
+.stat-title {
+  display: block;
+  font-size: 0.7rem;
+  color: #8c9ba5;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.stat-num {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.3rem;
+  color: #00f2fe;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  border: none;
+  color: #0b111e;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.15rem;
+  padding: 14px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5);
+}
+
+.primary-btn:active {
+  transform: translateY(1px);
+}

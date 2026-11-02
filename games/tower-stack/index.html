@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tower Stack - Mini Game Arcade</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <a href="/" class="back-link">‹ Arcade Hub</a>
+      <div class="hud">
+        <div class="hud-item"><span class="hud-label">STACK:</span> <span id="score-val" class="hud-value">0</span></div>
+        <div class="hud-item"><span class="hud-label">BEST:</span> <span id="best-val" class="hud-value">0</span></div>
+        <div class="hud-item combo-box"><span class="hud-label">COMBO:</span> <span id="combo-val" class="hud-value">0x</span></div>
+      </div>
+      <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound">🔊</button>
+    </header>
+
+    <div class="canvas-wrapper" id="canvas-wrapper">
+      <canvas id="game-canvas"></canvas>
+      <div id="combo-banner" class="combo-banner">PERFECT! +10</div>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="modal-overlay">
+        <div class="modal-content">
+          <div class="modal-icon">🏗️</div>
+          <h2>TOWER STACK</h2>
+          <p class="subtitle">Precision timing block builder</p>
+          <div class="instructions-box">
+            <p><strong>Tap, Click, or Spacebar</strong> to place the sliding block on top of the tower.</p>
+            <p>Overhanging edges get sliced off!</p>
+            <p>Score <strong>PERFECT</strong> alignments to build combos and earn bonus score!</p>
+          </div>
+          <button id="start-btn" class="primary-btn">START STACKING</button>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="game-over-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+          <div class="modal-icon">💥</div>
+          <h2>TOWER TOPPLED</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-title">Blocks Stacked</span>
+              <span id="final-score" class="stat-num">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-title">Personal Best</span>
+              <span id="final-best" class="stat-num">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-title">Max Combo</span>
+              <span id="final-combo" class="stat-num">0</span>
+            </div>
+          </div>
+          <button id="restart-btn" class="primary-btn">STACK AGAIN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

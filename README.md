@@ -6,7 +6,7 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
 
 ---
 
-## 🎮 Playable Games in the Arcade (28 Verified Games)
+## 🎮 Playable Games in the Arcade (30 Verified Games)
 
 ### Category A: Arcade & Action Games
 1. **🍉 Fruit Blade (`/games/fruit-blade/`)**
@@ -126,6 +126,14 @@ Live production link: **[https://blade-slicer-game.vercel.app](https://blade-sli
 28. **⚡ Tap Challenge (`/games/tap-challenge/`)**
     - Test clicking and tapping velocity in Clicks Per Second (CPS). Sprint across 5s, 10s, and 30s modes to earn Cheetah & Godlike ranks.
     - **Controls:** Rapid click or tap inside zone.
+
+29. **🏗️ Tower Stack (`/games/tower-stack/`)**
+    - Precision timing block builder! Tap to place sliding blocks, slice away overhanging edges, and stack the tallest tower with perfect combo chains.
+    - **Controls:** Tap, Click, or Spacebar to drop block.
+
+30. **⌨️ Typing Blitz (`/games/typing-speed/`)**
+    - High-octane 45-second typing benchmark! Crush cyber arcade words, calculate real-time gross WPM & accuracy, and achieve Grandmaster rank.
+    - **Controls:** Keyboard or mobile input field.
 
 ---
 

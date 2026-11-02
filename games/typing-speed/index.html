@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Typing Blitz - Mini Game Arcade</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <a href="/" class="back-link">‹ Arcade Hub</a>
+      <div class="hud">
+        <div class="hud-item"><span class="hud-label">TIME:</span> <span id="time-val" class="hud-value">45s</span></div>
+        <div class="hud-item"><span class="hud-label">WPM:</span> <span id="wpm-val" class="hud-value">0</span></div>
+        <div class="hud-item"><span class="hud-label">ACC:</span> <span id="acc-val" class="hud-value">100%</span></div>
+        <div class="hud-item"><span class="hud-label">BEST:</span> <span id="best-val" class="hud-value">0</span></div>
+      </div>
+      <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound">🔊</button>
+    </header>
+
+    <main class="arcade-stage">
+      <!-- Target Word Carousel / Display -->
+      <div class="word-card" id="word-card">
+        <div class="word-hint">TYPE THIS WORD:</div>
+        <div class="target-word" id="target-word">READY</div>
+        <div class="streak-indicator" id="streak-indicator">STREAK: 0🔥</div>
+      </div>
+
+      <!-- Typing Input Box -->
+      <div class="input-section">
+        <input type="text" id="type-input" placeholder="Type here..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
+      </div>
+
+      <!-- Live Speed / Streak Gauge -->
+      <div class="stats-ribbon">
+        <div class="ribbon-item">Words: <span id="words-count">0</span></div>
+        <div class="ribbon-item">Correct Chars: <span id="chars-count">0</span></div>
+        <div class="ribbon-item">Errors: <span id="errors-count">0</span></div>
+      </div>
+
+      <!-- Start Overlay -->
+      <div id="start-overlay" class="modal-overlay">
+        <div class="modal-content">
+          <div class="modal-icon">⌨️</div>
+          <h2>TYPING BLITZ</h2>
+          <p class="subtitle">High-speed cyber typing reflex challenge</p>
+          <div class="instructions-box">
+            <p>Type each arcade word as quickly and accurately as possible.</p>
+            <p>Press <strong>Space</strong> or finish the word to advance to the next target.</p>
+            <p>Chain error-free words to build your <strong>Streak Multiplier</strong> and maximize your WPM!</p>
+          </div>
+          <button id="start-btn" class="primary-btn">START 45s BLITZ</button>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="game-over-overlay" class="modal-overlay hidden">
+        <div class="modal-content">
+          <div class="modal-icon" id="rank-icon">🏆</div>
+          <h2 id="rank-title">GRANDMASTER</h2>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span class="stat-title">Gross WPM</span>
+              <span id="final-wpm" class="stat-num">0</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-title">Accuracy</span>
+              <span id="final-acc" class="stat-num">0%</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-title">Max Streak</span>
+              <span id="final-streak" class="stat-num">0</span>
+            </div>
+          </div>
+          <button id="restart-btn" class="primary-btn">PLAY AGAIN</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
