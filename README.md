@@ -2,7 +2,7 @@
 
 A fast, responsive, curated browser-based arcade website built with pure **HTML5**, **CSS3**, and **modern JavaScript (ES6+)**.
 
-Live production link: **[https://blade-slicer-game.vercel.app](https://blade-slicer-game.vercel.app)**
+Live production link: **[https://online-games-arcade.vercel.app](https://online-games-arcade.vercel.app)**
 
 ---
 

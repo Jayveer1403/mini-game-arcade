@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://online-games-arcade.vercel.app/sitemap.xml
